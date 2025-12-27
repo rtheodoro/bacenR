@@ -2,6 +2,8 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN) APIs.
