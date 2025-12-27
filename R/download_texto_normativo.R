@@ -3,6 +3,8 @@
 #' Para cada linha do data.frame de entrada, monta a URL apropriada à API de normativos
 #' do BCB, realiza a requisição, extrai o conteúdo retornado e faz limpeza básica dos
 #' campos de texto (Assunto e Texto). Retorna um data.frame com todos os conteúdos agregados.
+#' @description
+#' `r lifecycle::badge("superseded")`
 #'
 #' @param normative_data data.frame. Data.frame com pelo menos as colunas:
 #'   - TipodoNormativoOWSCHCS: tipo do normativo (ex.: "Comunicado", "Ato de Diretor", etc.)
@@ -44,6 +46,7 @@
 #' }
 #'
 #' @export
+
 download_texto_normativo <- function(normative_data) {
   all_data <- data.frame()
 

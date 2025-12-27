@@ -3,6 +3,9 @@
 #' Faz uma consulta à API de busca de normativos do BCB, coleta todos os resultados
 #' no intervalo de datas fornecido e retorna um data.frame com os registros.
 #'
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
 #' @param terms Character vector. Termos de busca; serão concatenados com " OR " e URL-encoded.
 #' @param ini_date Character. Data inicial no formato "YYYY-MM-DD".
 #' @param end_date Character. Data final no formato "YYYY-MM-DD".
@@ -23,6 +26,7 @@
 #' normas <- download_legislacao(terms, ini_date, end_date)
 #' }
 #' @export
+
 download_legislacao <- function(terms, ini_date, end_date) {
   # Juntar os termos com " OR " e substituir espaços por "%20"
   terms_joined <- stringr::str_c(terms, collapse = " OR ") |> URLencode()
