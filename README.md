@@ -4,14 +4,15 @@
 
 <!-- badges: end -->
 
-The goal of bacenR is to ...
+The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN) APIs.
 
 ## Installation
 
 You can install the development version of bacenR like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("remotes") # if you don't have remotes installed yet
+remotes::install_github("rtheodoro/bacenR")
 ```
 
 ## Example

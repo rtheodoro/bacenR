@@ -1,9 +1,9 @@
 Package: bacenR
-Title: What the Package Does (One Line, Title Case)
+Title: Tools to Access Data from Banco Central do Brasil
 Version: 0.0.0.9000
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br, role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Provides functions to query, retrieve, and tidy economic and financial data from Banco Central do Brasil web services for use in R analyses and workflows.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
