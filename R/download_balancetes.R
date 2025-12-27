@@ -1,0 +1,182 @@
+#' Download balancetes (balanços patrimoniais) from Banco Central do Brasil
+#'
+#' Downloads monthly "balancetes" (CSV.ZIP) released by the Banco Central do Brasil
+#' for one or more institution types and stores them in a local directory. ZIP
+#' files found in the destination directory are also extracted (errors during
+#' individual extractions are ignored).
+#'
+#' #' @description
+#' `r lifecycle::badge("superseded")`
+#'
+#' @param instituicao Character vector of institution types to download.
+#'   Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS",
+#'   "CONGLOMERADOS", "SOCIEDADES", "BLOPRUDENCIAL", "COMBINADOS", "LIQUIDACAO".
+#'   The function maps these tokens to the type names used in the BCB URL.
+#' @param meses Integer or integer vector specifying months to download. Values
+#'   should be 1..12 (single values or vectors like c(6, 12)). When a month
+#'   single-digit is provided it is zero-padded to two digits in filenames/URLs.
+#' @param primeiro_ano Integer, first year to download (inclusive). Defaults to
+#'   1993 (the oldest available balancete in the source).
+#' @param ano_final Integer, last year to download (inclusive). Defaults to the
+#'   previous calendar year.
+#' @param out_dir Character, directory where downloaded ZIP files (and extracted
+#'   CSVs) will be written. The directory is created if it does not exist.
+#' @param overwrite Logical, whether to overwrite existing files in out_dir
+#'   (default FALSE). If FALSE and a file already exists at the destination it
+#'   is treated as a successful local result.
+#'
+#' @details
+#' For each combination of year, month and institution type the function
+#' constructs a URL of the form:
+#' https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{INSTITUICAO}.CSV.ZIP
+#' and attempts to download it with httr::GET. Successful and failed attempts
+#' are recorded in the returned tibble. After attempting all downloads the
+#' function tries to unzip any .zip files found in out_dir; unzip errors for
+#' individual files are caught and ignored so the process continues.
+#'
+#' Invalid institution tokens cause an immediate error listing the invalid
+#' entries.
+#'
+#' @return A tibble with one row per attempted download and the following
+#'   columns:
+#'   - ano: Year attempted (integer).
+#'   - mes: Month attempted (integer).
+#'   - instituicao: Institution token used (character).
+#'   - url: The URL attempted (character).
+#'   - dest: Destination file path for the downloaded ZIP (character).
+#'   - success: Logical indicating if the download (or existing-file fallback)
+#'     was considered successful.
+#'   - http_status: HTTP status code returned by the request (integer NA if not
+#'     available).
+#'   - error: Character string with an error message when success is FALSE, or
+#'     a short note when a local file existed and was not overwritten.
+#'
+#' @references
+#' Source (Banco Central do Brasil): https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+#'
+#' @seealso glue, httr, purrr, tibble, stringr, tidyr, fs, dplyr
+#'
+#' @examples
+#' \dontrun{
+#' # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
+#' download_balancetes(
+#'   instituicao = c("BANCOS", "COOPERATIVAS"),
+#'   meses = c(6, 12),
+#'   primeiro_ano = 1993,
+#'   ano_final = 2023,
+#'   out_dir = "data_raw/balancetes",
+#'   overwrite = FALSE
+#' )
+#' }
+#'
+#' @export
+# Notas: Dados originais em https://www.bcb.gov.br/acessoinformacao/legado?url=https:%2F%2Fwww4.bcb.gov.br%2Ffis%2Fcosif%2Fbalancetes.asp
+#        O balancete mais antigo é de 1993
+#        Os balancetes deverão ser consolidados em um único arquivo posteriormente
+#        Código - 4010
+#        Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+download_balancetes <- function(
+   instituicao = "COOPERATIVAS",
+   meses = 12,
+   primeiro_ano = 1993,
+   ano_final = as.numeric(format(Sys.time(), "%Y")) - 1,
+   out_dir = "data_raw",
+   overwrite = FALSE
+) {
+   # dependências usadas: glue, httr, purrr, tibble, stringr, tidyr, fs
+   fs::dir_create(out_dir)
+
+   tipo_lookup <- c(
+      BANCOS = "Bancos",
+      COOPERATIVAS = "Cooperativas-de-credito",
+      CONSORCIOS = "Administradoras-de-consorcios",
+      CONGLOMERADOS = "Conglomerados-financeiros",
+      SOCIEDADES = "Sociedades",
+      BLOPRUDENCIAL = "Conglomerados-prudenciais",
+      COMBINADOS = "Combinados-cooperativos",
+      LIQUIDACAO = "Instituicoes-em-regime-especial"
+   )
+
+   instituicao <- toupper(instituicao)
+   invalido <- setdiff(instituicao, names(tipo_lookup))
+   if (length(invalido) > 0) {
+      stop("Instituição(s) inválida(s): ", paste(invalido, collapse = ", "))
+   }
+
+   combos <- tidyr::crossing(
+      ano = primeiro_ano:ano_final,
+      mes = meses,
+      instituicao = instituicao
+   ) |>
+      dplyr::mutate(
+         mes2 = stringr::str_pad(
+            as.character(mes),
+            width = 2,
+            side = "left",
+            pad = "0"
+         ),
+         tipo = unname(tipo_lookup[instituicao])
+      )
+
+   download_results <- purrr::pmap_dfr(
+      combos,
+      function(ano, mes, instituicao, mes2, tipo) {
+         url <- glue::glue(
+            "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}.CSV.ZIP"
+         )
+         dest <- file.path(out_dir, glue::glue("{ano}{mes2}_{instituicao}.zip"))
+
+         res <- tryCatch(
+            {
+               resp <- httr::GET(
+                  url,
+                  httr::write_disk(dest, overwrite = overwrite),
+                  httr::progress()
+               )
+               httr::stop_for_status(resp)
+               list(
+                  success = TRUE,
+                  status = httr::status_code(resp),
+                  error = NA_character_
+               )
+            },
+            error = function(e) {
+               if (file.exists(dest) && !overwrite) {
+                  # arquivo existente não sobrescrito é considerado sucesso local
+                  list(
+                     success = TRUE,
+                     status = NA_integer_,
+                     error = "arquivo existente, não sobrescrito"
+                  )
+               } else {
+                  list(
+                     success = FALSE,
+                     status = NA_integer_,
+                     error = conditionMessage(e)
+                  )
+               }
+            }
+         )
+
+         tibble::tibble(
+            ano = ano,
+            mes = as.integer(mes),
+            instituicao = instituicao,
+            url = as.character(url),
+            dest = dest,
+            success = res$success,
+            http_status = res$status,
+            error = res$error
+         )
+      }
+   )
+
+   # Extrai ZIPs — tentar extrair todos, ignorando erros individuais
+   zips <- list.files(path = out_dir, pattern = "\\.zip$", full.names = TRUE)
+   purrr::walk(
+      zips,
+      ~ tryCatch(unzip(.x, exdir = out_dir), error = function(e) NA)
+   )
+
+   download_results
+}

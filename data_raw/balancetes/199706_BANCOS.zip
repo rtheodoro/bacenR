@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="pt-br"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br">
+<head>
+<title>Objeto n&atilde;o encontrado!</title>
+<link rev="made" />
+<style>
+	a:link    {color:#0036D7; text-decoration: none;}		/* #4D749F */
+	a:hover   {color:#3366ff;}
+	a:active  {color:#0036D7;}
+	a:link	  {color:#0036D7;}
+	a:visited {color:#AF8C3A; text-decoration: none;}
+</style>
+
+</head>
+
+<body style="margin:0;" class="semTemplate">
+	<table border="0" width="100%"  cellpadding="0" cellspacing="0">
+		<tr>
+			<td height="23" colspan="6" align="left" valign="top" bgcolor="#FFCC00"><img src="/local_img/home/logo_faz2.gif" width="177" height="23" alt="Ministério da Fazenda"></td>
+			<td bgcolor="#FFCC00" align="right"><img src="/local_img/home/brasil2.gif" border=""0 width="74" height="21" alt="Acesse o Portal do Governo Brasileiro"></td>
+		</tr>
+		<tr bgcolor="#003d79">
+			<td height="40" colspan="7" align="left" valign="top" style="vertical-align:middle"><a href="http://www.bcb.gov.br" alt="Página inicial"><img src="/local_img/logobacen_transp.gif" border="0" width="165" height="35" alt="Página inicial"></a></td>
+		</tr>
+		<tr>
+			<td width="194" rowspan="4" align="left" valign="top" bgcolor="#E5E9ED">&nbsp;</td>
+			<td height="40" colspan="6" align="left" valign="top"><img src="/local_img/transparent.gif" width="1" height="40"></td>
+		</tr>
+		<tr>
+			<td width="20" rowspan="2" align="left" valign="top"><img src="/local_img/transparent.gif" width="20" height="20"></td>
+			<td width="301">&nbsp;</td>
+			<td width="50" rowspan="2" valign="top"><img src="/local_img/transparent.gif" width="50" height="1"></td>
+			<td width="301" valign="top">&nbsp;</td>
+			<td rowspan="2" align="left" valign="top">&nbsp;</td>
+		</tr>
+      <tr>
+			<td height="250" valign="top">
+					<!--INICIO TABELA PORTUGUÊS-->
+					<table  border="0" style="border:solid 2 #4a73a2" width="330" height="185" align="right" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="4" colspan="3" valign="top" bgcolor="#F2F4F6">&nbsp;</td>
+						</tr>
+						<tr>
+							<td height="4" width="6" align="right" valign="middle" bgcolor="#003d79"></td>
+							<td height="19" valign="top" bgcolor="#003d79"><font size="2" color="white" face="Verdana, Arial, Helvetica, sans-serif"><strong>Informa&ccedil;&atilde;o n&atilde;o encontrada</strong></font></td>
+							<td height="4" valign="top" bgcolor="#003d79">&nbsp;</td>
+						</tr>
+						<tr bgcolor="#F2F4F6">
+							<td width="14" rowspan="3" valign="top"></td>
+							<td width="243" height="98" align="left" valign="middle" bgcolor="#F2F4F6">
+								<font size="2" face="Verdana, Arial, Helvetica, sans-serif">
+                          Por favor, consulte o <a href="http://www.bcb.gov.br/?MAPA">mapa
+								  do site </a>ou entre em contato por <a href="mailto:webmaster@bcb.gov.br">e-mail</a>.
+								  Estamos prontos a ajudar.
+								</font>
+							</td>
+							<td width="20" rowspan="3" valign="top">&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="left" height="22" valign="top" bgcolor="#F2F4F6" style="text-indent:20;">
+								<a href="javascript:history.back();"><img src="/local_img/fundoazul/a_anter.gif" border="0" alt="Volta à página anterior"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Voltar&nbsp;</font></a><a href="http://www.bcb.gov.br/">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/local_img/home.gif" border="0" alt="Volta à página inicial da homepage"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;P&aacute;gina inicial</font></a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="left" height="22" valign="top" bgcolor="#F2F4F6">&nbsp;</td>
+						</tr>
+					</table>
+					<!--FIM TABELA PORTUGUÊS-->
+				</td>	
+				<td width="301" valign="top">
+					<!--INICIO TABELA INGLÊS-->
+					<table border="0" width="330" height="185" style="border:solid 2 #4a73a2" align="left" cellpadding="0" cellspacing="0">
+						
+						<tr>
+							<td height="19" colspan="3" valign="top" bgcolor="#F2F4F6"></td>
+						</tr>
+						<tr>
+							<td height="19" width="30" align="right" valign="middle" bgcolor="#003d79"></td>
+							<td height="19" valign="top" bgcolor="#003d79"><font size="2" color="white" face="Verdana, Arial, Helvetica, sans-serif"><strong>Information not found</strong></font></td>
+							<td height="19" valign="top" bgcolor="#003d79"><img src="/local_img/transparent.gif" width="20" height="20"></td>
+						</tr>
+						<tr bgcolor="#F2F4F6">
+							<td width="14" rowspan="3" valign="top"></td>
+							<td width="243" height="99" align="left" valign="middle" bgcolor="#F2F4F6"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">Please consult the <a href="http://www.bcb.gov.br/?SITEMAP">site map</a> or contact us by <a href="mailto:webmaster@bcb.gov.br">e-mail</a>. We will be glad to help you.</font></td>
+							<td width="20" rowspan="3" valign="top">&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="left" height="22" valign="top" bgcolor="#F2F4F6" style="text-indent:50;">
+								<a href="javascript:history.back();"><img src="/local_img/fundoazul/a_anter.gif" border="0" alt="Back to last page visited"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Back</font></a><a href="http://www.bcb.gov.br/?english">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/local_img/home.gif" border="0" alt="Back to Banco Central's main page"><font size="2" face="Verdana, Arial, Helvetica, sans-serif">&nbsp;Home</font></a>
+							</td>
+						<tr bgcolor="#F2F4F6">
+							<td height="18" colspan="3" valign="top"></td>
+						</tr>
+					</table>
+					<!--FIM TABELA INGLÊS-->
+			</td>
+		</tr>
+	<tr>
+	<td></td>
+	<td colspan="4" style="border-top-color:#003d79;border-top-width:1;border-top-style:solid;">
+		<font size="2" color="red" face="Verdana, Arial, Helvetica, sans-serif">
+			Technical Information: Error 404
+         <address>
+         
+         <span><!--#config timefmt="%c" --><!--# echo var="date_local" default="-" --><br />
+         </span>
+         </address>		
+         </font>
+	</td>
+	</tr>
+	</table>
+
+</body>
+</html>

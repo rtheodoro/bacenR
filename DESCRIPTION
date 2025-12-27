@@ -10,10 +10,17 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Imports: 
     dplyr,
+    fs,
     glue,
     httr,
     jsonlite,
     lifecycle,
     purrr,
     stringr,
-    utils
+    tibble,
+    tidyr,
+    utils,
+    xml2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
