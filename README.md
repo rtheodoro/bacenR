@@ -8,6 +8,10 @@
 
 The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN) APIs.
 
+The datasets available through bacenR include:
+- [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+- [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+
 ## Installation
 
 You can install the development version of bacenR like so:
@@ -45,3 +49,23 @@ download_balancetes(
 )
 
 ```
+
+## TO-DO
+- Add more datasets from BACEN APIs
+   - [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
+   - [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
+   - [Information about  Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+   - [Another datasets from BACEN APIs](https://dadosabertos.bcb.gov.br/)
+   - Interest rates
+   - Information about inflation-indexed assets
+   - Continue...
+- Improve error handling and user messages
+- Enhance documentation and examples
+
+
+## Contact
+Please file an issue on GitHub if you encounter any problems or have suggestions for improvements.
+
+Send me an email at rtheodoro@usp.br with any questions or comments.
+
+

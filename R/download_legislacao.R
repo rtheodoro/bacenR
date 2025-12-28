@@ -2,6 +2,7 @@
 #'
 #' Faz uma consulta à API de busca de normativos do BCB, coleta todos os resultados
 #' no intervalo de datas fornecido e retorna um data.frame com os registros.
+#' Os dados são baixados de https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
 #'
 #' @description
 #' `r lifecycle::badge("superseded")`
