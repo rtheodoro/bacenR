@@ -56,6 +56,7 @@ download_balancetes(
    - [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
    - [Information about  Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
    - [Another datasets from BACEN APIs](https://dadosabertos.bcb.gov.br/)
+   - [Information about members of statutory bodies](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
    - Interest rates
    - Information about inflation-indexed assets
    - Continue...
