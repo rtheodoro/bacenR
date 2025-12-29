@@ -1,3 +1,8 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
-})
+download_balancetes(
+  instituicao = c("BANCOS", "COOPERATIVAS"),
+  meses = c(12),
+  primeiro_ano = 2020,
+  ano_final = 2023,
+  out_dir = "data_raw/balancetes",
+  overwrite = FALSE
+)

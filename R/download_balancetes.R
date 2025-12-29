@@ -64,13 +64,13 @@
 #'   meses = c(6, 12),
 #'   primeiro_ano = 1993,
 #'   ano_final = 2023,
-#'   out_dir = "data_raw/balancetes",
+#'   out_dir = "data_raw",
 #'   overwrite = FALSE
 #' )
 #' }
 #'
 #' @export
-# Notas: Dados originais em https://www.bcb.gov.br/acessoinformacao/legado?url=https:%2F%2Fwww4.bcb.gov.br%2Ffis%2Fcosif%2Fbalancetes.asp
+# Notas:
 #        O balancete mais antigo é de 1993
 #        Os balancetes deverão ser consolidados em um único arquivo posteriormente
 #        Código - 4010
@@ -84,7 +84,9 @@ download_balancetes <- function(
    overwrite = FALSE
 ) {
    # dependências usadas: glue, httr, purrr, tibble, stringr, tidyr, fs
-   fs::dir_create(out_dir)
+   if (!fs::dir_exists(out_dir)) {
+      fs::dir_create(out_dir)
+   }
 
    tipo_lookup <- c(
       BANCOS = "Bancos",
@@ -118,64 +120,132 @@ download_balancetes <- function(
          tipo = unname(tipo_lookup[instituicao])
       )
 
-   download_results <- purrr::pmap_dfr(
-      combos,
-      function(ano, mes, instituicao, mes2, tipo) {
-         url <- glue::glue(
-            "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}.CSV.ZIP"
-         )
-         dest <- file.path(out_dir, glue::glue("{ano}{mes2}_{instituicao}.zip"))
+   download_single_balancete <- function(
+      ano,
+      mes,
+      instituicao,
+      mes2,
+      tipo,
+      out_dir,
+      overwrite
+   ) {
+      # try candidates in order: .CSV.ZIP, .CSV, .ZIP — pick first that returns HTTP 200
+      suffixes <- c(".CSV.ZIP", ".CSV", ".ZIP")
+      # default to the first candidate
+      url <- glue::glue(
+         "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}{suffixes[1]}"
+      )
+      dest <- file.path(
+         out_dir,
+         glue::glue("{ano}{mes2}_{instituicao}{suffixes[1]}")
+      )
 
-         res <- tryCatch(
-            {
-               resp <- httr::GET(
-                  url,
-                  httr::write_disk(dest, overwrite = overwrite),
-                  httr::progress()
-               )
-               httr::stop_for_status(resp)
-               list(
-                  success = TRUE,
-                  status = httr::status_code(resp),
-                  error = NA_character_
-               )
-            },
-            error = function(e) {
-               if (file.exists(dest) && !overwrite) {
-                  # arquivo existente não sobrescrito é considerado sucesso local
-                  list(
-                     success = TRUE,
-                     status = NA_integer_,
-                     error = "arquivo existente, não sobrescrito"
-                  )
-               } else {
-                  list(
-                     success = FALSE,
-                     status = NA_integer_,
-                     error = conditionMessage(e)
-                  )
-               }
+      candidate <- purrr::map(
+         suffixes,
+         ~ {
+            suf <- .
+            candidate_url <- glue::glue(
+               "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}{suf}"
+            )
+            head_resp <- tryCatch(
+               httr::HEAD(candidate_url, httr::timeout(10)),
+               error = function(e) NULL
+            )
+            head_status <- if (!is.null(head_resp)) {
+               httr::status_code(head_resp)
+            } else {
+               NA_integer_
             }
-         )
+            list(
+               suf = suf,
+               url = as.character(candidate_url),
+               status = head_status
+            )
+         }
+      ) |>
+         purrr::detect(~ identical(.x$status, 200L))
 
-         tibble::tibble(
-            ano = ano,
-            mes = as.integer(mes),
-            instituicao = instituicao,
-            url = as.character(url),
-            dest = dest,
-            success = res$success,
-            http_status = res$status,
-            error = res$error
+      if (!is.null(candidate)) {
+         url <- candidate$url
+         dest <- file.path(
+            out_dir,
+            glue::glue("{ano}{mes2}_{instituicao}{candidate$suf}")
          )
       }
+
+      res <- tryCatch(
+         {
+            resp <- httr::GET(
+               url,
+               httr::write_disk(dest, overwrite = overwrite),
+               httr::progress()
+            )
+            httr::stop_for_status(resp)
+            list(
+               success = TRUE,
+               status = httr::status_code(resp),
+               error = NA_character_
+            )
+         },
+         error = function(e) {
+            if (file.exists(dest) && !overwrite) {
+               # arquivo existente não sobrescrito é considerado sucesso local
+               list(
+                  success = TRUE,
+                  status = NA_integer_,
+                  error = "arquivo existente, não sobrescrito"
+               )
+            } else {
+               list(
+                  success = FALSE,
+                  status = NA_integer_,
+                  error = conditionMessage(e)
+               )
+            }
+         }
+      )
+
+      tibble::tibble(
+         ano = ano,
+         mes = as.integer(mes),
+         instituicao = instituicao,
+         url = as.character(url),
+         dest = dest,
+         success = res$success,
+         http_status = res$status,
+         error = res$error
+      )
+   }
+
+   download_results <- purrr::pmap_dfr(
+      combos,
+      download_single_balancete,
+      out_dir = out_dir,
+      overwrite = overwrite
    )
 
    # Extrai ZIPs — tentar extrair todos, ignorando erros individuais
-   zips <- list.files(path = out_dir, pattern = "\\.zip$", full.names = TRUE)
+   zips <- list.files(
+      path = out_dir,
+      pattern = "\\.zip$",
+      ignore.case = TRUE,
+      full.names = TRUE
+   )
+
    purrr::walk(
       zips,
-      ~ tryCatch(unzip(.x, exdir = out_dir), error = function(e) NA)
+      ~ {
+         extracted <- tryCatch(
+            {
+               utils::unzip(.x, exdir = out_dir)
+               TRUE
+            },
+            error = function(e) FALSE
+         )
+         if (isTRUE(extracted)) {
+            tryCatch(fs::file_delete(.x), error = function(e) NULL)
+         }
+      }
    )
 
    download_results

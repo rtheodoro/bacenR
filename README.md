@@ -29,7 +29,7 @@ This is a basic example which shows you how to solve a common problem:
 library(bacenR)
 ## basic example code
 
-# Baixa legislações relacionadas a Cooperativas de Crédito
+# Download legislation related to Credit Cooperatives
 terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
 ini_date <- "2020-01-01"
 end_date <- Sys.Date()
@@ -38,7 +38,7 @@ normative_data <- download_legislacao(terms, ini_date, end_date)
 normative_txt <- download_texto_normativo(normative_data)
 
 
-# Baixa balancetes dos Bancos e Cooperativas de Crédito
+# Download financial statements of banks and credit cooperatives
 download_balancetes(
    instituicao = c("BANCOS", "COOPERATIVAS"),
    meses = c(6, 12),
@@ -51,6 +51,7 @@ download_balancetes(
 ```
 
 ## TO-DO
+- Choose an idiom (Portuguese/English) for the package
 - Add more datasets from BACEN APIs
    - [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
    - [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
