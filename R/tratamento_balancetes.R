@@ -24,7 +24,7 @@ tratamento_balancetes <- function(
     function(fp) {
       dir <- dirname(fp)
       base_name <- basename(fp)
-      normalized_basename <- gsub("_", "", bn, fixed = TRUE)
+      new_bn <- gsub("_", "", base_name, fixed = TRUE)
       new_file_path <- file.path(dir, new_bn)
 
       if (identical(fp, new_file_path)) {
@@ -37,7 +37,7 @@ tratamento_balancetes <- function(
         ))
       }
 
-      rename_succeeded <- file.rename(fp, new_fp)
+      rename_succeeded <- file.rename(fp, new_file_path)
       if (!rename_succeeded) {
         stop(glue::glue("Failed to rename '{fp}' -> '{new_file_path}'."))
       }
@@ -85,21 +85,77 @@ tratamento_balancetes <- function(
       balancetes_inst <- purrr::map_dfr(
         inst_files,
         function(fp) {
-          df <- utils::read.csv(
-            fp,
-            {
-              # locate the header line containing "DOCUMENTO" or "DOCUMENTOS" (case-insensitive)
-              lines <- readLines(fp, encoding = "latin1", warn = FALSE)
-              header_idx <- grep("DOCUMENTO(S)?", lines, ignore.case = TRUE)[1L]
-              if (is.na(header_idx)) {
-                stop(glue::glue(
-                  "Header containing 'DOCUMENTO' not found in file: {fp}"
-                ))
-              }
-              header_idx - 1L
-            },
+          # locate the header line containing "DOCUMENTO" or "DOCUMENTOS" (case-insensitive)
+          lines <- readLines(fp, encoding = "latin1", warn = FALSE)
+          header_idx <- NA_integer_
+          sep_used <- ","
+
+          for (i in seq_along(lines)) {
+            ln <- lines[i]
+            if (nchar(trimws(ln)) == 0L) {
+              next
+            }
+
+            # detect likely delimiter for this header candidate
+            delim <- if (grepl(";", ln)) {
+              ";"
+            } else if (grepl(",", ln)) {
+              ","
+            } else {
+              "\\s+"
+            }
+            # when delim is whitespace use a regex split, otherwise split by the delimiter
+            split_pattern <- if (identical(delim, "\\s+")) "\\s+" else delim
+            tokens <- unlist(strsplit(ln, split_pattern, perl = TRUE))
+            tokens <- trimws(gsub('^["\']|["\']$', "", tokens))
+
+            if (length(tokens) == 0L) {
+              next
+            }
+
+            has_doc <- any(grepl("DOCUMENTO", tokens, ignore.case = TRUE))
+            has_cnpj <- any(grepl(
+              "^CNPJ$|\\bCNPJ\\b",
+              tokens,
+              ignore.case = TRUE
+            ))
+            has_data <- any(grepl(
+              "DATA[_ ]?BASE|#DATA_BASE",
+              tokens,
+              ignore.case = TRUE
+            ))
+
+            if (isTRUE(has_doc) && isTRUE(has_cnpj) && isTRUE(has_data)) {
+              header_idx <- i
+              # map detected delim to a value acceptable by read.table/read.csv:
+              # use "" for whitespace (read.table handles any amount of whitespace)
+              sep_used <- if (identical(delim, "\\s+")) "" else delim
+              break
+            }
+          }
+
+          if (is.na(header_idx)) {
+            stop(glue::glue(
+              "Header containing 'DOCUMENTO' not found in file: {fp}"
+            ))
+          }
+
+          con <- textConnection(lines)
+          on.exit(close(con), add = TRUE)
+
+          # read the table explicitly specifying header and separator and avoid using any column as row.names
+          df <- utils::read.table(
+            con,
+            sep = sep_used,
+            header = TRUE,
+            skip = header_idx - 1L,
             stringsAsFactors = FALSE,
-            fileEncoding = "latin1"
+            fileEncoding = "latin1",
+            comment.char = "",
+            check.names = FALSE,
+            row.names = NULL,
+            fill = TRUE,
+            na.strings = c("", "NA")
           )
           df[df$DOCUMENTO == doc_filter, , drop = FALSE]
         }
