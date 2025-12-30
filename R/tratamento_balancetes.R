@@ -1,102 +1,115 @@
-primeiroano <- 1993
-anomaisrecente <- as.numeric(format(Sys.time(), "%Y")) - 1
-
-csv_coop_completo_1993a2022 <- data.frame()
-
-load_and_treat_balanco <- function(
-  year,
-  month = "12",
-  skip,
-  data_col_name,
-  nome_col_name
+tratamento_balancetes <- function(
+  path_raw = "data_raw",
+  out_dir = "data",
+  doc_filter = 4010,
+  save = TRUE,
+  output_filename = NULL
 ) {
-  if (!grepl("^(0[1-9]|1[0-2])$", month)) {
-    stop(sprintf(
-      "Invalid month '%s'. Expected two-digit month between '01' and '12'.",
-      month
+  # locate CSVs with leading year+month in the filename (e.g. 202012COOPERATIVAS.CSV)
+  files <- list.files(
+    path_raw,
+    pattern = "\\.CSV$",
+    full.names = TRUE,
+    ignore.case = TRUE
+  )
+  if (length(files) == 0L) {
+    stop(glue::glue(
+      "No CSV files found in '{path_raw}'. Expected filenames with 'YYYYMM' prefix."
     ))
   }
 
-  csv_i <-
-    data.table::fread(
-      glue::glue('data_raw/{year}{month}COOPERATIVAS.CSV'),
-      sep = ";",
-      skip = skip
-    )
+  # normalize filenames by removing underscores and update `files`
+  new_paths <- vapply(
+    files,
+    function(fp) {
+      dir <- dirname(fp)
+      base_name <- basename(fp)
+      normalized_basename <- gsub("_", "", bn, fixed = TRUE)
+      new_file_path <- file.path(dir, new_bn)
 
-  csv_i |>
-    dplyr::filter(DOCUMENTO == 4010) |>
-    dplyr::select(
-      tidyselect::all_of(
-        c("CNPJ", data_col_name, nome_col_name, "CONTA", "SALDO")
+      if (identical(fp, new_file_path)) {
+        return(fp)
+      }
+
+      if (file.exists(new_file_path)) {
+        stop(glue::glue(
+          "Target filename already exists: '{new_file_path}'. Aborting to avoid overwrite."
+        ))
+      }
+
+      rename_succeeded <- file.rename(fp, new_fp)
+      if (!rename_succeeded) {
+        stop(glue::glue("Failed to rename '{fp}' -> '{new_file_path}'."))
+      }
+
+      new_file_path
+    },
+    character(1)
+  )
+
+  files <- unname(new_paths)
+
+  # Extract the informations: year, month and type of institution.
+  info_list <- lapply(
+    files,
+    function(fp) {
+      bn <- basename(fp)
+      year <- as.numeric(substr(bn, 1, 4))
+      month <- as.numeric(substr(bn, 5, 6))
+      type_inst <- gsub(
+        "\\d{6}|\\.CSV$",
+        "",
+        toupper(bn),
+        ignore.case = TRUE
       )
-    )
-}
-
-# Configuração dos parâmetros do balanço por faixa de ano
-balanco_config <- data.frame(
-  start_year = c(1993, 1994, 2010),
-  end_year = c(1993, 2009, Inf),
-  skip = c(4, 3, 3),
-  data_col_name = c("#DATA_BASE", "DATA", "#DATA_BASE"),
-  nome_col_name = c("NOME_INSTITUICAO", "NOME INSTITUICAO", "NOME_INSTITUICAO"),
-  stringsAsFactors = FALSE
-)
-
-get_balanco_params <- function(year, config_df = balanco_config) {
-  idx <- which(year >= config_df$start_year & year <= config_df$end_year)
-  if (length(idx) != 1L) {
-    stop(sprintf("No unique balanço configuration found for year %s.", year))
-  }
-  row <- config_df[idx, , drop = FALSE]
-  list(
-    skip = row$skip,
-    data_col_name = row$data_col_name,
-    nome_col_name = row$nome_col_name
-  )
-}
-
-for (i in primeiroano:anomaisrecente) {
-  print(glue::glue("Carregando Balanço do ano {i}"))
-
-  params <- get_balanco_params(i)
-  csv_i <- load_and_treat_balanco(
-    year = i,
-    skip = params$skip,
-    data_col_name = params$data_col_name,
-    nome_col_name = params$nome_col_name
+      data.frame(
+        file_path = fp,
+        year = year,
+        month = month,
+        type_institution = type_inst,
+        stringsAsFactors = FALSE
+      )
+    }
   )
 
-  print(glue::glue("Tratando Balanço do ano {i}"))
-  names(csv_i)[1:3] <- c('cnpj', 'ano', 'razao_social')
+  # Verify if there are more than one type of institution.
+  info_df <- do.call(rbind, info_list)
+  unique_types <- unique(info_df$type_institution)
 
-  csv_i <- csv_i |>
-    tidyr::pivot_wider(
-      id_cols = c(cnpj, ano, razao_social),
-      names_from = CONTA,
-      values_from = SALDO
-    )
+  # for each typo of institution, process the files using purrr functions
+  # import the csv files starting from the row where the document number is located.
+  balancetes_by_type <- purrr::set_names(unique_types) |>
+    purrr::map(function(inst_type) {
+      inst_files <- info_df$file_path[info_df$type_institution == inst_type]
 
-  print(glue::glue("Unificando Balanço do ano {i}"))
-  csv_coop_completo_1993a2022 <-
-    merge(csv_coop_completo_1993a2022, csv_i, all = TRUE)
+      balancetes_inst <- purrr::map_dfr(
+        inst_files,
+        function(fp) {
+          df <- utils::read.csv(
+            fp,
+            {
+              # locate the header line containing "DOCUMENTO" or "DOCUMENTOS" (case-insensitive)
+              lines <- readLines(fp, encoding = "latin1", warn = FALSE)
+              header_idx <- grep("DOCUMENTO(S)?", lines, ignore.case = TRUE)[1L]
+              if (is.na(header_idx)) {
+                stop(glue::glue(
+                  "Header containing 'DOCUMENTO' not found in file: {fp}"
+                ))
+              }
+              header_idx - 1L
+            },
+            stringsAsFactors = FALSE,
+            fileEncoding = "latin1"
+          )
+          df[df$DOCUMENTO == doc_filter, , drop = FALSE]
+        }
+      )
 
-  rm(csv_i)
+      balancetes_inst
+    })
+
+  balancetes_by_type
 }
 
-
-# Converte colunas numéricas de csv_coop_completo_1993a2022 de vírgula para ponto como separador decimal
-csv_coop_completo_1993a2022 <- csv_coop_completo_1993a2022 |>
-  dplyr::mutate_at(
-    dplyr::vars(dplyr::matches("[0-9]")),
-    ~ as.numeric(gsub(",", ".", .))
-  )
-
-
-write.csv(
-  csv_coop_completo_1993a2022,
-  file = glue::glue(
-    "data/balanco_coop_cred_{primeiroano}a{anomaisrecente}_4010.csv"
-  ),
-  row.names = FALSE
-)
+# call with defaults
+tratamento_balancetes()

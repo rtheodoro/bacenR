@@ -6,7 +6,7 @@
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN) APIs.
+The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN).
 
 The datasets available through bacenR include:
 - [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
