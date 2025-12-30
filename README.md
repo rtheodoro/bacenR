@@ -48,6 +48,11 @@ download_balancetes(
    overwrite = FALSE
 )
 
+# Unified treatment of downloaded financial statements
+tratamento_balancetes(path_raw = "data_raw", out_dir = "out",
+                      doc_filter = 4010, save = TRUE)
+
+
 ```
 
 ## TO-DO
