@@ -56,6 +56,9 @@ tratamento_balancetes(path_raw = "data_raw", out_dir = "out",
 ```
 
 ## TO-DO
+
+More datails about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
+
 - Choose an idiom (Portuguese/English) for the package
 - Add more datasets from BACEN APIs
    - [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
@@ -69,10 +72,14 @@ tratamento_balancetes(path_raw = "data_raw", out_dir = "out",
 - Improve error handling and user messages
 - Enhance documentation and examples
 
+Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
 ## Contact
-Please file an issue on GitHub if you encounter any problems or have suggestions for improvements.
 
-Send me an email at rtheodoro@usp.br with any questions or comments.
+Connect to me on LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
+Follow me on Twitter/X: [@rxtheodoro](https://x.com/rxtheodoro)
 
+Follow me on BlueSky: [@rtheodoro](https://bsky.app/profile/rtheodoro.com)
+
+Send me an email at rtheodoro@usp.br
