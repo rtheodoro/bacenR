@@ -82,7 +82,7 @@ download_balance_sheets(
   meses = c(6, 12),
   first_year = 1993,
   final_year = 2023,
-  out_dir = "data_raw/balancetes",
+  out_dir = "data_raw",
   overwrite = FALSE
 )
 }

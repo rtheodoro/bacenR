@@ -6,10 +6,18 @@
 \alias{bacenR-package}
 \title{bacenR: Tools to Access Data from Banco Central do Brasil}
 \description{
-Provides functions to query, retrieve, and tidy economic and financial data from Banco Central do Brasil web services for use in R analyses and workflows.
+Provides functions to query, retrieve, and tidy economic and financial data from Banco Central do Brasil web services for use in R analyses and workflows
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/rtheodoro/bacenR}
+  \item Report bugs at \url{https://github.com/rtheodoro/bacenR/issues}
+}
+
 }
 \author{
-\strong{Maintainer}: Ricardo Theodoro \email{rtheodoro@usp.br}
+\strong{Maintainer}: Ricardo Theodoro \email{rtheodoro@usp.br} (\href{https://orcid.org/0000-0001-6741-5153}{ORCID})
 
 }
 \keyword{internal}

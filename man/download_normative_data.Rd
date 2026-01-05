@@ -2,35 +2,36 @@
 % Please edit documentation in R/download_normative_data.R
 \name{download_normative_data}
 \alias{download_normative_data}
-\title{Baixa normativos do Banco Central (BCB) por termos e intervalo de datas}
+\title{Download normative acts from the Central Bank (BCB) by terms and date range}
 \usage{
 download_normative_data(terms, ini_date, end_date)
 }
 \arguments{
-\item{terms}{Character vector. Termos de busca; serão concatenados com " OR " e URL-encoded.}
+\item{terms}{Character vector. Search terms; they will be concatenated with " OR " and URL-encoded.}
 
-\item{ini_date}{Character. Data inicial no formato "YYYY-MM-DD".}
+\item{ini_date}{Character. Start date in "YYYY-MM-DD" format.}
 
-\item{end_date}{Character. Data final no formato "YYYY-MM-DD".}
+\item{end_date}{Character. End date in "YYYY-MM-DD" format.}
 }
 \value{
-data.frame contendo os registros retornados pela API e as colunas pós-processadas.
+data.frame containing the records returned by the API and the post-processed columns.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
 \details{
-Faz uma consulta à API de busca de normativos do BCB, coleta todos os resultados
-no intervalo de datas fornecido e retorna um data.frame com os registros.
+Queries the BCB normative search API, collects all results within the provided
+date range and returns a data.frame with the records.
+Data are downloaded from https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
 \enumerate{
-\item Constrói a URL de consulta usando os termos e o intervalo de datas.
-\item Recupera o total de resultados para definir o tamanho da página.
-\item Itera sobre as páginas de resultado (incremento de 500 em 500) até que a página retornada tenha menos de 13 linhas (condição de parada).
-\item Realiza limpeza simples em campos retornados:
+\item Builds the query URL using the terms and the date range.
+\item Retrieves the total number of results to determine the page size.
+\item Iterates over result pages (incrementing by 500) until a page returns fewer than 13 rows (stop condition).
+\item Performs simple cleaning on returned fields:
 \itemize{
-\item remove prefixos "string;#",
-\item remove tags HTML em resumos e assuntos,
-\item remove parte decimal de números de norma.
+\item removes "string;#" prefixes,
+\item removes HTML tags in summaries and subjects,
+\item removes the decimal part of normative numbers.
 }
 }
 }

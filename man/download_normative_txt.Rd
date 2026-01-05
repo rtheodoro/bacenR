@@ -2,60 +2,59 @@
 % Please edit documentation in R/download_normative_txt.R
 \name{download_normative_txt}
 \alias{download_normative_txt}
-\title{Baixa texto de normativos do Banco Central (BCB) a partir de um data.frame de referências}
+\title{Download normative texts from the Brazil Central Bank (BCB) from a reference data.frame}
 \usage{
 download_normative_txt(normative_data)
 }
 \arguments{
-\item{normative_data}{data.frame. Data.frame com pelo menos as colunas:
+\item{normative_data}{data.frame. A data.frame with at least the columns:
 \itemize{
-\item TipodoNormativoOWSCHCS: tipo do normativo (ex.: "Comunicado", "Ato de Diretor", etc.)
-\item NumeroOWSNMBR: número/identificador do normativo a ser consultado.
-\item É o resultado de uma consulta prévia (p.ex., via \code{download_normative_data}).
+\item TipodoNormativoOWSCHCS: type of the normative (e.g., "Comunicado", "Ato de Diretor", etc.)
+\item NumeroOWSNMBR: number/identifier of the normative to be queried.
+\item Typically the result of a prior query (e.g., via \code{download_normative_data}).
 }}
 }
 \value{
-data.frame com os registros retornados pela API para cada referência em \code{normative_data},
-incluindo os campos extraídos e pós-processados (p.ex. \code{Assunto}, \code{Texto}).
+data.frame with the records returned by the API for each reference in \code{normative_data},
+including the extracted and post-processed fields (e.g., \code{Assunto}, \code{Texto}).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
 \details{
-Para cada linha do data.frame de entrada, monta a URL apropriada à API de normativos
-do BCB, realiza a requisição, extrai o conteúdo retornado e faz limpeza básica dos
-campos de texto (Assunto e Texto). Retorna um data.frame com todos os conteúdos agregados.
+For each row of the input data.frame, constructs the appropriate URL for the BCB
+normatives API, performs the request, extracts the returned content and applies
+basic cleaning to the text fields (Assunto and Texto). Returns a data.frame
+with all aggregated contents.
 
-A função realiza os seguintes passos:
+The function performs the following steps:
 \enumerate{
-\item Itera por cada linha de \code{normative_data} (imprime o índice da iteração para acompanhamento).
-\item Codifica o tipo do normativo para uso em URL (usando \code{URLencode(..., reserved = TRUE)}).
-\item Seleciona a rota da API conforme o tipo:
+\item Iterates over each row of \code{normative_data} (prints the iteration index for monitoring).
+\item Encodes the normative type for URL usage (using \code{URLencode(..., reserved = TRUE)}).
+\item Chooses the API route depending on the type:
 \itemize{
-\item para "Comunicado", "Ato de Diretor" e "Ato do Presidente" usa o endpoint de
-outras normas (\code{exibeoutrasnormas});
-\item para os demais, usa o endpoint de normativo padrão (\code{exibenormativo}).
+\item for "Comunicado", "Ato de Diretor" and "Ato do Presidente" it uses the other-norms endpoint (\code{exibeoutrasnormas});
+\item for the rest, it uses the standard normative endpoint (\code{exibenormativo}).
 }
-\item Faz a requisição HTTP (via \code{httr::GET}) e converte o JSON retornado em data.frame.
-\item Extrai e limpa os campos textuais:
+\item Makes the HTTP request (via \code{httr::GET}) and converts the returned JSON into a data.frame.
+\item Extracts and cleans textual fields:
 \itemize{
-\item converte HTML em texto plano para os campos \code{Assunto} e \code{Texto} (usando \code{xml2::read_html} + \code{xml2::xml_text}),
-\item remove quebras de linha e excesso de espaços (\code{stringr::str_replace_all}, \code{stringr::str_squish}).
+\item converts HTML to plain text for the fields \code{Assunto} and \code{Texto} (using \code{xml2::read_html} + \code{xml2::xml_text}),
+\item removes line breaks and extra spaces (\code{stringr::str_replace_all}, \code{stringr::str_squish}).
 }
-\item Agrega cada resultado em um data.frame final retornado pela função.
+\item Aggregates each result into a final data.frame returned by the function.
 }
 }
 \note{
 \itemize{
-\item A função pressupõe que a API do BCB retorna um campo \code{conteudo} com os campos esperados.
-\item Erros de requisição ou alterações na estrutura da API podem causar falhas; trate possíveis exceções
-ao redor da chamada se necessário.
-\item Pacotes usados internamente: \code{httr}, \code{jsonlite}, \code{xml2}, \code{stringr}, \code{dplyr}, \code{glue}, \code{purrr}.
+\item The function assumes the BCB API returns a \code{conteudo} field with the expected fields.
+\item Request errors or changes in the API structure may cause failures; consider handling exceptions around the call if needed.
+\item Packages used internally: \code{httr}, \code{jsonlite}, \code{xml2}, \code{stringr}, \code{dplyr}, \code{glue}, \code{purrr}.
 }
 }
 \examples{
 \dontrun{
-# Exemplo mínimo
+# Minimal example
 normative_data <- data.frame(
   TipodoNormativoOWSCHCS = c("Comunicado", "Circular"),
   NumeroOWSNMBR = c("123", "456"),
