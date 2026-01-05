@@ -59,7 +59,7 @@
 #' @examples
 #' \dontrun{
 #' # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
-#' download_balancetes(
+#' download_balance_sheets(
 #'   instituicao = c("BANCOS", "COOPERATIVAS"),
 #'   meses = c(6, 12),
 #'   primeiro_ano = 1993,
@@ -75,7 +75,7 @@
 #        Os balancetes deverão ser consolidados em um único arquivo posteriormente
 #        Código - 4010
 #        Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
-download_balancetes <- function(
+download_balance_sheets <- function(
    instituicao = "COOPERATIVAS",
    meses = 12,
    primeiro_ano = 1993,

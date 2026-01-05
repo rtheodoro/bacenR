@@ -1,6 +1,6 @@
 #' Process and reshape "balancetes" CSV exports from the Brazilian Central Bank (BCB)
 #'
-#' tratameno_balancetes reads raw CSV export files produced by the BCB,
+#' tratameno_balance_sheets reads raw CSV export files produced by the BCB,
 #' normalizes filenames, locates the header row, imports rows matching a
 #' specific document number, cleans column names, pivots account balances
 #' so that each account becomes a column and each row corresponds to an
@@ -78,7 +78,7 @@
 #'
 #' # Write outputs with a fixed filename for all types
 #' treatment_balance_sheets(path_raw = "data_raw", out_dir = "data", doc_filter = 4010,
-#'                       save = TRUE, output_filename = "bc_balancetes.csv")
+#'                       save = TRUE, output_filename = "bc_balance_sheets.csv")
 #'
 #' # Custom naming function
 #' treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",

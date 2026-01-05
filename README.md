@@ -40,7 +40,7 @@ normative_txt <- download_normative_txt(normative_data)
 
 
 # Download financial statements of banks and credit cooperatives
-download_balancetes(
+download_balance_sheets(
    instituicao = c("BANCOS", "COOPERATIVAS"),
    meses = c(6, 12),
    primeiro_ano = 1993,
