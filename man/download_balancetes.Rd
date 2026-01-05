@@ -7,8 +7,8 @@
 download_balance_sheets(
   instituicao = "COOPERATIVAS",
   meses = 12,
-  primeiro_ano = 1993,
-  ano_final = as.numeric(format(Sys.time(), "\%Y")) - 1,
+  first_year = 1993,
+  final_year = as.numeric(format(Sys.time(), "\%Y")) - 1,
   out_dir = "data_raw",
   overwrite = FALSE
 )
@@ -23,10 +23,10 @@ The function maps these tokens to the type names used in the BCB URL.}
 should be 1..12 (single values or vectors like c(6, 12)). When a month
 single-digit is provided it is zero-padded to two digits in filenames/URLs.}
 
-\item{primeiro_ano}{Integer, first year to download (inclusive). Defaults to
+\item{first_year}{Integer, first year to download (inclusive). Defaults to
 1993 (the oldest available balancete in the source).}
 
-\item{ano_final}{Integer, last year to download (inclusive). Defaults to the
+\item{final_year}{Integer, last year to download (inclusive). Defaults to the
 previous calendar year.}
 
 \item{out_dir}{Character, directory where downloaded ZIP files (and extracted
@@ -80,8 +80,8 @@ entries.
 download_balance_sheets(
   instituicao = c("BANCOS", "COOPERATIVAS"),
   meses = c(6, 12),
-  primeiro_ano = 1993,
-  ano_final = 2023,
+  first_year = 1993,
+  final_year = 2023,
   out_dir = "data_raw/balancetes",
   overwrite = FALSE
 )

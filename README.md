@@ -43,8 +43,8 @@ normative_txt <- download_normative_txt(normative_data)
 download_balance_sheets(
    instituicao = c("BANCOS", "COOPERATIVAS"),
    meses = c(6, 12),
-   primeiro_ano = 1993,
-   ano_final = 2023,
+   first_year = 1993,
+   final_year = 2023,
    out_dir = "data_raw/balancetes",
    overwrite = FALSE
 )

@@ -15,9 +15,9 @@
 #' @param meses Integer or integer vector specifying months to download. Values
 #'   should be 1..12 (single values or vectors like c(6, 12)). When a month
 #'   single-digit is provided it is zero-padded to two digits in filenames/URLs.
-#' @param primeiro_ano Integer, first year to download (inclusive). Defaults to
+#' @param first_year Integer, first year to download (inclusive). Defaults to
 #'   1993 (the oldest available balancete in the source).
-#' @param ano_final Integer, last year to download (inclusive). Defaults to the
+#' @param final_year Integer, last year to download (inclusive). Defaults to the
 #'   previous calendar year.
 #' @param out_dir Character, directory where downloaded ZIP files (and extracted
 #'   CSVs) will be written. The directory is created if it does not exist.
@@ -62,8 +62,8 @@
 #' download_balance_sheets(
 #'   instituicao = c("BANCOS", "COOPERATIVAS"),
 #'   meses = c(6, 12),
-#'   primeiro_ano = 1993,
-#'   ano_final = 2023,
+#'   first_year = 1993,
+#'   final_year = 2023,
 #'   out_dir = "data_raw",
 #'   overwrite = FALSE
 #' )
@@ -73,13 +73,12 @@
 # Notas:
 #        O balancete mais antigo é de 1993
 #        Os balancetes deverão ser consolidados em um único arquivo posteriormente
-#        Código - 4010
 #        Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 download_balance_sheets <- function(
    instituicao = "COOPERATIVAS",
    meses = 12,
-   primeiro_ano = 1993,
-   ano_final = as.numeric(format(Sys.time(), "%Y")) - 1,
+   first_year = 1993,
+   final_year = as.numeric(format(Sys.time(), "%Y")) - 1,
    out_dir = "data_raw",
    overwrite = FALSE
 ) {
@@ -106,7 +105,7 @@ download_balance_sheets <- function(
    }
 
    combos <- tidyr::crossing(
-      ano = primeiro_ano:ano_final,
+      ano = first_year:final_year,
       mes = meses,
       instituicao = instituicao
    ) |>
