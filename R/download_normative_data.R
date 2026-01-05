@@ -91,9 +91,3 @@ download_normative_data <- function(terms, ini_date, end_date) {
 
   return(all_data)
 }
-
-# ini_date <- "2020-01-01"
-# end_date <- lubridate::today()
-# terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
-
-# normative_data <- download_normative_data(terms, ini_date, end_date)

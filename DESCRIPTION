@@ -6,12 +6,11 @@ Authors@R:
            comment = c(ORCID = "0000-0001-6741-5153"))
 Description: Provides functions to query, retrieve, and tidy economic and
     financial data from Banco Central do Brasil web services for use in R
-    analyses and workflows
-License: MIT + file LICENSE
+    analyses and workflows.
+License: GPL (>= 3)
 URL: https://github.com/rtheodoro/bacenR
 BugReports: https://github.com/rtheodoro/bacenR/issues
 Imports: 
-    data.table,
     dplyr,
     fs,
     glue,
@@ -20,14 +19,16 @@ Imports:
     jsonlite,
     lifecycle,
     purrr,
+    readr,
     stringr,
     tibble,
     tidyr,
+    tools,
     utils,
     xml2
 Suggests: 
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    testthat (>= 1.0.0)
+Config/testthat/edition: 1
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
