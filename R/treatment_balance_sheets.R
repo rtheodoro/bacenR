@@ -74,20 +74,20 @@
 #' @examples
 #' \dontrun{
 #' # Basic usage (do not write outputs)
-#' tratamento_balancetes(path_raw = "data_raw", out_dir = "data", doc_filter = 4010, save = FALSE)
+#' treatment_balance_sheets(path_raw = "data_raw", out_dir = "data", doc_filter = 4010, save = FALSE)
 #'
 #' # Write outputs with a fixed filename for all types
-#' tratamento_balancetes(path_raw = "data_raw", out_dir = "data", doc_filter = 4010,
+#' treatment_balance_sheets(path_raw = "data_raw", out_dir = "data", doc_filter = 4010,
 #'                       save = TRUE, output_filename = "bc_balancetes.csv")
 #'
 #' # Custom naming function
-#' tratamento_balancetes(path_raw = "data_raw", out_dir = "out",
+#' treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
 #'                       doc_filter = 4010, save = TRUE,
 #'                       output_filename = function(type) paste0("bal_", tolower(type), ".csv"))
 #' }
 #'
 #' @export
-tratamento_balancetes <- function(
+treatment_balance_sheets <- function(
   path_raw = "data_raw",
   out_dir = "data",
   doc_filter = 4010,

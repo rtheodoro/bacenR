@@ -1,34 +1,34 @@
-#' Baixa normativos do Banco Central (BCB) por termos e intervalo de datas
+#' Download normative acts from the Central Bank (BCB) by terms and date range
 #'
-#' Faz uma consulta à API de busca de normativos do BCB, coleta todos os resultados
-#' no intervalo de datas fornecido e retorna um data.frame com os registros.
-#' Os dados são baixados de https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
+#' Queries the BCB normative search API, collects all results within the provided
+#' date range and returns a data.frame with the records.
+#' Data are downloaded from https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
 #'
 #' @description
 #' `r lifecycle::badge("superseded")`
 #'
-#' @param terms Character vector. Termos de busca; serão concatenados com " OR " e URL-encoded.
-#' @param ini_date Character. Data inicial no formato "YYYY-MM-DD".
-#' @param end_date Character. Data final no formato "YYYY-MM-DD".
+#' @param terms Character vector. Search terms; they will be concatenated with " OR " and URL-encoded.
+#' @param ini_date Character. Start date in "YYYY-MM-DD" format.
+#' @param end_date Character. End date in "YYYY-MM-DD" format.
 #' @details
-#' 1. Constrói a URL de consulta usando os termos e o intervalo de datas.
-#' 2. Recupera o total de resultados para definir o tamanho da página.
-#' 3. Itera sobre as páginas de resultado (incremento de 500 em 500) até que a página retornada tenha menos de 13 linhas (condição de parada).
-#' 4. Realiza limpeza simples em campos retornados:
-#'    - remove prefixos "string;#",
-#'    - remove tags HTML em resumos e assuntos,
-#'    - remove parte decimal de números de norma.
-#' @return data.frame contendo os registros retornados pela API e as colunas pós-processadas.
+#' 1. Builds the query URL using the terms and the date range.
+#' 2. Retrieves the total number of results to determine the page size.
+#' 3. Iterates over result pages (incrementing by 500) until a page returns fewer than 13 rows (stop condition).
+#' 4. Performs simple cleaning on returned fields:
+#'    - removes "string;#" prefixes,
+#'    - removes HTML tags in summaries and subjects,
+#'    - removes the decimal part of normative numbers.
+#' @return data.frame containing the records returned by the API and the post-processed columns.
 #' @examples
 #' \dontrun{
 #' ini_date <- "2020-01-01"
 #' end_date <- Sys.Date()
 #' terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
-#' normas <- download_legislacao(terms, ini_date, end_date)
+#' normas <- download_normative_data(terms, ini_date, end_date)
 #' }
 #' @export
 
-download_legislacao <- function(terms, ini_date, end_date) {
+download_normative_data <- function(terms, ini_date, end_date) {
   # Juntar os termos com " OR " e substituir espaços por "%20"
   terms_joined <- stringr::str_c(terms, collapse = " OR ") |> URLencode()
 
@@ -96,4 +96,4 @@ download_legislacao <- function(terms, ini_date, end_date) {
 # end_date <- lubridate::today()
 # terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
 
-# normative_data <- download_legislacao(terms, ini_date, end_date)
+# normative_data <- download_normative_data(terms, ini_date, end_date)

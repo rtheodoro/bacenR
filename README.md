@@ -2,14 +2,15 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
 <!-- badges: end -->
 
 The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN).
 
-The datasets available through bacenR include:
-- [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+The datasets available through bacenR include: 
+
+- [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) 
 - [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
 ## Installation
@@ -26,16 +27,16 @@ remotes::install_github("rtheodoro/bacenR")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+# Load the package
 library(bacenR)
-## basic example code
 
 # Download legislation related to Credit Cooperatives
 terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
 ini_date <- "2020-01-01"
 end_date <- Sys.Date()
 
-normative_data <- download_legislacao(terms, ini_date, end_date)
-normative_txt <- download_texto_normativo(normative_data)
+normative_data <- download_normative_data(terms, ini_date, end_date)
+normative_txt <- download_normative_txt(normative_data)
 
 
 # Download financial statements of banks and credit cooperatives
@@ -49,28 +50,27 @@ download_balancetes(
 )
 
 # Unified treatment of downloaded financial statements
-tratamento_balancetes(path_raw = "data_raw", out_dir = "out",
+treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
                       doc_filter = 4010, save = TRUE)
-
 
 ```
 
 ## TO-DO
 
-More datails about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
+More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
-- Choose an idiom (Portuguese/English) for the package
-- Add more datasets from BACEN APIs
-   - [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
-   - [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
-   - [Information about  Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
-   - [Another datasets from BACEN APIs](https://dadosabertos.bcb.gov.br/)
-   - [Information about members of statutory bodies](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
-   - Interest rates
-   - Information about inflation-indexed assets
-   - Continue...
-- Improve error handling and user messages
-- Enhance documentation and examples
+-   Choose an idiom (Portuguese/English) for the package
+-   Add more datasets from BACEN APIs
+    -   [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
+    -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
+    -   [Information about Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+    -   [Another datasets from BACEN APIs](https://dadosabertos.bcb.gov.br/)
+    -   [Information about members of statutory bodies](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
+    -   Interest rates
+    -   Information about inflation-indexed assets
+    -   Continue...
+-   Improve error handling and user messages
+-   Enhance documentation and examples
 
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
@@ -78,8 +78,8 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 Connect to me on LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
-Follow me on Twitter/X: [@rxtheodoro](https://x.com/rxtheodoro)
+Follow me on Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
 
-Follow me on BlueSky: [@rtheodoro](https://bsky.app/profile/rtheodoro.com)
+Follow me on BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
 
-Send me an email at rtheodoro@usp.br
+Send me an email at rtheodoro\@usp.br
