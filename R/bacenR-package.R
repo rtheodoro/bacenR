@@ -2,6 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @import rlang
 #' @importFrom dplyr mutate
 #' @importFrom fs dir_create
 #' @importFrom fs dir_exists
