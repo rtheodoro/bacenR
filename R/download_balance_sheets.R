@@ -80,7 +80,7 @@ download_balance_sheets <- function(
    out_dir = "data_raw",
    overwrite = FALSE
 ) {
-   # dependências usadas: glue, httr, purrr, tibble, stringr, tidyr, fs
+   # Dependencies used: glue, httr, purrr, tibble, stringr, tidyr, fs
    if (!fs::dir_exists(out_dir)) {
       fs::dir_create(out_dir)
    }
@@ -99,7 +99,7 @@ download_balance_sheets <- function(
    instituicao <- toupper(instituicao)
    invalido <- setdiff(instituicao, names(tipo_lookup))
    if (length(invalido) > 0) {
-      stop("Instituicao(s) inválida(s): ", paste(invalido, collapse = ", "))
+      stop("Instituicao(s) invalida(s): ", paste(invalido, collapse = ", "))
    }
 
    combos <- tidyr::crossing(
@@ -186,7 +186,7 @@ download_balance_sheets <- function(
          },
          error = function(e) {
             if (file.exists(dest) && !overwrite) {
-               # arquivo existente nao sobrescrito é considerado sucesso local
+               # Existent file note overwrite is a local success
                list(
                   success = TRUE,
                   status = NA_integer_,
