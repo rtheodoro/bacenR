@@ -67,7 +67,7 @@ download_balance_sheets(
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
 for one or more institution types and stores them in a local directory. ZIP

@@ -46,7 +46,7 @@ and one column per account (the "conta" values) with balances
 populated from the "saldo" column.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 \code{treatment_balance_sheets} reads raw CSV export files produced by the BCB,
 normalizes filenames, locates the header row, imports rows matching a
