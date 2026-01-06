@@ -7,15 +7,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-In progress.
+The {bacenR} package provides tools to download and process data from the Central Bank of Brazil (Banco Central do Brasil — Bacen) in a simple and efficient way. Currently, the package includes the following functions:
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+- `download_balance_sheets()`: download balance sheets from financial institutions
+- `treatment_balance_sheets()`: process downloaded balance sheets and combine them into a single, unified file
+- `download_normative_data()`: download regulatory metadata
+- `download_normative_txt()`: download the full texts of regulatory instructions
 
-```{r setup}
-library(bacenR)
-```
+Additional functions and features will be added in future releases.
+
+For more details and examples, see the project on GitHub: [https://github.com/rtheodoro/bacenR](https://github.com/rtheodoro/bacenR)

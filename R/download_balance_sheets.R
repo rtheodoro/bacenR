@@ -28,7 +28,7 @@
 #' @details
 #' For each combination of year, month and institution type the function
 #' constructs a URL of the form:
-#' https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{INSTITUICAO}.CSV.ZIP
+#' `https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{INSTITUICAO}.CSV.ZIP`
 #' and attempts to download it with httr::GET. Successful and failed attempts
 #' are recorded in the returned tibble. After attempting all downloads the
 #' function tries to unzip any .zip files found in out_dir; unzip errors for
@@ -40,7 +40,7 @@
 #' @return A tibble with one row per attempted download and the following
 #'   columns:
 #'   - ano: Year attempted (integer).
-#'   - mes: Month attempted (integer).
+#'   - meses: Month attempted (integer).
 #'   - instituicao: Institution token used (character).
 #'   - url: The URL attempted (character).
 #'   - dest: Destination file path for the downloaded ZIP (character).
@@ -51,7 +51,7 @@
 #'   - error: Character string with an error message when success is FALSE, or
 #'     a short note when a local file existed and was not overwritten.
 #'
-#' #' @examples
+#' @examples
 #' \dontrun{
 #' # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
 #' download_balance_sheets(
@@ -66,11 +66,12 @@
 #'
 #' @references
 #' Source Banco Central do Brasil (Bacen): [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+#' Notas:
+#'   Os balancetes devem ser consolidados em um unico arquivo posteriormente
+#'   Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 #'
 #' @export
-# Notas:
-#        Os balancetes deverão ser consolidados em um único arquivo posteriormente
-#        Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+#'
 download_balance_sheets <- function(
    instituicao = "COOPERATIVAS",
    meses = 12,
@@ -98,7 +99,7 @@ download_balance_sheets <- function(
    instituicao <- toupper(instituicao)
    invalido <- setdiff(instituicao, names(tipo_lookup))
    if (length(invalido) > 0) {
-      stop("Instituição(s) inválida(s): ", paste(invalido, collapse = ", "))
+      stop("Instituicao(s) inválida(s): ", paste(invalido, collapse = ", "))
    }
 
    combos <- tidyr::crossing(
@@ -125,7 +126,7 @@ download_balance_sheets <- function(
       out_dir,
       overwrite
    ) {
-      # try candidates in order: .CSV.ZIP, .CSV, .ZIP — pick first that returns HTTP 200
+      # try candidates in order: .CSV.ZIP, .CSV, .ZIP and pick first that returns HTTP 200
       suffixes <- c(".CSV.ZIP", ".CSV", ".ZIP")
       # default to the first candidate
       url <- glue::glue(
@@ -185,11 +186,11 @@ download_balance_sheets <- function(
          },
          error = function(e) {
             if (file.exists(dest) && !overwrite) {
-               # arquivo existente não sobrescrito é considerado sucesso local
+               # arquivo existente nao sobrescrito é considerado sucesso local
                list(
                   success = TRUE,
                   status = NA_integer_,
-                  error = "arquivo existente, não sobrescrito"
+                  error = "arquivo existente, nao sobrescrito"
                )
             } else {
                list(
@@ -220,7 +221,7 @@ download_balance_sheets <- function(
       overwrite = overwrite
    )
 
-   # Extrai ZIPs — tentar extrair todos, ignorando erros individuais
+   # Extract ZIPs and ignore extraction errors
    zips <- list.files(
       path = out_dir,
       pattern = "\\.zip$",
@@ -245,4 +246,8 @@ download_balance_sheets <- function(
    )
 
    download_results
+}
+
+if (getRversion() >= "2.15.1") {
+   utils::globalVariables(c("mes"))
 }

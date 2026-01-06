@@ -29,10 +29,8 @@
 #' @export
 #'
 download_normative_data <- function(terms, ini_date, end_date) {
-  # Juntar os termos com " OR " e substituir espaços por "%20"
   terms_joined <- stringr::str_c(terms, collapse = " OR ") |> URLencode()
 
-  # Pegando Qtd de linhas
   site <- glue::glue(
     "https://www.bcb.gov.br/api/search/app/normativos/buscanormativos?querytext=ContentType:normativo%20AND%20contentSource:normativos%20AND%20{terms_joined}&rowlimit=15&startrow=0&sortlist=Data1OWSDATE:descending&refinementfilters=Data:range(datetime({ini_date}),datetime({end_date}))"
   )

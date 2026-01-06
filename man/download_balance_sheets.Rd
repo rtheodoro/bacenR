@@ -41,7 +41,7 @@ A tibble with one row per attempted download and the following
 columns:
 \itemize{
 \item ano: Year attempted (integer).
-\item mes: Month attempted (integer).
+\item meses: Month attempted (integer).
 \item instituicao: Institution token used (character).
 \item url: The URL attempted (character).
 \item dest: Destination file path for the downloaded ZIP (character).
@@ -52,8 +52,28 @@ available).
 \item error: Character string with an error message when success is FALSE, or
 a short note when a local file existed and was not overwritten.
 }
+}
+\description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-#' @examples
+Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
+for one or more institution types and stores them in a local directory. ZIP
+files found in the destination directory are also extracted (errors during
+individual extractions are ignored).
+}
+\details{
+For each combination of year, month and institution type the function
+constructs a URL of the form:
+\verb{https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/\{tipo\}/\{YYYY\}\{MM\}\{INSTITUICAO\}.CSV.ZIP}
+and attempts to download it with httr::GET. Successful and failed attempts
+are recorded in the returned tibble. After attempting all downloads the
+function tries to unzip any .zip files found in out_dir; unzip errors for
+individual files are caught and ignored so the process continues.
+
+Invalid institution tokens cause an immediate error listing the invalid
+entries.
+}
+\examples{
 \dontrun{
 # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
 download_balance_sheets(
@@ -65,27 +85,11 @@ download_balance_sheets(
   overwrite = FALSE
 )
 }
-}
-\description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-#' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
-for one or more institution types and stores them in a local directory. ZIP
-files found in the destination directory are also extracted (errors during
-individual extractions are ignored).
-}
-\details{
-For each combination of year, month and institution type the function
-constructs a URL of the form:
-https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{INSTITUICAO}.CSV.ZIP
-and attempts to download it with httr::GET. Successful and failed attempts
-are recorded in the returned tibble. After attempting all downloads the
-function tries to unzip any .zip files found in out_dir; unzip errors for
-individual files are caught and ignored so the process continues.
-
-Invalid institution tokens cause an immediate error listing the invalid
-entries.
 }
 \references{
 Source Banco Central do Brasil (Bacen): \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
+Notas:
+Os balancetes devem ser consolidados em um unico arquivo posteriormente
+Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 }
