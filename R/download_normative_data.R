@@ -27,7 +27,7 @@
 #' normas <- download_normative_data(terms, ini_date, end_date)
 #' }
 #' @export
-
+#'
 download_normative_data <- function(terms, ini_date, end_date) {
   # Juntar os termos com " OR " e substituir espaços por "%20"
   terms_joined <- stringr::str_c(terms, collapse = " OR ") |> URLencode()
@@ -41,53 +41,53 @@ download_normative_data <- function(terms, ini_date, end_date) {
     jsonlite::fromJSON()
   total_rows <- json_file$TotalRows
 
+  message("total rows ", total_rows)
+
   startrow <- 0
   all_data <- data.frame()
+  starts <- if (total_rows <= 0) integer(0) else seq(0, total_rows, by = 500)
 
-  repeat {
+  all_data <- purrr::map_dfr(starts, function(start) {
     site <- glue::glue(
-      "https://www.bcb.gov.br/api/search/app/normativos/buscanormativos?querytext=ContentType:normativo%20AND%20contentSource:normativos%20AND%20{terms_joined}&rowlimit={total_rows}&startrow={startrow}&sortlist=Data1OWSDATE:descending&refinementfilters=Data:range(datetime({ini_date}),datetime({end_date}))"
+      "https://www.bcb.gov.br/api/search/app/normativos/buscanormativos?querytext=ContentType:normativo%20AND%20contentSource:normativos%20AND%20{terms_joined}&rowlimit=500&startrow={start}&sortlist=Data1OWSDATE:descending&refinementfilters=Data:range(datetime({ini_date}),datetime({end_date}))"
     )
 
-    response <- httr::GET(site) |>
+    resp <- httr::GET(site) |>
       httr::content(as = "text") |>
-      jsonlite::fromJSON() |>
-      purrr::pluck("Rows") |>
-      as.data.frame()
-
-    if (nrow(response) < 13) {
-      break
+      jsonlite::fromJSON()
+    rows <- purrr::pluck(resp, "Rows")
+    if (is.null(rows) || length(rows) == 0) {
+      message("No rows for start ", start)
+      return(NULL)
     }
 
-    response <- response |>
+    df <- as.data.frame(rows) |>
       dplyr::mutate(
-        RefinableString01 = stringr::str_replace_all(
-          RefinableString01,
-          "string;#",
-          ""
+        dplyr::across(
+          dplyr::any_of("RefinableString01"),
+          ~ stringr::str_replace_all(., "string;#", "")
         ),
-        AssuntoNormativoOWSMTXT = stringr::str_replace_all(
-          AssuntoNormativoOWSMTXT,
-          "<[^>]+>",
-          ""
+        dplyr::across(
+          dplyr::any_of("AssuntoNormativoOWSMTXT"),
+          ~ stringr::str_replace_all(., "<[^>]+>", "")
         ),
-        RefinableString03 = stringr::str_replace_all(
-          RefinableString03,
-          "string;#",
-          ""
+        dplyr::across(
+          dplyr::any_of("RefinableString03"),
+          ~ stringr::str_replace_all(., "string;#", "")
         ),
-        HitHighlightedSummary = stringr::str_replace_all(
-          HitHighlightedSummary,
-          "<[^>]+>",
-          ""
+        dplyr::across(
+          dplyr::any_of("HitHighlightedSummary"),
+          ~ stringr::str_replace_all(., "<[^>]+>", "")
         ),
-        NumeroOWSNMBR = stringr::str_replace_all(NumeroOWSNMBR, "\\..*$", "")
+        dplyr::across(
+          dplyr::any_of("NumeroOWSNMBR"),
+          ~ stringr::str_replace_all(., "\\..*$", "")
+        )
       )
 
-    all_data <- rbind(all_data, response)
-    message(startrow)
-    startrow <- startrow + 500
-  }
+    message("Row ", start)
+    df
+  })
 
   return(all_data)
 }

@@ -36,11 +36,10 @@
 #' @examples
 #' \dontrun{
 #' # Minimal example
-#' normative_data <- data.frame(
-#'   TipodoNormativoOWSCHCS = c("Comunicado", "Circular"),
-#'   NumeroOWSNMBR = c("123", "456"),
-#'   stringsAsFactors = FALSE
-#' )
+#' normative_data <- download_normative_data(
+#'    "Cooperativa",
+#'     "2023-08-01",
+#'     "2025-08-01")
 #' normative_txt <- download_normative_txt(normative_data)
 #' }
 #'
