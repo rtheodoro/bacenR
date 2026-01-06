@@ -23,7 +23,7 @@ remotes::install_github("rtheodoro/bacenR")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example:
 
 ``` r
 # Load the package
