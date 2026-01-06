@@ -1,6 +1,6 @@
 Package: bacenR
 Title: Tools to Access Data from Banco Central do Brasil
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6741-5153"))
