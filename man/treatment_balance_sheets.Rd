@@ -46,13 +46,13 @@ and one column per account (the "conta" values) with balances
 populated from the "saldo" column.
 }
 \description{
-tratameno_balance_sheets reads raw CSV export files produced by the BCB,
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
+
+\code{treatment_balance_sheets} reads raw CSV export files produced by the BCB,
 normalizes filenames, locates the header row, imports rows matching a
 specific document number, cleans column names, pivots account balances
 so that each account becomes a column and each row corresponds to an
 institution/date, and optionally writes per-institution-type CSVs.
-#' @description
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 }
 \details{
 Behavior and implementation notes:

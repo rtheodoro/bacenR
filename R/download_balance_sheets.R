@@ -1,12 +1,12 @@
-#' Download balancetes (balanços patrimoniais) from Banco Central do Brasil
+#' Download balance sheets from Banco Central do Brasil
 #'
-#' Downloads monthly "balancetes" (CSV.ZIP) released by the Banco Central do Brasil
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
+#' #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
 #' for one or more institution types and stores them in a local directory. ZIP
 #' files found in the destination directory are also extracted (errors during
 #' individual extractions are ignored).
-#'
-#' #' @description
-#' `r lifecycle::badge("superseded")`
 #'
 #' @param instituicao Character vector of institution types to download.
 #'   Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS",
@@ -51,12 +51,7 @@
 #'   - error: Character string with an error message when success is FALSE, or
 #'     a short note when a local file existed and was not overwritten.
 #'
-#' @references
-#' Source (Banco Central do Brasil): https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
-#'
-#' @seealso glue, httr, purrr, tibble, stringr, tidyr, fs, dplyr
-#'
-#' @examples
+#' #' @examples
 #' \dontrun{
 #' # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
 #' download_balance_sheets(
@@ -69,9 +64,11 @@
 #' )
 #' }
 #'
+#' @references
+#' Source Banco Central do Brasil (Bacen): [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+#'
 #' @export
 # Notas:
-#        O balancete mais antigo é de 1993
 #        Os balancetes deverão ser consolidados em um único arquivo posteriormente
 #        Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 download_balance_sheets <- function(

@@ -20,13 +20,13 @@ including the extracted and post-processed fields (e.g., \code{Assunto}, \code{T
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
-}
-\details{
+
 For each row of the input data.frame, constructs the appropriate URL for the BCB
 normatives API, performs the request, extracts the returned content and applies
 basic cleaning to the text fields (Assunto and Texto). Returns a data.frame
 with all aggregated contents.
-
+}
+\details{
 The function performs the following steps:
 \enumerate{
 \item Iterates over each row of \code{normative_data} (prints the iteration index for monitoring).
@@ -54,12 +54,12 @@ The function performs the following steps:
 }
 \examples{
 \dontrun{
-# Minimal example
-normative_data <- data.frame(
-  TipodoNormativoOWSCHCS = c("Comunicado", "Circular"),
-  NumeroOWSNMBR = c("123", "456"),
-  stringsAsFactors = FALSE
-)
+# First, download normative data
+normative_data <- download_normative_data(
+   "Cooperativa",
+    "2023-08-01",
+    "2025-08-01")
+# Then, download the full texts for the retrieved normatives
 normative_txt <- download_normative_txt(normative_data)
 }
 

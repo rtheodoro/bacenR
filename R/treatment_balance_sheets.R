@@ -1,13 +1,13 @@
 #' Process and reshape "balancetes" CSV exports from the Brazilian Central Bank (BCB)
 #'
-#' tratameno_balance_sheets reads raw CSV export files produced by the BCB,
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
+#' `treatment_balance_sheets` reads raw CSV export files produced by the BCB,
 #' normalizes filenames, locates the header row, imports rows matching a
 #' specific document number, cleans column names, pivots account balances
 #' so that each account becomes a column and each row corresponds to an
 #' institution/date, and optionally writes per-institution-type CSVs.
-#' #' @description
-#' `r lifecycle::badge("superseded")`
-#'
 #' @param path_raw Character scalar. Directory containing the raw CSV files.
 #'   Filenames are expected to start with a YYYYMM prefix (e.g. "202012COOPERATIVAS.CSV").
 #'   The function will look for files matching "\\.CSV$" (case-insensitive).

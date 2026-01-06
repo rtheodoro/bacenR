@@ -20,15 +20,12 @@ test_that("treat balance sheet of two types of institution", {
   )
 })
 
-# Regular function call without saving
-treatment_balance_sheets(
-  path_raw = "data_raw",
-  out_dir = "data",
-  doc_filter = 4010,
-  save = FALSE
-)
 
-test_that("treat balance sheet of one type of institution", {
+# Delete directory after tests
+fs::dir_delete("data_raw")
+fs::dir_delete("data")
+
+test_that("treat balance sheet of two types of institutions for 2 months", {
   local({
     download_balance_sheets(
       instituicao = c("COOPERATIVAS", "BANCOS"),

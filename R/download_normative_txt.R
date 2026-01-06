@@ -1,11 +1,12 @@
 #' Download normative texts from the Brazil Central Bank (BCB) from a reference data.frame
 #'
+#' @description
+#' `r lifecycle::badge("superseded")`
+#'
 #' For each row of the input data.frame, constructs the appropriate URL for the BCB
 #' normatives API, performs the request, extracts the returned content and applies
 #' basic cleaning to the text fields (Assunto and Texto). Returns a data.frame
 #' with all aggregated contents.
-#' @description
-#' `r lifecycle::badge("superseded")`
 #'
 #' @param normative_data data.frame. A data.frame with at least the columns:
 #'   - TipodoNormativoOWSCHCS: type of the normative (e.g., "Comunicado", "Ato de Diretor", etc.)
@@ -35,11 +36,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Minimal example
+#' # First, download normative data
 #' normative_data <- download_normative_data(
 #'    "Cooperativa",
 #'     "2023-08-01",
 #'     "2025-08-01")
+#' # Then, download the full texts for the retrieved normatives
 #' normative_txt <- download_normative_txt(normative_data)
 #' }
 #'

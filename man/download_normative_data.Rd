@@ -18,11 +18,12 @@ data.frame containing the records returned by the API and the post-processed col
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
-}
-\details{
+
 Queries the BCB normative search API, collects all results within the provided
 date range and returns a data.frame with the records.
-Data are downloaded from https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
+Data are downloaded from \url{https://www.bcb.gov.br/estabilidadefinanceira/buscanormas}.
+}
+\details{
 \enumerate{
 \item Builds the query URL using the terms and the date range.
 \item Retrieves the total number of results to determine the page size.

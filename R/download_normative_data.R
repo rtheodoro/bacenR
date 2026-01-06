@@ -1,11 +1,11 @@
 #' Download normative acts from the Central Bank (BCB) by terms and date range
 #'
-#' Queries the BCB normative search API, collects all results within the provided
-#' date range and returns a data.frame with the records.
-#' Data are downloaded from https://www.bcb.gov.br/estabilidadefinanceira/buscanormas
-#'
 #' @description
 #' `r lifecycle::badge("superseded")`
+#'
+#' Queries the BCB normative search API, collects all results within the provided
+#' date range and returns a data.frame with the records.
+#' Data are downloaded from [https://www.bcb.gov.br/estabilidadefinanceira/buscanormas](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas).
 #'
 #' @param terms Character vector. Search terms; they will be concatenated with " OR " and URL-encoded.
 #' @param ini_date Character. Start date in "YYYY-MM-DD" format.

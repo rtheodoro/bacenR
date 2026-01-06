@@ -1,0 +1,21 @@
+---
+title: "bacenR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bacenR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+In progress.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bacenR)
+```
