@@ -1,7 +1,7 @@
 #' Download balance sheets from Banco Central do Brasil
 #'
 #' @description
-#' `r lifecycle::badge("superseded")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
 #' for one or more institution types and stores them in a local directory. ZIP

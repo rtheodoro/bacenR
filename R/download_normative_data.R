@@ -1,7 +1,7 @@
 #' Download normative acts from the Central Bank (BCB) by terms and date range
 #'
 #' @description
-#' `r lifecycle::badge("superseded")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' Queries the BCB normative search API, collects all results within the provided
 #' date range and returns a data.frame with the records.

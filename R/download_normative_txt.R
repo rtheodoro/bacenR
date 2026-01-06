@@ -1,7 +1,7 @@
 #' Download normative texts from the Brazil Central Bank (BCB) from a reference data.frame
 #'
 #' @description
-#' `r lifecycle::badge("superseded")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' For each row of the input data.frame, constructs the appropriate URL for the BCB
 #' normatives API, performs the request, extracts the returned content and applies

@@ -1,7 +1,7 @@
 #' Process and reshape "balancetes" CSV exports from the Brazilian Central Bank (BCB)
 #'
 #' @description
-#' `r lifecycle::badge("superseded")`
+#' `r lifecycle::badge("experimental")`
 #'
 #' `treatment_balance_sheets` reads raw CSV export files produced by the BCB,
 #' normalizes filenames, locates the header row, imports rows matching a
