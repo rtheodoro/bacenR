@@ -3,7 +3,7 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
+#' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Banco Central do Brasil
 #' for one or more institution types and stores them in a local directory. ZIP
 #' files found in the destination directory are also extracted (errors during
 #' individual extractions are ignored).
