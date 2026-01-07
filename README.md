@@ -1,16 +1,17 @@
 # bacenR
 
 <!-- badges: start -->
+
 [![CRAN status](https://www.r-pkg.org/badges/version/bacenR)](https://CRAN.R-project.org/package=bacenR) [![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 
 <!-- badges: end -->
 
 The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN).
 
-The datasets available through bacenR include: 
+The datasets available through bacenR include:
 
-- [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) 
-- [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+-   [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+-   [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
 ## Installation
 
@@ -23,7 +24,7 @@ remotes::install_github("rtheodoro/bacenR")
 
 ## Example
 
-This is a basic example:
+This is a basic example of use:
 
 ``` r
 # Load the package
@@ -51,7 +52,6 @@ download_balance_sheets(
 # Unified treatment of downloaded financial statements
 treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
                       doc_filter = 4010, save = TRUE)
-
 ```
 
 ## TO-DO
@@ -73,7 +73,9 @@ More details about the to-do list can be found in the [GitHub project board](htt
 
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
-## Contact
+## Author
+
+Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/)
 
 Connect to me on LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
@@ -82,3 +84,7 @@ Follow me on Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
 Follow me on BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
 
 Send me an email at rtheodoro\@usp.br
+
+## Support
+
+You can support the development of this package by buying me a coffee with [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c)
