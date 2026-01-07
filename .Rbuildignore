@@ -8,3 +8,4 @@
 ^_pkgdown\.yml$     
 ^\.github$         
 ^cran-comments\.md$
+^\.github$
