@@ -75,7 +75,7 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 ## Author
 
-Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/)
+Ricardo Theodoro: Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/)
 
 Connect to me on LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
@@ -87,4 +87,6 @@ Send me an email at rtheodoro\@usp.br
 
 ## Support
 
-You can support the development of this package by buying me a coffee with [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c)
+If this package is useful and saves you time, please consider starring this GitHub repository.
+
+You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
