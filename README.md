@@ -58,8 +58,8 @@ treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
--   Choose an idiom (Portuguese/English) for the package
--   Add more datasets from BACEN APIs
+
+-   Functions to collect more datasets from BACEN
     -   [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
     -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
     -   [Information about Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
@@ -67,9 +67,7 @@ More details about the to-do list can be found in the [GitHub project board](htt
     -   [Information about members of statutory bodies](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
     -   Interest rates
     -   Information about inflation-indexed assets
-    -   Continue...
--   Improve error handling and user messages
--   Enhance documentation and examples
+
 
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
@@ -77,13 +75,13 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 Ricardo Theodoro: Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/)
 
-Connect to me on LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
+LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
-Follow me on Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
+Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
 
-Follow me on BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
+BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
 
-Send me an email at rtheodoro\@usp.br
+Email: rtheodoro\@usp.br
 
 ## Support
 
