@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_balance_sheets.R
 \name{download_balance_sheets}
 \alias{download_balance_sheets}
-\title{Download balance sheets from Banco Central do Brasil}
+\title{Download balance sheets from \href{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}{Banco Central do Brasil}}
 \usage{
 download_balance_sheets(
   instituicao = "COOPERATIVAS",
@@ -15,9 +15,9 @@ download_balance_sheets(
 }
 \arguments{
 \item{instituicao}{Character vector of institution types to download.
-Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS",
-"CONGLOMERADOS", "SOCIEDADES", "BLOPRUDENCIAL", "COMBINADOS", "LIQUIDACAO".
-The function maps these tokens to the type names used in the BCB URL.}
+Accepted values (case-insensitive): "BANCOS" to get data from, "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
+"CONGLOMERADOS" (Conglomerados financeiros), "SOCIEDADES", "BLOPRUDENCIAL" (Conglomerados Prudenciais), "COMBINADOS" (Combinados Cooperativos), "LIQUIDACAO" (Instituições em Regime Especial).
+The function maps these tokens to the type names used in the \href{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}{BCB URL}.}
 
 \item{meses}{Integer or integer vector specifying months to download. Values
 should be 1..12 (single values or vectors like c(6, 12)). When a month
@@ -89,7 +89,8 @@ download_balance_sheets(
 }
 \references{
 Source Banco Central do Brasil (Bacen): \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
-Notas:
-Os balancetes devem ser consolidados em um unico arquivo posteriormente
+Note:
+The values are not changed or processed in any way, they are downloaded as-is from the source.
+Check the function \code{treat_balance_sheets()} for tools to read and process
 Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 }

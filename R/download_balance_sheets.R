@@ -1,4 +1,4 @@
-#' Download balance sheets from Banco Central do Brasil
+#' Download balance sheets from [Banco Central do Brasil](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
@@ -9,9 +9,9 @@
 #' individual extractions are ignored).
 #'
 #' @param instituicao Character vector of institution types to download.
-#'   Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS",
-#'   "CONGLOMERADOS", "SOCIEDADES", "BLOPRUDENCIAL", "COMBINADOS", "LIQUIDACAO".
-#'   The function maps these tokens to the type names used in the BCB URL.
+#'   Accepted values (case-insensitive): "BANCOS" to get data from, "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
+#'   "CONGLOMERADOS" (Conglomerados financeiros), "SOCIEDADES", "BLOPRUDENCIAL" (Conglomerados Prudenciais), "COMBINADOS" (Combinados Cooperativos), "LIQUIDACAO" (Instituições em Regime Especial).
+#'   The function maps these tokens to the type names used in the [BCB URL](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais).
 #' @param meses Integer or integer vector specifying months to download. Values
 #'   should be 1..12 (single values or vectors like c(6, 12)). When a month
 #'   single-digit is provided it is zero-padded to two digits in filenames/URLs.
@@ -66,8 +66,9 @@
 #'
 #' @references
 #' Source Banco Central do Brasil (Bacen): [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
-#' Notas:
-#'   Os balancetes devem ser consolidados em um unico arquivo posteriormente
+#' Note:
+#'   The values are not changed or processed in any way, they are downloaded as-is from the source.
+#'   Check the function `treat_balance_sheets()` for tools to read and process
 #'   Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 #'
 #' @export

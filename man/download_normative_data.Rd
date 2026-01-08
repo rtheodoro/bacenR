@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_normative_data.R
 \name{download_normative_data}
 \alias{download_normative_data}
-\title{Download normative acts from the Central Bank (BCB) by terms and date range}
+\title{Download normative acts from the Central Bank (Bacen) by terms and date range}
 \usage{
 download_normative_data(terms, ini_date, end_date)
 }

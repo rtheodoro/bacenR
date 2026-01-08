@@ -2,7 +2,7 @@
 % Please edit documentation in R/treatment_balance_sheets.R
 \name{treatment_balance_sheets}
 \alias{treatment_balance_sheets}
-\title{Process and reshape "balancetes" CSV exports from the Brazilian Central Bank (BCB)}
+\title{Process and reshape balances CSV exports from the Brazilian Central Bank (Bacen) downloaded via \code{download_balance_sheets()}.}
 \usage{
 treatment_balance_sheets(
   path_raw = "data_raw",
@@ -23,7 +23,7 @@ when \code{save = TRUE}. If it does not exist it will be created.}
 \item{doc_filter}{Numeric or integer scalar. The numeric value used to
 filter rows in the imported tables by the column DOCUMENTO (e.g. 4010).
 Other options are: 4010, 4413, 4423, 4433, 4060, 4016 and 4066.
-Check the webpage for more details: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
+Check the webpage for more details: \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}}
 
 \item{save}{Logical scalar. If \code{TRUE} (default) the processed data
 frames are written to disk as CSV files (one per institution type).}
@@ -48,10 +48,9 @@ populated from the "saldo" column.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-\code{treatment_balance_sheets} reads raw CSV export files produced by the BCB,
-normalizes filenames, locates the header row, imports rows matching a
-specific document number, cleans column names, pivots account balances
-so that each account becomes a column and each row corresponds to an
+\code{treatment_balance_sheets} reads raw CSV export files produced by the BCB and downloaded via \code{download_balance_sheets()}, normalizes filenames, locates the
+header row, imports rows matching a specific document number, cleans column names, pivots account balances so
+that each account becomes a column and each row corresponds to an
 institution/date, and optionally writes per-institution-type CSVs.
 }
 \details{
@@ -96,7 +95,7 @@ or failure to rename files when removing underscores.
 \note{
 The function prints a message reminding that the numeric values
 in the balancetes are not adjusted for inflation. See:
-https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+\url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
 }
 \examples{
 \dontrun{

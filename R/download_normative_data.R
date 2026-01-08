@@ -1,4 +1,4 @@
-#' Download normative acts from the Central Bank (BCB) by terms and date range
+#' Download normative acts from the Central Bank (Bacen) by terms and date range
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`

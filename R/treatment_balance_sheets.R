@@ -1,12 +1,11 @@
-#' Process and reshape "balancetes" CSV exports from the Brazilian Central Bank (BCB)
+#' Process and reshape balances CSV exports from the Brazilian Central Bank (Bacen) downloaded via `download_balance_sheets()`.
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' `treatment_balance_sheets` reads raw CSV export files produced by the BCB,
-#' normalizes filenames, locates the header row, imports rows matching a
-#' specific document number, cleans column names, pivots account balances
-#' so that each account becomes a column and each row corresponds to an
+#' `treatment_balance_sheets` reads raw CSV export files produced by the BCB and downloaded via `download_balance_sheets()`, normalizes filenames, locates the
+#' header row, imports rows matching a specific document number, cleans column names, pivots account balances so
+#' that each account becomes a column and each row corresponds to an
 #' institution/date, and optionally writes per-institution-type CSVs.
 #' @param path_raw Character scalar. Directory containing the raw CSV files.
 #'   Filenames are expected to start with a YYYYMM prefix (e.g. "202012COOPERATIVAS.CSV").
@@ -16,7 +15,7 @@
 #' @param doc_filter Numeric or integer scalar. The numeric value used to
 #'   filter rows in the imported tables by the column DOCUMENTO (e.g. 4010).
 #'   Other options are: 4010, 4413, 4423, 4433, 4060, 4016 and 4066.
-#'   Check the webpage for more details: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+#'   Check the webpage for more details: [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #' @param save Logical scalar. If \code{TRUE} (default) the processed data
 #'   frames are written to disk as CSV files (one per institution type).
 #' @param output_filename NULL, character scalar, or function. Controls the
@@ -69,7 +68,7 @@
 #'
 #' @note The function prints a message reminding that the numeric values
 #'   in the balancetes are not adjusted for inflation. See:
-#'   https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
+#'   [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @examples
 #' \dontrun{
