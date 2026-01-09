@@ -11,7 +11,7 @@ The goal of `bacenR` is to provide R functions to access, download, and work wit
 The datasets available through `bacenR` include:
 
 -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
--   [Financial statements (balancetes) of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+-   [Financial statements (balance sheets) of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
 ## Summary
 
