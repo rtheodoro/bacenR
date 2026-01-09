@@ -102,7 +102,7 @@ If this package is useful and saves you time, please consider starring this GitH
 
 You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
 
-# How to cite
+## How to cite
 
 To cite bacenR in publications, please use:
 
@@ -111,11 +111,6 @@ citation("bacenR")
 ```
 
 ```         
-  
-Theodoro R (2026). “bacenR: Tools to Access Data from Banco Central do Brasil.” R package version 2.7.3, <https://github.com/rtheodoro/bacenR>.
-
-Or
-
 @Unpublished{,
     title = {bacenR: Tools to Access Data from Banco Central do Brasil},
     author = {Ricardo Theodoro},
