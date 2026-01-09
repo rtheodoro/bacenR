@@ -6,12 +6,12 @@
 
 <!-- badges: end -->
 
-The goal of `bacenR` is to provide R functions to access, download, and work with data from the Central Bank of Brazil (Bacen).
+The goal of `bacenR` is to provide R functions to access, download, and work with data from the Brazilian Central Bank (Bacen).
 
 The datasets available through `bacenR` include:
 
--   [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
--   [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+-   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+-   [Financial statements (balancetes) of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
 ## Summary
 
@@ -39,12 +39,13 @@ This is a basic example of use:
 # Load the package
 library(bacenR)
 
-# Download legislation related to Credit Cooperatives
-terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
-ini_date <- "2020-01-01"
-end_date <- Sys.Date()
+# Download normative legislation related to Credit Cooperatives
+normative_data <- download_normative_data(
+    terms = c("Cooperativas de Crédito", "Cooperativa de Crédito"), 
+    ini_date = "2020-01-01", 
+    end_date = Sys.Date())
 
-normative_data <- download_normative_data(terms, ini_date, end_date)
+# Download texts of the normative legislation
 normative_txt <- download_normative_txt(normative_data)
 
 
@@ -66,7 +67,7 @@ treatment_balance_sheets(
     save = TRUE)
 ```
 
-* For Financial and Economic Indicators, such as IPCA, Selic, GDP, Government Debt, and others check it out: [BacenAPI.R]("https://cran.r-project.org/web/packages/BacenAPI/index.html") and [rbcb]("https://cran.r-project.org/web/packages/rbcb/index.html") packages.
+For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI.R](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
 
 ## To-do
 
