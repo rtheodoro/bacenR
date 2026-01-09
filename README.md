@@ -13,6 +13,17 @@ The datasets available through bacenR include:
 -   [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
 -   [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
+## Summary
+
+-   [Installation](#installation)
+-   [Example](#example)
+-   [TO-DO](#to-do)
+-   [Author](#author)
+-   [Support](#support)
+-   [How to cite](#how-to-cite)
+
+
+
 ## Installation
 
 You can install the development version of bacenR like so:
@@ -54,7 +65,7 @@ treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
                       doc_filter = 4010, save = TRUE)
 ```
 
-## TO-DO
+## To-do
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
@@ -88,3 +99,19 @@ Email: rtheodoro\@usp.br
 If this package is useful and saves you time, please consider starring this GitHub repository.
 
 You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
+
+# How to cite
+
+To cite bacenR in publications, please use:
+```r
+citation("bacenR")
+
+    bibentry(
+    bibtype = "manual",
+    title = "bacenR: Tools to Access Data from Banco Central do Brasil",
+    author = "Ricardo Theodoro",
+    journal = "github",
+    year = "2025",
+    url = "https://github.com/rtheodoro/bacenR"
+    )
+```

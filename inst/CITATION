@@ -1,5 +1,5 @@
 bibentry(
-  bibtype = "Article",
+  bibtype = "manual",
   title = "bacenR: Tools to Access Data from Banco Central do Brasil",
   author = "Ricardo Theodoro",
   journal = "github",
