@@ -76,7 +76,7 @@ More details about the to-do list can be found in the [GitHub project board](htt
 -   Functions to collect more datasets from Bacen
     -   [Institutions authorized, regulated, or supervised](https://www.bcb.gov.br/meubc/encontreinstituicao)
     -   [Institutions operating in the country](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
-    -   [Members of the board](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
+    -   [Board members](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
     -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/)
     -   [Datasets from Bacen.API](https://dadosabertos.bcb.gov.br/)
  
