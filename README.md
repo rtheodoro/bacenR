@@ -6,9 +6,9 @@
 
 <!-- badges: end -->
 
-The goal of bacenR is to provide R functions to access, download, and work with data from the Central Bank of Brazil (BACEN).
+The goal of `bacenR` is to provide R functions to access, download, and work with data from the Central Bank of Brazil (Bacen).
 
-The datasets available through bacenR include:
+The datasets available through `bacenR` include:
 
 -   [Normative legislation and texts](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
 -   [Financial statements (balancetes) of banks, credit unions, and other financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
@@ -16,11 +16,11 @@ The datasets available through bacenR include:
 ## Summary
 
 -   [Installation](#installation)
--   [Example](#example)
+-   [Usage](#usage)
 -   [To-do](#to-do)
 -   [Author](#author)
--   [Support](#support)
 -   [How to cite](#how-to-cite)
+-   [Support](#support)
 
 ## Installation
 
@@ -31,7 +31,7 @@ You can install the development version of bacenR like so:
 remotes::install_github("rtheodoro/bacenR")
 ```
 
-## Example
+## Usage
 
 This is a basic example of use:
 
@@ -59,23 +59,26 @@ download_balance_sheets(
 )
 
 # Unified treatment of downloaded financial statements
-treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
-                      doc_filter = 4010, save = TRUE)
+treatment_balance_sheets(
+    path_raw = "data_raw", 
+    out_dir = "out",
+    doc_filter = 4010, 
+    save = TRUE)
 ```
+
+* For Financial and Economic Indicators, such as IPCA, Selic, GDP, Government Debt, and others check it out: [BacenAPI.R]("https://cran.r-project.org/web/packages/BacenAPI/index.html") and [rbcb]("https://cran.r-project.org/web/packages/rbcb/index.html") packages.
 
 ## To-do
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
--   Functions to collect more datasets from BACEN
-    -   [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
-    -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/) - I need to explode this in sub-tasks
-    -   [Information about Institutions Operating in the Country (file transfer)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
-    -   [Another datasets from BACEN APIs](https://dadosabertos.bcb.gov.br/)
-    -   [Information about members of statutory bodies](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
-    -   Interest rates
-    -   Information about inflation-indexed assets
-
+-   Functions to collect more datasets from Bacen
+    -   [Institutions authorized, regulated, or supervised](https://www.bcb.gov.br/meubc/encontreinstituicao)
+    -   [Institutions operating in the country](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+    -   [Members of the board](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
+    -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/)
+    -   [Datasets from Bacen.API](https://dadosabertos.bcb.gov.br/)
+ 
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
 ## Author
@@ -96,11 +99,6 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
     -   Email: rtheodoro\@usp.br
 
-## Support
-
-If this package is useful and saves you time, please consider starring this GitHub repository.
-
-You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
 
 ## How to cite
 
@@ -120,3 +118,9 @@ citation("bacenR")
     url = {https://github.com/rtheodoro/bacenR},
 }
 ```
+
+## Support
+
+If this package is useful and saves you time, please consider starring this GitHub repository.
+
+You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
