@@ -114,9 +114,9 @@ citation("bacenR")
 @Unpublished{,
     title = {bacenR: Tools to Access Data from Banco Central do Brasil},
     author = {Ricardo Theodoro},
-    journal = {github},
+    journal = {Github},
     year = {2026},
-    note = {R package version 2.7.3},
+    note = {R package version 0.1.0},
     url = {https://github.com/rtheodoro/bacenR},
 }
 ```
