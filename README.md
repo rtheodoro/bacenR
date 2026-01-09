@@ -17,14 +17,12 @@ The datasets available through bacenR include:
 
 -   [Installation](#installation)
 -   [Example](#example)
--   [TO-DO](#to-do)
+-   [To-do](#to-do)
 -   [Author](#author)
 -   [Support](#support)
 -   [How to cite](#how-to-cite)
 
-
-
-## Installation
+## Installation {#installation}
 
 You can install the development version of bacenR like so:
 
@@ -33,7 +31,7 @@ You can install the development version of bacenR like so:
 remotes::install_github("rtheodoro/bacenR")
 ```
 
-## Example
+## Example {#example}
 
 This is a basic example of use:
 
@@ -65,10 +63,9 @@ treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
                       doc_filter = 4010, save = TRUE)
 ```
 
-## To-do
+## To-do {#to-do}
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
-
 
 -   Functions to collect more datasets from BACEN
     -   [Information about institutions authorized, regulated, or supervised by the Central Bank of Brazil (BC)](https://www.bcb.gov.br/meubc/encontreinstituicao)
@@ -79,39 +76,52 @@ More details about the to-do list can be found in the [GitHub project board](htt
     -   Interest rates
     -   Information about inflation-indexed assets
 
-
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
-## Author
+## Author {#author}
 
-Ricardo Theodoro: Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/)
+**Ricardo Theodoro**:
 
-LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
+-   Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/).
 
-Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
+-   Researcher at [OBSCOOP/USP](https://linktr.ee/obscoopusp)
 
-BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
+-   Contact information:
 
-Email: rtheodoro\@usp.br
+    -   LinkedIn: [Ricardo Theodoro](https://www.linkedin.com/in/rtheodoro/)
 
-## Support
+    -   Twitter/X: [\@rxtheodoro](https://x.com/rxtheodoro)
+
+    -   BlueSky: [\@rtheodoro](https://bsky.app/profile/rtheodoro.com)
+
+    -   Email: rtheodoro\@usp.br
+
+## Support {#support}
 
 If this package is useful and saves you time, please consider starring this GitHub repository.
 
 You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
 
-# How to cite
+# How to cite {#how-to-cite}
 
 To cite bacenR in publications, please use:
-```r
-citation("bacenR")
 
-    bibentry(
-    bibtype = "manual",
-    title = "bacenR: Tools to Access Data from Banco Central do Brasil",
-    author = "Ricardo Theodoro",
-    journal = "github",
-    year = "2025",
-    url = "https://github.com/rtheodoro/bacenR"
-    )
+``` r
+citation("bacenR")
+```
+
+```         
+  
+Theodoro R (2026). “bacenR: Tools to Access Data from Banco Central do Brasil.” R package version 2.7.3, <https://github.com/rtheodoro/bacenR>.
+
+Or
+
+@Unpublished{,
+    title = {bacenR: Tools to Access Data from Banco Central do Brasil},
+    author = {Ricardo Theodoro},
+    journal = {github},
+    year = {2026},
+    note = {R package version 2.7.3},
+    url = {https://github.com/rtheodoro/bacenR},
+}
 ```
