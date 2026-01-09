@@ -22,7 +22,7 @@ The datasets available through bacenR include:
 -   [Support](#support)
 -   [How to cite](#how-to-cite)
 
-## Installation {#installation}
+## Installation
 
 You can install the development version of bacenR like so:
 
@@ -31,7 +31,7 @@ You can install the development version of bacenR like so:
 remotes::install_github("rtheodoro/bacenR")
 ```
 
-## Example {#example}
+## Example
 
 This is a basic example of use:
 
@@ -63,7 +63,7 @@ treatment_balance_sheets(path_raw = "data_raw", out_dir = "out",
                       doc_filter = 4010, save = TRUE)
 ```
 
-## To-do {#to-do}
+## To-do
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
@@ -78,7 +78,7 @@ More details about the to-do list can be found in the [GitHub project board](htt
 
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
 
-## Author {#author}
+## Author
 
 **Ricardo Theodoro**:
 
@@ -96,13 +96,13 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
     -   Email: rtheodoro\@usp.br
 
-## Support {#support}
+## Support
 
 If this package is useful and saves you time, please consider starring this GitHub repository.
 
 You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
 
-# How to cite {#how-to-cite}
+# How to cite
 
 To cite bacenR in publications, please use:
 
