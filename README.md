@@ -11,20 +11,20 @@ The goal of `bacenR` is to provide R functions to access, download, and work wit
 The datasets available through `bacenR` include:
 
 -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
--   [Financial statements (balance sheets) of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+-   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 
 ## Summary
 
--   [Installation](#installation)
+-   [Install](#install)
 -   [Usage](#usage)
 -   [To-do](#to-do)
 -   [Author](#author)
 -   [How to cite](#how-to-cite)
 -   [Support](#support)
 
-## Installation
+## Install
 
-You can install the development version of bacenR like so:
+You can install the development version of `bacenR` like so:
 
 ``` r
 # install.packages("remotes") # if you don't have remotes installed yet
@@ -43,11 +43,11 @@ library(bacenR)
 normative_data <- download_normative_data(
     terms = c("Cooperativas de Crédito", "Cooperativa de Crédito"), 
     ini_date = "2020-01-01", 
-    end_date = Sys.Date())
+    end_date = Sys.Date()
+)
 
 # Download texts of the normative legislation
 normative_txt <- download_normative_txt(normative_data)
-
 
 # Download financial statements of banks and credit cooperatives
 download_balance_sheets(
@@ -64,7 +64,8 @@ treatment_balance_sheets(
     path_raw = "data_raw", 
     out_dir = "out",
     doc_filter = 4010, 
-    save = TRUE)
+    save = TRUE
+)
 ```
 
 For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI.R](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
@@ -103,7 +104,7 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 ## How to cite
 
-To cite bacenR in publications, please use:
+To cite `bacenR` in publications, please use:
 
 ``` r
 citation("bacenR")
