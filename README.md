@@ -6,7 +6,7 @@
 
 <!-- badges: end -->
 
-The goal of `bacenR` is to provide R functions to access, download, and work with data from the Brazilian Central Bank (Bacen).
+The goal of `bacenR` is to provide R functions to download and work with data from the Brazilian Central Bank (Bacen).
 
 The datasets available through `bacenR` include:
 
