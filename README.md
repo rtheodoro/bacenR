@@ -68,7 +68,7 @@ treatment_balance_sheets(
 )
 ```
 
-For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI.R](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
+For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
 
 ## To-do
 
