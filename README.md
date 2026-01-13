@@ -55,7 +55,7 @@ download_balance_sheets(
    meses = c(6, 12),
    first_year = 1993,
    final_year = 2023,
-   out_dir = "data_raw/balancetes",
+   out_dir = "data_raw",
    overwrite = FALSE
 )
 
@@ -87,7 +87,7 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 **Ricardo Theodoro**:
 
--   Economist, Ph.D. candidate and Master's degree holder in Accounting at [USP/FEARP](http://www.fearp.usp.br/).
+-   Economist, Ph.D. candidate and Master's degree holder in Accounting at [FEARP/USP](http://www.fearp.usp.br/).
 
 -   Researcher at [OBSCOOP/USP](https://linktr.ee/obscoopusp)
 
