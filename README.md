@@ -27,8 +27,8 @@ The datasets available through `bacenR` include:
 You can install the development version of `bacenR` like so:
 
 ``` r
-# install.packages("remotes") # if you don't have remotes installed yet
-remotes::install_github("rtheodoro/bacenR")
+# install.packages("pak") # if you don't have pak installed yet
+pak::pak("rtheodoro/bacenR")
 ```
 
 ## Usage
