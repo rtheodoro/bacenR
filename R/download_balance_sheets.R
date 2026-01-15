@@ -173,6 +173,7 @@ download_balance_sheets <- function(
 
       res <- tryCatch(
          {
+            message(glue::glue("{ano}{mes2}_{instituicao}{candidate$suf}"))
             resp <- httr::GET(
                url,
                httr::write_disk(dest, overwrite = overwrite),

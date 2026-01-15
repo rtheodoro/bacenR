@@ -1,1 +1,3 @@
 *.html
+/data/
+/data_raw/
