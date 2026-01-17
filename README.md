@@ -40,17 +40,17 @@ This is a basic example of use:
 library(bacenR)
 
 # Download normative legislation related to Credit Cooperatives
-normative_data <- download_normative_data(
+normative_data <- get_normative_data(
     terms = c("Cooperativas de Crédito", "Cooperativa de Crédito"), 
     ini_date = "2020-01-01", 
     end_date = Sys.Date()
 )
 
 # Download texts of the normative legislation
-normative_txt <- download_normative_txt(normative_data)
+normative_txt <- get_normative_txt(normative_data)
 
 # Download financial statements of banks and credit cooperatives
-download_balance_sheets(
+get_balance_sheets(
    instituicao = c("BANCOS", "COOPERATIVAS"),
    meses = c(6, 12),
    first_year = 1993,
@@ -60,7 +60,7 @@ download_balance_sheets(
 )
 
 # Unified treatment of downloaded financial statements
-treatment_balance_sheets(
+tidy_balance_sheets(
     path_raw = "data_raw", 
     out_dir = "out",
     doc_filter = 4010, 

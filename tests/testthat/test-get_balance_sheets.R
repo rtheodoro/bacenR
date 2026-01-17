@@ -1,5 +1,5 @@
 # test_that("create directory, download files and extract them, for a range of years", {
-#   download_balance_sheets(
+#   get_balance_sheets(
 #     instituicao = "COOPERATIVAS",
 #     meses = 12,
 #     first_year = 2022,
@@ -11,7 +11,7 @@
 # })
 
 # test_that("Check if directory exists, download files and extract them, for multiple institutions", {
-#   download_balance_sheets(
+#   get_balance_sheets(
 #     instituicao = c("COOPERATIVAS", "BANCOS"),
 #     meses = 12,
 #     first_year = 2022,
@@ -26,7 +26,7 @@
 # })
 
 # test_that("Check if overwrite files and download multiple months", {
-#   download_balance_sheets(
+#   get_balance_sheets(
 #     instituicao = c("COOPERATIVAS", "BANCOS"),
 #     meses = c(6, 12),
 #     first_year = 2022,

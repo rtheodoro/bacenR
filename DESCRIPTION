@@ -5,7 +5,7 @@ Authors@R:
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6741-5153"))
 Description: Provides functions to query, retrieve, and tidy economic and
-    financial data from Banco Central do Brasil web services for use in R
+    financial data from Brazilian Central Bank web services for use in R
     analyses and workflows.
 License: GPL (>= 3)
 URL: https://github.com/rtheodoro/bacenR
@@ -13,6 +13,7 @@ BugReports: https://github.com/rtheodoro/bacenR/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
+    data.table,
     dplyr,
     fs,
     glue,

@@ -1,9 +1,9 @@
-#' Download normative acts from the Central Bank (Bacen) by terms and date range
+#' Download [normative acts from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) by terms and date range
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Queries the BCB normative search API, collects all results within the provided
+#' Queries the Bacen normative search API, collects all results within the provided
 #' date range and returns a data.frame with the records.
 #' Data are downloaded from [https://www.bcb.gov.br/estabilidadefinanceira/buscanormas](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas).
 #'
@@ -24,11 +24,11 @@
 #' ini_date <- "2020-01-01"
 #' end_date <- Sys.Date()
 #' terms <- c("Cooperativas de Crédito", "Cooperativa de Crédito")
-#' normas <- download_normative_data(terms, ini_date, end_date)
+#' normas <- get_normative_data(terms, ini_date, end_date)
 #' }
 #' @export
 #'
-download_normative_data <- function(terms, ini_date, end_date) {
+get_normative_data <- function(terms, ini_date, end_date) {
   terms_joined <- stringr::str_c(terms, collapse = " OR ") |> URLencode()
 
   site <- glue::glue(

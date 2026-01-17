@@ -3,6 +3,8 @@
 
 ## usethis namespace: start
 #' @import rlang
+#' @importFrom data.table fread
+#' @importFrom data.table fwrite
 #' @importFrom dplyr mutate
 #' @importFrom fs dir_create
 #' @importFrom fs dir_exists
@@ -19,8 +21,10 @@
 #' @importFrom janitor clean_names
 #' @importFrom jsonlite fromJSON
 #' @importFrom lifecycle deprecated
+#' @importFrom purrr imap
 #' @importFrom purrr iwalk
 #' @importFrom purrr map
+#' @importFrom purrr map_dfr
 #' @importFrom purrr pluck
 #' @importFrom purrr pmap_dfr
 #' @importFrom purrr set_names

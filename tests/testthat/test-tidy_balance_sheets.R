@@ -1,13 +1,13 @@
 # test_that("treat balance sheet of two types of institution", {
 #   local({
-#     download_balance_sheets(
+#     get_balance_sheets(
 #       instituicao = c("COOPERATIVAS", "BANCOS"),
 #       meses = c(6, 12),
 #       first_year = 2022,
 #       final_year = as.numeric(format(Sys.time(), "%Y")) - 2,
 #       overwrite = TRUE
 #     )
-#     treatment_balance_sheets(
+#     tidy_balance_sheets(
 #       path_raw = "data_raw",
 #       out_dir = "data",
 #       doc_filter = 4010,
@@ -26,18 +26,17 @@
 
 # test_that("treat balance sheet of two types of institutions for 2 months", {
 #   local({
-#     download_balance_sheets(
+#     get_balance_sheets(
 #       instituicao = c("COOPERATIVAS", "BANCOS"),
 #       meses = c(6, 12),
 #       first_year = 2022,
 #       final_year = as.numeric(format(Sys.time(), "%Y")) - 2,
 #       overwrite = TRUE
 #     )
-#     treatment_balance_sheets(
+#     tidy_balance_sheets(
 #       path_raw = "data_raw",
 #       out_dir = "data",
 #       doc_filter = 4060,
-#       output_filename = function(type) paste0("bal_", tolower(type), ".csv"),
 #       save = TRUE
 #     )
 #   })
@@ -50,20 +49,3 @@
 # # Delete directory after tests
 # fs::dir_delete("data_raw")
 # fs::dir_delete("data")
-
-download_balance_sheets(
-    instituicao = c("BANCOS", "COOPERATIVAS"),
-    meses = 12,
-    first_year = 2003,
-    final_year = 2023,
-    out_dir = "data_raw",
-    overwrite = FALSE
-)
-
-treatment_balance_sheets(
-    path_raw = "data_raw",
-    out_dir = "data",
-    doc_filter = 4010,
-    save = TRUE,
-    output_filename = NULL
-)

@@ -1,9 +1,9 @@
-#' Download normative texts from the Brazil Central Bank (BCB) from a reference data.frame
+#' Download [normative texts from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) from a reference data.frame
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' For each row of the input data.frame, constructs the appropriate URL for the BCB
+#' For each row of the input data.frame, constructs the appropriate URL for the Bacen
 #' normatives API, performs the request, extracts the returned content and applies
 #' basic cleaning to the text fields (Assunto and Texto). Returns a data.frame
 #' with all aggregated contents.
@@ -11,7 +11,7 @@
 #' @param normative_data data.frame. A data.frame with at least the columns:
 #'   - TipodoNormativoOWSCHCS: type of the normative (e.g., "Comunicado", "Ato de Diretor", etc.)
 #'   - NumeroOWSNMBR: number/identifier of the normative to be queried.
-#'   - Typically the result of a prior query (e.g., via \code{download_normative_data}).
+#'   - Typically the result of a prior query (e.g., via \code{get_normative_data}).
 #'
 #' @details
 #' The function performs the following steps:
@@ -37,17 +37,17 @@
 #' @examples
 #' \dontrun{
 #' # First, download normative data
-#' normative_data <- download_normative_data(
+#' normative_data <- get_normative_data(
 #'    "Cooperativa",
 #'     "2023-08-01",
 #'     "2025-08-01")
 #' # Then, download the full texts for the retrieved normatives
-#' normative_txt <- download_normative_txt(normative_data)
+#' normative_txt <- get_normative_txt(normative_data)
 #' }
 #'
 #' @export
 
-download_normative_txt <- function(normative_data) {
+get_normative_txt <- function(normative_data) {
   all_data <- data.frame()
 
   # Iterate over each row of the input data.frame

@@ -1,4 +1,4 @@
 *.html
 /data/
 /data_raw/
-copilot-instructions.md
+/temp/
