@@ -30,6 +30,7 @@
 #' @importFrom purrr set_names
 #' @importFrom purrr walk
 #' @importFrom readr write_csv
+#' @importFrom readxl read_xls
 #' @importFrom stringr str_c
 #' @importFrom stringr str_pad
 #' @importFrom stringr str_replace_all

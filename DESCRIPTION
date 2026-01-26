@@ -23,6 +23,7 @@ Imports:
     lifecycle,
     purrr,
     readr,
+    readxl,
     rlang,
     stringr,
     tibble,
