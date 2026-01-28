@@ -130,13 +130,12 @@ citation("bacenR")
 ```
 
 ```         
-@Unpublished{,
-    title = {bacenR: Tools to Access Data from Banco Central do Brasil},
-    author = {Ricardo Theodoro},
-    journal = {Github},
-    year = {2026},
-    note = {R package version 0.1.0},
-    url = {https://github.com/rtheodoro/bacenR},
+@manual{,
+  title = "bacenR: Tools to Access Data from Banco Central do Brasil",
+  author = "Ricardo Theodoro",
+  year = "2026",
+  version = "v0.2.0",
+  url = "https://github.com/rtheodoro/bacenR"
 }
 ```
 
