@@ -7,12 +7,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The {bacenR} package provides tools to download and process data from the Central Bank of Brazil (Banco Central do Brasil — Bacen) in a simple and efficient way. Currently, the package includes the following functions:
+The {bacenR} package provides tools to download and process data from the [Brazilian Central Bank (Banco Central do Brasil — Bacen)](https://www.bcb.gov.br) in a simple and efficient way. Currently, the package includes the following functions:
 
-- `get_balance_sheets()`: download balance sheets from financial institutions
-- `tidy_balance_sheets()`: process downloaded balance sheets and combine them into a single, unified file
-- `get_normative_data()`: download regulatory metadata
-- `get_normative_txt()`: download the full texts of regulatory instructions
+- `get_balance_sheets()`: download [balance sheets from financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+- `tidy_balance_sheets()`: process downloaded balance sheets with `get_balance_sheets()` and combine them into a single, unified file
+- `get_normative_data()`: download [regulatory metadata](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+- `get_normative_txt()`: download the [full texts of regulatory instructions](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+- `get_institutions()`: download information about [institutions regulated by Bacen](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+- `tidy_institutions()`: precess the data downloaded with `get_institutions()` and combine them into a single, unified file
 
 Additional functions and features will be added in future releases.
 
