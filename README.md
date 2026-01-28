@@ -12,10 +12,10 @@ The datasets available through `bacenR` include:
 
 -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
 -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
--   [List of financial institutions regulated by Bacen](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+-   [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
 
-For IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
+To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html).
 
 ## Summary
 
