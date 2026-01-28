@@ -14,6 +14,9 @@ The datasets available through `bacenR` include:
 -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 -   [List of financial institutions regulated by Bacen](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
+
+For IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
+
 ## Summary
 
 -   [Install](#install)
@@ -87,15 +90,12 @@ tidy_institutions(
 
 ```
 
-For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
-
 ## To-do
 
 More details about the to-do list can be found in the [GitHub project board](https://github.com/users/rtheodoro/projects/1/views/1).
 
 -   Functions to collect more datasets from Bacen
     -   [Institutions authorized, regulated, or supervised](https://www.bcb.gov.br/meubc/encontreinstituicao)
-    -   [Institutions operating in the country](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
     -   [Board members](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
     -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/)
     -   [Datasets from Bacen.API](https://dadosabertos.bcb.gov.br/)
