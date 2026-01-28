@@ -2,68 +2,91 @@
 % Please edit documentation in R/get_institutions.R
 \name{get_institutions}
 \alias{get_institutions}
-\title{get_institutions}
+\title{Download and Process Brazilian Financial Institutions Data from Bacen}
 \usage{
 get_institutions(
-  start_date = "2007-09",
-  end_date = "2024-09",
-  out_dir = "data",
-  output_csv = "coop_em_funcionamento_bacen.csv",
-  download_files = TRUE,
+  institution = "COOPERATIVAS",
+  start_date = "200709",
+  end_date = "202409",
+  out_dir = "data_raw",
   cleanup_zip = TRUE,
-  verbose = FALSE
+  verbose = TRUE
 )
 }
 \arguments{
-\item{start_date}{Character. Start of the monthly sequence (inclusive). Expected in "YYYY-MM" format (default: "2007-09").}
+\item{institution}{Character vector. Type(s) of financial institutions to download.
+Valid options are: "CONGLOMERADOS", "BANCOS", "COOPERATIVAS", "CONSORCIO", "SOCIEDADES".
+Default is "COOPERATIVAS". Case-insensitive.}
 
-\item{end_date}{Character. End of the monthly sequence (inclusive). Expected in "YYYY-MM" format (default: "2024-09").}
+\item{start_date}{Character. Start date in "YYYYMM" format (e.g., "200709") or
+a parsable date string (e.g., "2007-09-01"). Default is "200709".}
 
-\item{out_dir}{Character. Directory used to store downloaded and extracted files (default: "download"). Created if it does not exist.}
+\item{end_date}{Character. End date in "YYYYMM" format (e.g., "202409") or
+a parsable date string (e.g., "2024-09-01"). Default is "202409".}
 
-\item{output_csv}{Character or NULL. Path to write the final combined CSV. If NULL or empty string, no CSV is written (default: "coop_em_funcionamento_bacen.csv").}
+\item{out_dir}{Character. Directory path where downloaded files will be saved.
+Default is "data". The directory will be created if it doesn't exist.}
 
-\item{download_files}{Logical. If TRUE the function will attempt to download monthly ZIP files from the BCB; if FALSE it will only process files already present in out_dir (default: TRUE).}
+\item{cleanup_zip}{Logical. If TRUE, removes ZIP files after extraction.
+Default is TRUE.}
 
-\item{cleanup_zip}{Logical. If TRUE temporarily downloaded ZIP files are removed after extraction (default: TRUE).}
-
-\item{verbose}{Logical. Currently reserved for future use; no verbose output is produced by the function as implemented (default: FALSE).}
+\item{verbose}{Logical. If TRUE, displays progress messages and warnings.
+Default is TRUE.}
 }
 \value{
-A tibble (data.frame) containing the combined and cleaned cooperatives data for the requested period. If no files are found
-or none can be parsed, an empty tibble is returned.
+Invisible NULL. The function is called for its side effects (downloading
+and extracting files to the specified directory).
 }
 \description{
-Download, extract and parse monthly "cooperativas" institution reports from the
-Banco Central do Brasil (Bacen) and return a cleaned tibble of institution data.
+This function downloads \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{financial institutions data from the Brazilian Central Bank (Bacen)}
+website for specified institution types and date ranges. The data is downloaded as ZIP files,
+extracted, and can be optionally cleaned up.
 }
 \details{
-The function:
+The function performs the following steps:
 \itemize{
-\item Builds a sequence of months between start_date and end_date (formatted as YYYYMM).
-\item For each month, it constructs a URL to download a ZIP file containing the cooperatives report and attempts to download it using httr::GET.
-\item Extracts any found ZIP archives into out_dir and (optionally) deletes the ZIPs.
-\item Lists extracted files whose filenames contain "COOPERATIVAS" (case-insensitive).
-\item Reads each file attempting readxl::read_xlsx first and falling back to readxl::read_xls, using skip = 9 and sheet = "Plan1".
-\item Cleans and normalizes column names with janitor::clean_names(), filters out header/footer artefacts, renames several common columns
-(e.g. endereco -> logradouro, nome* -> nome_instituicao, mail -> e_mail, fone -> telefone), and coerces common columns to character.
-\item Extracts the report date (ano, mes) from the filename and appends them as integer columns.
-\item Binds all monthly tables into a single tibble, replaces NA values in character/numeric/logical columns with sensible defaults, and
-reorders columns placing core identifier columns (cnpj, nome_instituicao, tipo, classe, categoria, filiacao, criterio_de_associacao)
-first followed by the remaining columns and the ano/mes columns at the end.
-\item Optionally writes the final result to output_csv using readr::write_csv.
+\item Validates institution types against known valid options
+\item Generates a sequence of months between start_date and end_date
+\item Downloads ZIP files for each institution and month from BCB website
+\item Extracts the downloaded ZIP files to the output directory
+\item Optionally removes ZIP files after extraction
+\item Displays progress information if verbose = TRUE
 }
 
-Note: The function depends on several packages (httr, utils, readxl, janitor, dplyr, tidyr, stringr, purrr, readr). The exact column
-names produced depend on the input Excel files and the renaming heuristics implemented in the function.
+Institution type mappings:
+\itemize{
+\item CONGLOMERADOS: Conglomerados
+\item BANCOS: Bancos comerciais, múltiplos e caixa
+\item COOPERATIVAS: Cooperativas de crédito
+\item CONSORCIO: Consórcios administrativos
+\item SOCIEDADES: Bancos de investimentos, desenvolvimento e sociedades corretoras
+}
 }
 \examples{
 \dontrun{
-# Download and parse default range, write CSV to working directory
-df <- get_institutions()
+# Download cooperative credit unions data for 2023
+get_institutions(
+  institution = "COOPERATIVAS",
+  start_date = "202301",
+  end_date = "202312",
+  out_dir = "data_raw/cooperativas"
+)
 
-# Only parse files already present in "download" and don't write CSV
-df <- get_institutions(download_files = FALSE, output_csv = "")
+# Download multiple institution types
+get_institutions(
+  institution = c("BANCOS", "COOPERATIVAS"),
+  start_date = "202201",
+  end_date = "202212"
+)
+
+# Skip downloading, just use existing files
+get_institutions(
+  institution = "BANCOS",
+  verbose = FALSE
+)
 }
 
+}
+\seealso{
+\url{https://www.bcb.gov.br/estabilidadefinanceira/relacao}
 }

@@ -48,7 +48,7 @@
 #'   institution = "COOPERATIVAS",
 #'   start_date = "202301",
 #'   end_date = "202312",
-#'   out_dir = "data/cooperativas"
+#'   out_dir = "data_raw/cooperativas"
 #' )
 #'
 #' # Download multiple institution types
@@ -73,7 +73,7 @@ get_institutions <- function(
   institution = "COOPERATIVAS",
   start_date = "200709",
   end_date = "202409",
-  out_dir = "data",
+  out_dir = "data_raw",
   cleanup_zip = TRUE,
   verbose = TRUE
 ) {

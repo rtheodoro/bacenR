@@ -1,10 +1,33 @@
-#' Process Institution Data Files downloaded with `get_institutions()`
+#' Process and unify institution CSV exports from the Brazilian Central Bank (Bacen) downloaded via `get_institutions()`.
+
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' This function reads and processes [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+#' files that were previously
+#' downloaded using the `get_institutions()` function. It takes a directory path
+#' containing the institution files, processes them, and optionally saves the
+#' output to a specified directory.
 #'
-#' @param path_dir Path to directory containing institution files
-#' @param out_dir Path to directory for output files
-#' @param verbose Logical, whether to print progress messages
+#' @param path_dir Character string specifying the path to the directory
+#'   containing institution files to be processed.
+#' @param out_dir Character string specifying the path to the directory where
+#'   processed output files should be saved.
+#' @param verbose Logical value indicating whether to print progress messages
+#'   during processing. Default is typically FALSE.
 #'
-#' @return A list of data.frames, one per institution
+#' @return A list of data.frames, where each element corresponds to a processed
+#'   institution file. The names of the list elements typically correspond to
+#'   institution identifiers or file names.
+#' @examples
+#' \dontrun{
+#' # Process institution files from a directory
+#' institutions <- tidy_institutions(
+#'   path_dir = "data/raw_institutions",
+#'   out_dir = "data/processed_institutions",
+#'   verbose = TRUE
+#' )
+#' }
+#'
 #' @export
 tidy_institutions <- function(
   path_dir = "data",
@@ -123,59 +146,75 @@ tidy_institutions <- function(
     df
   }
 
-  # process all files grouped by institution
-  results_list <- Map(
-    function(file_path, institution, file_data, file_name) {
-      if (verbose) {
-        message(
-          "Processing ",
-          institution,
-          ": ",
-          file_name
-        )
-      }
-      result <- import_file(file_path)
-      if (!is.null(result)) {
-        result$institution <- institution
-        result$data <- file_data
-        result
-      } else {
-        NULL
-      }
-    },
-    file_info$file_path,
-    file_info$institution,
-    file_info$data,
-    file_info$file_name
-  )
+  # Group files by institution first
+  file_info_split <- split(file_info, file_info$institution)
 
-  # Remove NULL results and combine
-  results_list <- results_list[!sapply(results_list, is.null)]
+  # Process each institution separately
+  inst_list <- lapply(names(file_info_split), function(inst_name) {
+    inst_files <- file_info_split[[inst_name]]
 
-  if (length(results_list) == 0) {
+    if (verbose) {
+      message("Processing institution: ", inst_name)
+    }
+
+    # Process all files for this institution
+    inst_results <- Map(
+      function(file_path, file_data, file_name) {
+        if (verbose) {
+          message("  - ", file_name)
+        }
+        result <- import_file(file_path)
+        if (!is.null(result)) {
+          result$institution <- inst_name
+          result$data <- file_data
+          result
+        } else {
+          NULL
+        }
+      },
+      inst_files$file_path,
+      inst_files$data,
+      inst_files$file_name
+    )
+
+    # Remove NULL results
+    inst_results <- inst_results[!sapply(inst_results, is.null)]
+
+    if (length(inst_results) == 0) {
+      return(NULL)
+    }
+
+    # Combine data frames for this institution only
+    all_cols <- unique(unlist(lapply(inst_results, names)))
+    inst_data <- do.call(
+      rbind,
+      lapply(inst_results, function(df) {
+        # Add missing columns with NA
+        missing_cols <- setdiff(all_cols, names(df))
+        if (length(missing_cols) > 0) {
+          df[missing_cols] <- NA
+        }
+        df[all_cols]
+      })
+    )
+
+    inst_data
+  })
+
+  # Name the list and remove NULLs
+  names(inst_list) <- names(file_info_split)
+  inst_list <- inst_list[!sapply(inst_list, is.null)]
+
+  if (length(inst_list) == 0) {
     if (verbose) {
       message("No valid data found in any files")
     }
     return(list())
   }
 
-  # Combine all data frames
-  # Get all unique column names across all results once
-  all_cols <- unique(unlist(lapply(results_list, names)))
-  all_data <- do.call(
-    rbind,
-    lapply(results_list, function(df) {
-      # Add missing columns with NA
-      missing_cols <- setdiff(all_cols, names(df))
-      if (length(missing_cols) > 0) {
-        df[missing_cols] <- NA
-      }
-      df[all_cols]
-    })
-  )
-
-  # Group by institution and split data
-  inst_list <- split(all_data, all_data$institution)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+  }
 
   # Write CSV files for each institution
   purrr::iwalk(inst_list, function(df, inst_name) {
