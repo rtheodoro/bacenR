@@ -12,6 +12,7 @@ The datasets available through `bacenR` include:
 
 -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
 -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+-   [List of financial institutions regulated by Bacen](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
 ## Summary
 
@@ -66,6 +67,24 @@ tidy_balance_sheets(
     doc_filter = 4010, 
     save = TRUE
 )
+
+# Download list of financial institutions regulated by Bacen
+get_institutions(
+  institution = c("COOPERATIVAS", "BANCOS"),
+  start_date = "202312",
+  end_date = "202405",
+  out_dir = "data_raw",
+  cleanup_zip = TRUE,
+  verbose = TRUE
+)
+
+# Tidy the institutions data
+tidy_institutions(
+  path_raw = "data_raw",
+  out_dir = "data"
+)
+
+
 ```
 
 For IPCA, Selic, GDP, Government Debt, and others check: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html) packages.
