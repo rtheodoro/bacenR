@@ -61,23 +61,44 @@
 #'   or failure to rename files when removing underscores.
 #'
 #' @note The function prints a message reminding that the numeric values
-#'   in the balancetes are not adjusted for inflation. See:
+#'   in the balance sheets are not adjusted for inflation. See:
 #'   [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @examples
-#' \dontrun{
-#' # Basic usage (do not write outputs)
-#' tidy_balance_sheets(path_raw = "data_raw", out_dir = "data", doc_filter = 4010, save = FALSE)
+#' \donttest{
+#' # First, download balance sheets
+#' get_balance_sheets(
+#'   institution = c("BANCOS", "COOPERATIVAS"),
+#'   months = c(6, 12),
+#'   first_year = 2022,
+#'   final_year = 2023,
+#'   out_dir = tempdir(),
+#'   overwrite = FALSE
+#' )
+#'
+#' # Now, tidy the files
+#' # Do not write outputs
+#' tidy_balance_sheets(
+#'   path_raw = tempdir(),
+#'   out_dir = tempdir(),
+#'   doc_filter = 4010,
+#'   save = FALSE
+#' )
 #'
 #' # Write outputs
-#' tidy_balance_sheets(path_raw = "data_raw", out_dir = "data", doc_filter = 4016, save = TRUE)
+#' tidy_balance_sheets(
+#'   path_raw = tempdir(),
+#'   out_dir = tempdir(),
+#'   doc_filter = 4016,
+#'   save = TRUE
+#' )
 #'}
 #'
 #' @export
 
 tidy_balance_sheets <- function(
-  path_raw = "data_raw",
-  out_dir = "data",
+  path_raw,
+  out_dir,
   doc_filter = 4010,
   save = TRUE
 ) {

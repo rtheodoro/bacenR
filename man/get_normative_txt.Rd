@@ -53,7 +53,7 @@ The function performs the following steps:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # First, download normative data
 normative_data <- get_normative_data(
    "Cooperativa",

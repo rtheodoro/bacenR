@@ -35,7 +35,7 @@
 #' - Packages used internally: \code{httr}, \code{jsonlite}, \code{xml2}, \code{stringr}, \code{dplyr}, \code{glue}, \code{purrr}.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # First, download normative data
 #' normative_data <- get_normative_data(
 #'    "Cooperativa",
@@ -43,13 +43,14 @@
 #'     "2025-08-01")
 #' # Then, download the full texts for the retrieved normatives
 #' normative_txt <- get_normative_txt(normative_data)
-#' }
+#'}
 #'
 #' @export
 
 get_normative_txt <- function(normative_data) {
   all_data <- data.frame()
-
+  Assunto = as.character()
+  Texto = as.character()
   # Iterate over each row of the input data.frame
   all_data <- purrr::pmap_dfr(
     normative_data,

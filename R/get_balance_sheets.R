@@ -10,11 +10,11 @@
 #'
 #' Check the function `tidy_balance_sheets()` for tools to read and process
 #'
-#' @param instituicao Character vector of institution types to download.
-#'   Accepted values (case-insensitive): "BANCOS" to get data from, "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
+#' @param institution Character vector of institution types to download.
+#'   Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
 #'   "CONGLOMERADOS" (Conglomerados financeiros), "SOCIEDADES", "BLOPRUDENCIAL" (Conglomerados Prudenciais), "COMBINADOS" (Combinados Cooperativos), "LIQUIDACAO" (Instituições em Regime Especial).
 #'   The function maps these tokens to the type names used in the [BCB URL](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais).
-#' @param meses Integer or integer vector specifying months to download. Values
+#' @param months Integer or integer vector specifying months to download. Values
 #'   should be 1..12 (single values or vectors like c(6, 12)). When a month
 #'   single-digit is provided it is zero-padded to two digits in filenames/URLs.
 #' @param first_year Integer, first year to download (inclusive). Defaults to
@@ -30,7 +30,7 @@
 #' @details
 #' For each combination of year, month and institution type the function
 #' constructs a URL of the form:
-#' `https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{INSTITUICAO}.CSV.ZIP`
+#' `https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{YYYY}{MM}{institution}.CSV.ZIP`
 #' and attempts to download it with httr::GET. Successful and failed attempts
 #' are recorded in the returned tibble. After attempting all downloads the
 #' function tries to unzip any .zip files found in out_dir; unzip errors for
@@ -41,9 +41,9 @@
 #'
 #' @return A tibble with one row per attempted download and the following
 #'   columns:
-#'   - ano: Year attempted (integer).
-#'   - meses: Month attempted (integer).
-#'   - instituicao: Institution token used (character).
+#'   - years: Year attempted (integer).
+#'   - months: Month attempted (integer).
+#'   - institution: Institution token used (character).
 #'   - url: The URL attempted (character).
 #'   - dest: Destination file path for the downloaded ZIP (character).
 #'   - success: Logical indicating if the download (or existing-file fallback)
@@ -54,17 +54,17 @@
 #'     a short note when a local file existed and was not overwritten.
 #'
 #' @examples
-#' \dontrun{
-#' # Download balancetes for banks and cooperatives for June and December from 1993 to 2023
+#' \donttest{
+#' # Download balancetes for banks and cooperatives for June and December from 2022 to 2023
 #' get_balance_sheets(
-#'   instituicao = c("BANCOS", "COOPERATIVAS"),
-#'   meses = c(6, 12),
-#'   first_year = 1993,
+#'   institution = c("BANCOS", "COOPERATIVAS"),
+#'   months = c(6, 12),
+#'   first_year = 2022,
 #'   final_year = 2023,
-#'   out_dir = "data_raw",
+#'   out_dir = tempdir(),
 #'   overwrite = FALSE
 #' )
-#' }
+#'}
 #'
 #' @references
 #' Source Banco Central do Brasil (Bacen): [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
@@ -76,16 +76,15 @@
 #' @export
 #'
 get_balance_sheets <- function(
-  instituicao = "COOPERATIVAS",
-  meses = 12,
-  first_year = 1993,
-  final_year = as.numeric(format(Sys.time(), "%Y")) - 1,
-  out_dir = "data_raw",
+  institution,
+  months = 12,
+  first_year,
+  final_year,
+  out_dir,
   overwrite = FALSE
 ) {
-  # Dependencies used: glue, httr, purrr, tibble, stringr, tidyr, fs
-  if (!fs::dir_exists(out_dir)) {
-    fs::dir_create(out_dir)
+  if (!dir.exists(out_dir)) {
+    dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   }
 
   tipo_lookup <- c(
@@ -99,16 +98,16 @@ get_balance_sheets <- function(
     LIQUIDACAO = "Instituicoes-em-regime-especial"
   )
 
-  instituicao <- toupper(instituicao)
-  invalido <- setdiff(instituicao, names(tipo_lookup))
+  institution <- toupper(institution)
+  invalido <- setdiff(institution, names(tipo_lookup))
   if (length(invalido) > 0) {
-    stop("Instituicao(s) invalida(s): ", paste(invalido, collapse = ", "))
+    stop("Invalid institution: ", paste(invalido, collapse = ", "))
   }
 
   combos <- tidyr::crossing(
-    ano = first_year:final_year,
-    mes = meses,
-    instituicao = instituicao
+    years = first_year:final_year,
+    mes = months,
+    institution = institution
   ) |>
     dplyr::mutate(
       mes2 = stringr::str_pad(
@@ -117,13 +116,13 @@ get_balance_sheets <- function(
         side = "left",
         pad = "0"
       ),
-      tipo = unname(tipo_lookup[instituicao])
+      tipo = unname(tipo_lookup[institution])
     )
 
   download_single_balancete <- function(
-    ano,
+    years,
     mes,
-    instituicao,
+    institution,
     mes2,
     tipo,
     out_dir,
@@ -133,11 +132,11 @@ get_balance_sheets <- function(
     suffixes <- c(".CSV.ZIP", ".CSV", ".ZIP")
     # default to the first candidate
     url <- glue::glue(
-      "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}{suffixes[1]}"
+      "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{years}{mes2}{institution}{suffixes[1]}"
     )
     dest <- file.path(
       out_dir,
-      glue::glue("{ano}{mes2}_{instituicao}{suffixes[1]}")
+      glue::glue("{years}{mes2}_{institution}{suffixes[1]}")
     )
 
     candidate <- purrr::map(
@@ -145,7 +144,7 @@ get_balance_sheets <- function(
       ~ {
         suf <- .
         candidate_url <- glue::glue(
-          "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{ano}{mes2}{instituicao}{suf}"
+          "https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/{tipo}/{years}{mes2}{institution}{suf}"
         )
         head_resp <- tryCatch(
           httr::HEAD(candidate_url, httr::timeout(10)),
@@ -169,13 +168,13 @@ get_balance_sheets <- function(
       url <- candidate$url
       dest <- file.path(
         out_dir,
-        glue::glue("{ano}{mes2}_{instituicao}{candidate$suf}")
+        glue::glue("{years}{mes2}_{institution}{candidate$suf}")
       )
     }
 
     res <- tryCatch(
       {
-        message(glue::glue("{ano}{mes2}_{instituicao}{candidate$suf}"))
+        message(glue::glue("{years}{mes2}_{institution}{candidate$suf}"))
         resp <- httr::GET(
           url,
           httr::write_disk(dest, overwrite = overwrite),
@@ -207,9 +206,9 @@ get_balance_sheets <- function(
     )
 
     tibble::tibble(
-      ano = ano,
+      years = years,
       mes = as.integer(mes),
-      instituicao = instituicao,
+      institution = institution,
       url = as.character(url),
       dest = dest,
       success = res$success,

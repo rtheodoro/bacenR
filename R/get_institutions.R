@@ -1,12 +1,14 @@
 #' Download and Process Brazilian Financial Institutions Data from Bacen
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
 #' This function downloads [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 #' website for specified institution types and date ranges. The data is downloaded as ZIP files,
 #' extracted, and can be optionally cleaned up.
 #'
 #' @param institution Character vector. Type(s) of financial institutions to download.
 #'   Valid options are: "CONGLOMERADOS", "BANCOS", "COOPERATIVAS", "CONSORCIO", "SOCIEDADES".
-#'   Default is "COOPERATIVAS". Case-insensitive.
+#'   Default is "COOPERATIVAS". Case-insensitive. Check the details on [Bacen's website](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento).
 #' @param start_date Character. Start date in "YYYYMM" format (e.g., "200709") or
 #'   a parsable date string (e.g., "2007-09-01"). Default is "200709".
 #' @param end_date Character. End date in "YYYYMM" format (e.g., "202409") or
@@ -42,38 +44,41 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Download cooperative credit unions data for 2023
 #' get_institutions(
 #'   institution = "COOPERATIVAS",
 #'   start_date = "202301",
 #'   end_date = "202312",
-#'   out_dir = "data_raw/cooperativas"
+#'   out_dir = tempdir()
 #' )
 #'
 #' # Download multiple institution types
 #' get_institutions(
 #'   institution = c("BANCOS", "COOPERATIVAS"),
 #'   start_date = "202201",
-#'   end_date = "202212"
+#'   end_date = "202212",
+#'   out_dir = tempdir()
 #' )
 #'
 #' # Skip downloading, just use existing files
 #' get_institutions(
 #'   institution = "BANCOS",
+#'   start_date = "202201",
+#'   end_date = "202212",
+#'   out_dir = tempdir(),
 #'   verbose = FALSE
 #' )
-#' }
-#'
+#'}
 #' @seealso
-#' \url{https://www.bcb.gov.br/estabilidadefinanceira/relacao}
+#' \url{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}
 #'
 #' @export
 get_institutions <- function(
-  institution = "COOPERATIVAS",
-  start_date = "200709",
-  end_date = "202409",
-  out_dir = "data_raw",
+  institution,
+  start_date,
+  end_date,
+  out_dir,
   cleanup_zip = TRUE,
   verbose = TRUE
 ) {

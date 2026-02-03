@@ -15,7 +15,7 @@ The datasets available through `bacenR` include:
 -   [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
 
-To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://cran.r-project.org/web/packages/BacenAPI/index.html) and [rbcb](https://cran.r-project.org/web/packages/rbcb/index.html).
+To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://CRAN.R-project.org/package=BacenAPI) and [rbcb](https://CRAN.R-project.org/package=rbcb).
 
 ## Summary
 
@@ -55,8 +55,8 @@ normative_txt <- get_normative_txt(normative_data)
 
 # Download financial statements of banks and credit cooperatives
 get_balance_sheets(
-   instituicao = c("BANCOS", "COOPERATIVAS"),
-   meses = c(6, 12),
+   institution = c("BANCOS", "COOPERATIVAS"),
+   months = c(6, 12),
    first_year = 1993,
    final_year = 2023,
    out_dir = "data_raw",
@@ -106,7 +106,7 @@ Feel free to contribute to this list by [opening issues or pull requests on GitH
 
 **Ricardo Theodoro**:
 
--   Economist, Ph.D. candidate and Master's degree holder in Accounting at [FEARP/USP](http://www.fearp.usp.br/).
+-   Economist, Ph.D. candidate and Master's degree holder in Accounting at [FEARP/USP](https://www.fearp.usp.br/).
 
 -   Researcher at [OBSCOOP/USP](https://linktr.ee/obscoopusp)
 

@@ -5,21 +5,21 @@
 \title{Download balance sheets from \href{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}{Brazilian Central Bank}}
 \usage{
 get_balance_sheets(
-  instituicao = "COOPERATIVAS",
-  meses = 12,
-  first_year = 1993,
-  final_year = as.numeric(format(Sys.time(), "\%Y")) - 1,
-  out_dir = "data_raw",
+  institution,
+  months = 12,
+  first_year,
+  final_year,
+  out_dir,
   overwrite = FALSE
 )
 }
 \arguments{
-\item{instituicao}{Character vector of institution types to download.
-Accepted values (case-insensitive): "BANCOS" to get data from, "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
+\item{institution}{Character vector of institution types to download.
+Accepted values (case-insensitive): "BANCOS", "COOPERATIVAS", "CONSORCIOS" (Administradoras de consórcios),
 "CONGLOMERADOS" (Conglomerados financeiros), "SOCIEDADES", "BLOPRUDENCIAL" (Conglomerados Prudenciais), "COMBINADOS" (Combinados Cooperativos), "LIQUIDACAO" (Instituições em Regime Especial).
 The function maps these tokens to the type names used in the \href{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}{BCB URL}.}
 
-\item{meses}{Integer or integer vector specifying months to download. Values
+\item{months}{Integer or integer vector specifying months to download. Values
 should be 1..12 (single values or vectors like c(6, 12)). When a month
 single-digit is provided it is zero-padded to two digits in filenames/URLs.}
 
@@ -40,9 +40,9 @@ is treated as a successful local result.}
 A tibble with one row per attempted download and the following
 columns:
 \itemize{
-\item ano: Year attempted (integer).
-\item meses: Month attempted (integer).
-\item instituicao: Institution token used (character).
+\item years: Year attempted (integer).
+\item months: Month attempted (integer).
+\item institution: Institution token used (character).
 \item url: The URL attempted (character).
 \item dest: Destination file path for the downloaded ZIP (character).
 \item success: Logical indicating if the download (or existing-file fallback)
@@ -66,7 +66,7 @@ Check the function \code{tidy_balance_sheets()} for tools to read and process
 \details{
 For each combination of year, month and institution type the function
 constructs a URL of the form:
-\verb{https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/\{tipo\}/\{YYYY\}\{MM\}\{INSTITUICAO\}.CSV.ZIP}
+\verb{https://www.bcb.gov.br/content/estabilidadefinanceira/cosif/\{tipo\}/\{YYYY\}\{MM\}\{institution\}.CSV.ZIP}
 and attempts to download it with httr::GET. Successful and failed attempts
 are recorded in the returned tibble. After attempting all downloads the
 function tries to unzip any .zip files found in out_dir; unzip errors for
@@ -76,14 +76,14 @@ Invalid institution tokens cause an immediate error listing the invalid
 entries.
 }
 \examples{
-\dontrun{
-# Download balancetes for banks and cooperatives for June and December from 1993 to 2023
+\donttest{
+# Download balancetes for banks and cooperatives for June and December from 2022 to 2023
 get_balance_sheets(
-  instituicao = c("BANCOS", "COOPERATIVAS"),
-  meses = c(6, 12),
-  first_year = 1993,
+  institution = c("BANCOS", "COOPERATIVAS"),
+  months = c(6, 12),
+  first_year = 2022,
   final_year = 2023,
-  out_dir = "data_raw",
+  out_dir = tempdir(),
   overwrite = FALSE
 )
 }

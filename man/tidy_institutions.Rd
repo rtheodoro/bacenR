@@ -4,7 +4,7 @@
 \alias{tidy_institutions}
 \title{Process and unify institution CSV exports from the Brazilian Central Bank (Bacen) downloaded via \code{get_institutions()}.}
 \usage{
-tidy_institutions(path_dir = "data", out_dir = "data", verbose = TRUE)
+tidy_institutions(path_dir, out_dir, verbose = TRUE)
 }
 \arguments{
 \item{path_dir}{Character string specifying the path to the directory
@@ -30,11 +30,18 @@ containing the institution files, processes them, and optionally saves the
 output to a specified directory.
 }
 \examples{
-\dontrun{
+\donttest{
+# First, download institution data
+ get_institutions(
+  institution = "COOPERATIVAS",
+  start_date = "202301",
+  end_date = "202312",
+  out_dir = tempdir()
+)
 # Process institution files from a directory
 institutions <- tidy_institutions(
-  path_dir = "data/raw_institutions",
-  out_dir = "data/processed_institutions",
+  path_dir = tempdir(),
+  out_dir = tempdir(),
   verbose = TRUE
 )
 }

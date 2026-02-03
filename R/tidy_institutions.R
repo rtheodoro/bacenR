@@ -19,19 +19,26 @@
 #'   institution file. The names of the list elements typically correspond to
 #'   institution identifiers or file names.
 #' @examples
-#' \dontrun{
+#' \donttest{
+#'# First, download institution data
+#'  get_institutions(
+#'   institution = "COOPERATIVAS",
+#'   start_date = "202301",
+#'   end_date = "202312",
+#'   out_dir = tempdir()
+#' )
 #' # Process institution files from a directory
 #' institutions <- tidy_institutions(
-#'   path_dir = "data/raw_institutions",
-#'   out_dir = "data/processed_institutions",
+#'   path_dir = tempdir(),
+#'   out_dir = tempdir(),
 #'   verbose = TRUE
 #' )
-#' }
+#'}
 #'
 #' @export
 tidy_institutions <- function(
-  path_dir = "data",
-  out_dir = "data",
+  path_dir,
+  out_dir,
   verbose = TRUE
 ) {
   # find all Excel and CSV files in path_dir
@@ -41,6 +48,8 @@ tidy_institutions <- function(
     full.names = TRUE,
     recursive = TRUE
   )
+
+  cnpj <- as.numeric()
 
   if (length(candidate_files) == 0) {
     if (verbose) {
