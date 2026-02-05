@@ -8,14 +8,16 @@
 
 The goal of `bacenR` is to provide R functions to download and work with data from the Brazilian Central Bank (Bacen).
 
-The datasets available through `bacenR` include:
+- The datasets available through `bacenR` include:
+  -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+  -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+  -  [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
--   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
--   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
--   [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 
+To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages:
 
-To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages: [BacenAPI](https://CRAN.R-project.org/package=BacenAPI) and [rbcb](https://CRAN.R-project.org/package=rbcb).
+  - [BacenAPI](https://CRAN.R-project.org/package=BacenAPI)
+  - [rbcb](https://CRAN.R-project.org/package=rbcb)
 
 ## Summary
 
@@ -143,4 +145,4 @@ citation("bacenR")
 
 If this package is useful and saves you time, please consider starring this GitHub repository.
 
-You can also buy me a coffee via [PIX](https://nubank.com.br/cobrar/ddat/695e7490-e957-4d60-be76-87f08a6d292c).
+You can also give a penny to charity.
