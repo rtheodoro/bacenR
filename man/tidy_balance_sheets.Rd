@@ -9,7 +9,7 @@ tidy_balance_sheets(path_raw, out_dir, doc_filter = 4010, save = TRUE)
 \arguments{
 \item{path_raw}{Character scalar. Directory containing the raw CSV files.
 Filenames are expected to start with a YYYYMM prefix (e.g. "202012COOPERATIVAS.CSV").
-The function will look for files matching "\\.CSV$" (case-insensitive).}
+The function will look for files matching "\\.CSV\$" (case-insensitive).}
 
 \item{out_dir}{Character scalar. Directory where output CSVs will be saved
 when \code{save = TRUE}. If it does not exist it will be created.}
@@ -83,12 +83,12 @@ in the balance sheets are not adjusted for inflation. See:
 \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
 }
 \examples{
-\donttest{
+
 # First, download balance sheets
 get_balance_sheets(
-  institution = c("BANCOS", "COOPERATIVAS"),
-  months = c(6, 12),
-  first_year = 2022,
+  institution = "BANCOS",
+  months = 12,
+  first_year = 2023,
   final_year = 2023,
   out_dir = tempdir(),
   overwrite = FALSE
@@ -102,7 +102,7 @@ tidy_balance_sheets(
   doc_filter = 4010,
   save = FALSE
 )
-
+\donttest{
 # Write outputs
 tidy_balance_sheets(
   path_raw = tempdir(),

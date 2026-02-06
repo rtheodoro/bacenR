@@ -4,7 +4,7 @@
 \name{bacenR-package}
 \alias{bacenR}
 \alias{bacenR-package}
-\title{bacenR: Tools to Access Data from Brazilian Central Bank}
+\title{bacenR: Access Data from Brazilian Central Bank: Active Institutions, Balance Sheets and Normative Acts}
 \description{
 Provides functions to query, retrieve, and tidy economic and financial data from Brazilian Central Bank web services for use in R analyses and workflows. Active institutions information, balance sheets and normative acts.
 }

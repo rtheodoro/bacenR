@@ -76,8 +76,19 @@ Invalid institution tokens cause an immediate error listing the invalid
 entries.
 }
 \examples{
+
+# Download balance sheets of credit unions for December of 2023
+get_balance_sheets(
+  institution = "COOPERATIVAS",
+  months = 12,
+  first_year = 2023,
+  final_year = 2023,
+  out_dir = tempdir(),
+  overwrite = FALSE
+)
+
 \donttest{
-# Download balancetes for banks and cooperatives for June and December from 2022 to 2023
+# Download balance sheets of credit unions for December of 2023
 get_balance_sheets(
   institution = c("BANCOS", "COOPERATIVAS"),
   months = c(6, 12),

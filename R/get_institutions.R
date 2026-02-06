@@ -44,15 +44,15 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#'
 #' # Download cooperative credit unions data for 2023
 #' get_institutions(
 #'   institution = "COOPERATIVAS",
-#'   start_date = "202301",
+#'   start_date = "202311",
 #'   end_date = "202312",
 #'   out_dir = tempdir()
 #' )
-#'
+#'\donttest{
 #' # Download multiple institution types
 #' get_institutions(
 #'   institution = c("BANCOS", "COOPERATIVAS"),

@@ -1,5 +1,5 @@
 Package: bacenR
-Title: Tools to Access Data from Brazilian Central Bank 
+Title: Access Data from Brazilian Central Bank: Active Institutions, Balance Sheets and Normative Acts 
 Version: 0.2.0
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),

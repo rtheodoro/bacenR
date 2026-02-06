@@ -30,11 +30,11 @@ containing the institution files, processes them, and optionally saves the
 output to a specified directory.
 }
 \examples{
-\donttest{
+
 # First, download institution data
  get_institutions(
   institution = "COOPERATIVAS",
-  start_date = "202301",
+  start_date = "202311",
   end_date = "202312",
   out_dir = tempdir()
 )
@@ -44,6 +44,6 @@ institutions <- tidy_institutions(
   out_dir = tempdir(),
   verbose = TRUE
 )
-}
+
 
 }

@@ -65,12 +65,12 @@
 #'   [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @examples
-#' \donttest{
+#'
 #' # First, download balance sheets
 #' get_balance_sheets(
-#'   institution = c("BANCOS", "COOPERATIVAS"),
-#'   months = c(6, 12),
-#'   first_year = 2022,
+#'   institution = "BANCOS",
+#'   months = 12,
+#'   first_year = 2023,
 #'   final_year = 2023,
 #'   out_dir = tempdir(),
 #'   overwrite = FALSE
@@ -84,7 +84,7 @@
 #'   doc_filter = 4010,
 #'   save = FALSE
 #' )
-#'
+#'\donttest{
 #' # Write outputs
 #' tidy_balance_sheets(
 #'   path_raw = tempdir(),

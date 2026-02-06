@@ -19,11 +19,11 @@
 #'   institution file. The names of the list elements typically correspond to
 #'   institution identifiers or file names.
 #' @examples
-#' \donttest{
+#'
 #'# First, download institution data
 #'  get_institutions(
 #'   institution = "COOPERATIVAS",
-#'   start_date = "202301",
+#'   start_date = "202311",
 #'   end_date = "202312",
 #'   out_dir = tempdir()
 #' )
@@ -33,7 +33,7 @@
 #'   out_dir = tempdir(),
 #'   verbose = TRUE
 #' )
-#'}
+#'
 #'
 #' @export
 tidy_institutions <- function(

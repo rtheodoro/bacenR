@@ -40,7 +40,7 @@
 #' normative_data <- get_normative_data(
 #'    "Cooperativa",
 #'     "2023-08-01",
-#'     "2025-08-01")
+#'     "2023-08-10")
 #' # Then, download the full texts for the retrieved normatives
 #' normative_txt <- get_normative_txt(normative_data)
 #'}
