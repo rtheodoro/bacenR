@@ -10,11 +10,93 @@ vignette: >
 The {bacenR} package provides tools to download and process data from the [Brazilian Central Bank (Banco Central do Brasil — Bacen)](https://www.bcb.gov.br) in a simple and efficient way. Currently, the package includes the following functions:
 
 - `get_balance_sheets()`: download [balance sheets from financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
+
+```R
+get_balance_sheets(
+  institution = c("BANCOS", "COOPERATIVAS"),
+  months = c(6, 12),
+  first_year = 2022,
+  final_year = 2023,
+  out_dir = tempdir(),
+  overwrite = FALSE
+)
+```
+
 - `tidy_balance_sheets()`: process downloaded balance sheets with `get_balance_sheets()` and combine them into a single, unified file
+
+```R
+# First, download balance sheets
+get_balance_sheets(
+  institution = c("BANCOS", "COOPERATIVAS"),
+  months = 12,
+  first_year = 2022,
+  final_year = 2023,
+  out_dir = tempdir(),
+  overwrite = FALSE
+)
+
+# Now, tidy the files
+tidy_balance_sheets(
+  path_raw = tempdir(),
+  out_dir = tempdir(),
+  doc_filter = 4010,
+  save = FALSE
+)
+```
 - `get_normative_data()`: download [regulatory metadata](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+
+```R
+normas <- get_normative_data(
+ terms = c("Cooperativas", "Cooperativa"), 
+ ini_date = "2025-01-01",
+ end_date = "2025-12-12"
+ )
+```
+
 - `get_normative_txt()`: download the [full texts of regulatory instructions](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
+
+```R
+# First, download normative data
+normative_data <- get_normative_data(
+   terms = "Cooperativa",
+   ini_date = "2023-08-01",
+   end_date = "2023-12-10"
+)
+
+# Then, download the full texts for the retrieved normatives
+normative_txt <- get_normative_txt(normative_data)
+```
+
 - `get_institutions()`: download information about [institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+
+```R
+# Download multiple institution types
+get_institutions(
+  institution = c("BANCOS", "COOPERATIVAS"),
+  start_date = "202201",
+  end_date = "202212",
+  out_dir = tempdir()
+)
+```
+
 - `tidy_institutions()`: precess the data downloaded with `get_institutions()` and combine them into a single, unified file
+
+```R
+# First, download institution data
+ get_institutions(
+  institution = "COOPERATIVAS",
+  start_date = "202311",
+  end_date = "202312",
+  out_dir = tempdir()
+)
+
+# Process institution files from a directory
+institutions <- tidy_institutions(
+  path_dir = tempdir(),
+  out_dir = tempdir(),
+  verbose = TRUE
+)
+```
 
 Additional functions and features will be added in future releases.
 
