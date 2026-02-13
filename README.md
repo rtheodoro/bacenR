@@ -12,6 +12,7 @@ The goal of `bacenR` is to provide R functions to download and work with data fr
   -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
   -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
   -  [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+  - [IfData resources](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos)
 
 
 To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages:
@@ -89,7 +90,17 @@ tidy_institutions(
   out_dir = "data"
 )
 
+# Get data from IF.data Values
+data_value <- get_ifdata_values(
+  year = c(2023, 2024),
+  month = c(6, 12),
+  type_institution = c(1, 2, 3)
+)
 
+# Get data from IF.data Registry (Cadastro)
+data <- get_ifdata_registry(
+  year = c(2023, 2024), 
+  month = c(3, 6, 9, 12))
 ```
 
 ## To-do

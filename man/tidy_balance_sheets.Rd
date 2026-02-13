@@ -9,7 +9,7 @@ tidy_balance_sheets(path_raw, out_dir, doc_filter = 4010, save = TRUE)
 \arguments{
 \item{path_raw}{Character scalar. Directory containing the raw CSV files.
 Filenames are expected to start with a YYYYMM prefix (e.g. "202012COOPERATIVAS.CSV").
-The function will look for files matching "\\.CSV\$" (case-insensitive).}
+The function will look for files matching "\\.CSV$" (case-insensitive).}
 
 \item{out_dir}{Character scalar. Directory where output CSVs will be saved
 when \code{save = TRUE}. If it does not exist it will be created.}

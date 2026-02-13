@@ -43,6 +43,7 @@ tidy_balance_sheets(
   save = FALSE
 )
 ```
+
 - `get_normative_data()`: download [regulatory metadata](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
 
 ```R
@@ -95,6 +96,49 @@ institutions <- tidy_institutions(
   path_dir = tempdir(),
   out_dir = tempdir(),
   verbose = TRUE
+)
+```
+
+- `get_ifdata_values()`: download [IFDATA values](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos/IfDataValores#eyJmb3JtdWxhcmlvIjp7IiRmb3JtYXQiOiJ0ZXh0L2NzdiIsIiR0b3AiOjEwMCwiBDIEIjoiMjAxODAzIiwiUmVsYXRvcmlvIjoiVCIsIgQwBCI6IjEyMzQifSwicHJvcHJpZWRhZGVzIjpbMCwxLDIsMyw0LDUsNiw3LDgsOV0sInBlc3F1aXNhZG8iOnRydWUsImFjdGl2ZVRhYiI6InRhYmxlIiwiZ3JpZFN0YXRlIjp7AzADOlt7A0IDIgQwBCIsA0EDfSx7A0IDIgQxBCIsA0EDfSx7A0IDIgQyBCIsA0EDfSx7A0IDIgQzBCIsA0EDfSx7A0IDIgQ0BCIsA0EDfSx7A0IDIgQ1BCIsA0EDfSx7A0IDIgQ2BCIsA0EDfSx7A0IDIgQ3BCIsA0EDfSx7A0IDIgQ4BCIsA0EDfSx7A0IDIgQ5BCIsA0EDfV0sAzEDOnt9LAMyAzpbXSwDMwM6e30sAzQDOnt9LAM1Azp7fX0sInBpdm90T3B0aW9ucyI6ewNhAzp7fSwDYgM6W10sA2MDOjUwMCwDZAM6W10sA2UDOltdLANmAzpbXSwDZwM6ImtleV9hX3RvX3oiLANoAzoia2V5X2FfdG9feiIsA2kDOnt9LANqAzp7fSwDawM6ODUsA2wDOmZhbHNlLANtAzp7fSwDbgM6e30sA28DOiIENgRnZW0iLANwAzoiVGFibGUifX0=) for specific periods and institution types
+
+```R
+# Unique institution type for a specific period
+data_value <- get_ifdata_values(year = 2024, month = 12, type_institution = 3)
+# Multiple institution types for a specific period
+data_value <- get_ifdata_values(year = 2024, month = 12, type_institution = c(2, 3))
+# Multiple institution types for multiple periods
+data_value <- get_ifdata_values(
+  year = c(2023, 2024),
+  month = c(6, 12),
+  type_institution = c(1, 2, 3)
+)
+```
+
+- `get_ifdata_registry()`: download [IFDATA registry data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos/IfDataCadastro#eyJmb3JtdWxhcmlvIjp7IiRmb3JtYXQiOiJ0ZXh0L2NzdiIsIiR0b3AiOm51bGwsIkFub01lcyI6IjIwMTgwMyIsIiRmaWx0ZXIiOiIifSwicHJvcHJpZWRhZGVzIjpbMCwxLDIsMyw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNV19) for specified years and months
+
+```R
+# Single period
+data <- get_ifdata_registry(year = 2024, month = 12)
+# Multiple months in the same year
+data <- get_ifdata_registry(year = 2024, month = c(6, 12))
+# Multiple years and months (all combinations)
+data <- get_ifdata_registry(year = c(2023, 2024), month = c(3, 6, 9, 12))
+```
+
+- `get_ifdata_values()`: download [IFDATA values](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos/IfDataValores#eyJmb3JtdWxhcmlvIjp7IiRmb3JtYXQiOiJ0ZXh0L2NzdiIsIiR0b3AiOjEwMCwiBDIEIjoiMjAxODAzIiwiUmVsYXRvcmlvIjoiVCIsIgQwBCI6IjEyMzQifSwicHJvcHJpZWRhZGVzIjpbMCwxLDIsMyw0LDUsNiw3LDgsOV0sInBlc3F1aXNhZG8iOnRydWUsImFjdGl2ZVRhYiI6InRhYmxlIiwiZ3JpZFN0YXRlIjp7AzADOlt7A0IDIgQwBCIsA0EDfSx7A0IDIgQxBCIsA0EDfSx7A0IDIgQyBCIsA0EDfSx7A0IDIgQzBCIsA0EDfSx7A0IDIgQ0BCIsA0EDfSx7A0IDIgQ1BCIsA0EDfSx7A0IDIgQ2BCIsA0EDfSx7A0IDIgQ3BCIsA0EDfSx7A0IDIgQ4BCIsA0EDfSx7A0IDIgQ5BCIsA0EDfV0sAzEDOnt9LAMyAzpbXSwDMwM6e30sAzQDOnt9LAM1Azp7fX0sInBpdm90T3B0aW9ucyI6ewNhAzp7fSwDYgM6W10sA2MDOjUwMCwDZAM6W10sA2UDOltdLANmAzpbXSwDZwM6ImtleV9hX3RvX3oiLANoAzoia2V5X2FfdG9feiIsA2kDOnt9LANqAzp7fSwDawM6ODUsA2wDOmZhbHNlLANtAzp7fSwDbgM6e30sA28DOiIENgRnZW0iLANwAzoiVGFibGUifX0=) for specific periods and institution types
+
+```R
+# Unique institution type for a specific period
+data <- get_ifdata_values(year = 2024, month = 12, type_institution = 3)
+
+# Multiple institution types for a specific period
+data <- get_ifdata_values(year = 2024, month = 12, type_institution = c(2, 3))
+
+# Multiple institution types for multiple periods
+data <- get_ifdata_values(
+  year = c(2023, 2024),
+  month = c(6, 12),
+  type_institution = c(1, 2, 3)
 )
 ```
 
