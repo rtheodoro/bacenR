@@ -1,9 +1,10 @@
-#' Download institution registry data from Bacen IF.data Cadastro
+#' Download institution registry data from [IF.data of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Cadastro
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Download [institution registry data from the Brazilian Central Bank (Bacen) IF.data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos/IfDataCadastro#eyJmb3JtdWxhcmlvIjp7IiRmb3JtYXQiOiJ0ZXh0L2NzdiIsIiR0b3AiOm51bGwsIkFub01lcyI6IjIwMTgwMyIsIiRmaWx0ZXIiOiIifSwicHJvcHJpZWRhZGVzIjpbMCwxLDIsMyw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNV19) API for specified years and months. The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
+#' Download [institution registry data from the Brazilian Central Bank (Bacen) IF.data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) API for specified years and months.
+#' The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
 #'
 #' @param year Numeric or vector. Year(s) to download (e.g., 2024 or c(2023, 2024))
 #' @param month Numeric or vector. Month(s) to download (1 to 12)

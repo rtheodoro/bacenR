@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_ifdata_registy.R
 \name{get_ifdata_registry}
 \alias{get_ifdata_registry}
-\title{Download institution registry data from Bacen IF.data Cadastro}
+\title{Download institution registry data from \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao}{IF.data of Brazilian Central Bank (Bacen)} Cadastro}
 \usage{
 get_ifdata_registry(year, month, verbose = TRUE)
 }
@@ -19,7 +19,8 @@ Data frame with institution registry data or NULL in case of error
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Download \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos/IfDataCadastro#eyJmb3JtdWxhcmlvIjp7IiRmb3JtYXQiOiJ0ZXh0L2NzdiIsIiR0b3AiOm51bGwsIkFub01lcyI6IjIwMTgwMyIsIiRmaWx0ZXIiOiIifSwicHJvcHJpZWRhZGVzIjpbMCwxLDIsMyw0LDUsNiw3LDgsOSwxMCwxMSwxMiwxMywxNCwxNV19}{institution registry data from the Brazilian Central Bank (Bacen) IF.data} API for specified years and months. The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
+Download \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao}{institution registry data from the Brazilian Central Bank (Bacen) IF.data} API for specified years and months.
+The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
 }
 \examples{
 \donttest{
