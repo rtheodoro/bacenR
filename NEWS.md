@@ -1,3 +1,10 @@
+# bacenR 0.3.0
+
+* New functions added:
+    - `get_ifdata_registry()`: Download institution registry data from Bacen IF.data Cadastro
+    - `get_ifdata_values()`: Download data financial information from IF.data of Brazilian Central Bank (Bacen)
+
+
 # bacenR 0.2.0
 
 * New functions added:
