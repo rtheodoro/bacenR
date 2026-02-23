@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_ifdata_values.R
 \name{get_ifdata_values}
 \alias{get_ifdata_values}
-\title{Download data from \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao}{IF.data of Brazilian Central Bank (Bacen)}}
+\title{Download institution values data from \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao}{IF.data of Brazilian Central Bank (Bacen)} Cadastro}
 \usage{
 get_ifdata_values(
   year,

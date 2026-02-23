@@ -1,4 +1,4 @@
-#' Download data from [IF.data of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao)
+#' Download institution values data from [IF.data of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Cadastro
 #'@description
 #' `r lifecycle::badge("experimental")`
 #'
