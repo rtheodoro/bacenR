@@ -91,13 +91,12 @@ tidy_institutions(
 )
 
 # Get data from IFdata Reports
-data <- get_ifdata_reports(
-  year = 2011,
+cc_ativa_pj_modalidade_20142024 <- bacenR::get_ifdata_reports(
+  year = c(2014:2024),
   month = 12,
-  type_institution = 2,
-  report = 1,
-  verbose = TRUE
-) 
+  report = 13,
+  type_institution = 2
+)
 
 # Get data from IFdata Registry (Cadastro)
 data <- get_ifdata_registry(

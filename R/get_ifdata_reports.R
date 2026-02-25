@@ -100,6 +100,7 @@ get_ifdata_reports <- function(
   Saldo = as.character()
   TipoInstituicao = as.character()
   CodInst = as.character()
+  AnoMes = as.character()
 
   # Download function for a single period and institution type
   baixar_periodo <- function(year_i, month_i, report_1, tipo_inst_i) {
@@ -145,6 +146,7 @@ get_ifdata_reports <- function(
           dplyr::mutate(
             CodInst = as.character(CodInst),
             TipoInstituicao = as.character(TipoInstituicao),
+            AnoMes = as.character(AnoMes),
             Saldo = as.character(Saldo)
           )
 

@@ -103,10 +103,10 @@ institutions <- tidy_institutions(
 
 ```R
 # Multiple periods
-data_value <- get_ifdata_reports(
-  year = c(2023, 2024),
-  month = c(6, 12),
-  report = 1,
+cc_ativa_pj_modalidade_20142024 <- bacenR::get_ifdata_reports(
+  year = c(2014:2024),
+  month = 12,
+  report = 13,
   type_institution = 2
 )
 ```
