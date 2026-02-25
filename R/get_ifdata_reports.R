@@ -6,7 +6,7 @@
 #'  months, institution types, and report types. The function handles multiple combinations
 #'  of parameters and returns a consolidated data frame with the results.
 #'
-#' Also, check the page to see the available reports for each institution types: [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html).
+#' Also, check the page to see the available reports for each institution type and date: [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html).
 #'
 #' @param year Numeric or vector. year (ex: 2024 or c(2023, 2024))
 #' @param month Numeric or vector. month (1 to 12, or c(6, 12))
@@ -72,8 +72,9 @@ get_ifdata_reports <- function(
   report,
   verbose = TRUE
 ) {
-  # Validate
+  Saldo = as.character()
 
+  # Validate
   if (any(!type_institution %in% 1:4)) {
     stop("type_institution should be 1, 2, 3 or 4")
   }

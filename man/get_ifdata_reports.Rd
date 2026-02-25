@@ -47,7 +47,7 @@ Download IFdata reports from the Brazilian Central Bank (Bacen) API for specifie
 months, institution types, and report types. The function handles multiple combinations
 of parameters and returns a consolidated data frame with the results.
 
-Also, check the page to see the available reports for each institution types: \href{https://www3.bcb.gov.br/ifdata/index2024.html}{IFdata}.
+Also, check the page to see the available reports for each institution type and date: \href{https://www3.bcb.gov.br/ifdata/index2024.html}{IFdata}.
 }
 \examples{
 \donttest{
