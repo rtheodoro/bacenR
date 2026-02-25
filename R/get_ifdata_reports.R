@@ -64,8 +64,6 @@ get_ifdata_reports <- function(
   report,
   verbose = TRUE
 ) {
-  Saldo = as.character()
-
   # Validate
   if (any(!type_institution %in% 1:4)) {
     stop("type_institution should be 1, 2, 3 or 4")
@@ -98,6 +96,10 @@ get_ifdata_reports <- function(
   if (verbose) {
     cat(sprintf("Total of requests: %d\n", nrow(grid_periodos)))
   }
+
+  Saldo = as.character()
+  TipoInstituicao = as.character()
+  CodInst = as.character()
 
   # Download function for a single period and institution type
   baixar_periodo <- function(year_i, month_i, report_1, tipo_inst_i) {
@@ -141,6 +143,8 @@ get_ifdata_reports <- function(
           locale = readr::locale(decimal_mark = ".", grouping_mark = ",")
         ) |>
           dplyr::mutate(
+            CodInst = as.character(CodInst),
+            TipoInstituicao = as.character(TipoInstituicao),
             Saldo = as.character(Saldo)
           )
 
