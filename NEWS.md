@@ -1,6 +1,6 @@
 # bacenR 0.3.1
 
-* Functions were renamed:
+* Function renamed:
     - From`get_ifdata_values()` to `get_ifdata_reports()`
 
 * Fixed bugs in select report types in `get_ifdata_reports()`
