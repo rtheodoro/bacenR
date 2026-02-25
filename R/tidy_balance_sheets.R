@@ -257,8 +257,7 @@ tidy_balance_sheets <- function(
 
   message(glue::glue(
     "Note: \n
-    The values in the balancetes are not adjusted for inflation nor modified. \n
-    This function is still in development, check your data carefully. \n     
+    The values in the balancetes are not adjusted for inflation nor modified. \n    
     Check the the page https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais "
   ))
 

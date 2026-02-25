@@ -99,32 +99,26 @@ institutions <- tidy_institutions(
 )
 ```
 
-- `get_ifdata_values()`: download [IFDATA values](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) for specific periods and institution types
+- `get_ifdata_reports()`: download [IFdata Reports](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) for specific periods and institution types. See also [IFdata Reports interface](https://www3.bcb.gov.br/ifdata/index2024.html).
 
 ```R
-# Unique institution type for a specific period
-data_value <- get_ifdata_values(year = 2024, month = 12, type_institution = 3)
-# Multiple institution types for a specific period
-data_value <- get_ifdata_values(year = 2024, month = 12, type_institution = c(2, 3))
-# Multiple institution types for multiple periods
-data_value <- get_ifdata_values(
+# Multiple periods
+data_value <- get_ifdata_reports(
   year = c(2023, 2024),
   month = c(6, 12),
-  type_institution = c(1, 2, 3)
+  report = 1,
+  type_institution = 2
 )
 ```
 
-- `get_ifdata_registry()`: download [IFDATA registry data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) for specified years and months
+- `get_ifdata_registry()`: download [IFdata Registry data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) for specified years and months. 
 
 ```R
-# Single period
-data <- get_ifdata_registry(year = 2024, month = 12)
-# Multiple months in the same year
-data <- get_ifdata_registry(year = 2024, month = c(6, 12))
-# Multiple years and months (all combinations)
-data <- get_ifdata_registry(year = c(2023, 2024), month = c(3, 6, 9, 12))
+# Multiple years and months
+data <- get_ifdata_registry(
+  year = c(2023, 2024), 
+  month = c(6, 12)
+)
 ```
-
-Additional functions and features will be added in future releases.
 
 For more details and examples, see the project on GitHub: [https://github.com/rtheodoro/bacenR](https://github.com/rtheodoro/bacenR)

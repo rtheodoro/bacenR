@@ -1,9 +1,9 @@
-#' Download institution registry data from [IF.data of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Cadastro
+#' Download institution registry data from [IFdata of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Cadastro
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Download [institution registry data from the Brazilian Central Bank (Bacen) IF.data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) API for specified years and months.
+#' Download [institution registry data from the Brazilian Central Bank (Bacen) IFdata](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) API for specified years and months.
 #' The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
 #'
 #' @param year Numeric or vector. Year(s) to download (e.g., 2024 or c(2023, 2024))
@@ -16,14 +16,23 @@
 #' @examples
 #' \donttest{
 #' # Single period
-#' data <- get_ifdata_registry(year = 2024, month = 12)
+#' data <- get_ifdata_registry(
+#'  year = 2024,
+#'  month = 12
+#' )
 #' }
 #'\dontrun{
 #' # Multiple months in the same year
-#' data <- get_ifdata_registry(year = 2024, month = c(6, 12))
+#' data <- get_ifdata_registry(
+#'  year = 2024,
+#'  month = c(6, 12)
+#' )
 #'
 #' # Multiple years and months (all combinations)
-#' data <- get_ifdata_registry(year = c(2023, 2024), month = c(3, 6, 9, 12))
+#' data <- get_ifdata_registry(
+#'  year = c(2023, 2024),
+#'  month = c(3, 6, 9, 12)
+#' )
 #'}
 get_ifdata_registry <- function(year, month, verbose = TRUE) {
   # Validations
@@ -63,7 +72,7 @@ get_ifdata_registry <- function(year, month, verbose = TRUE) {
     )
 
     if (verbose) {
-      cat(sprintf("Downloading: %d/%02d... ", year_i, month_i))
+      cat(sprintf("Downloading: %d/%02d... \n", year_i, month_i))
     }
 
     tryCatch(
@@ -110,14 +119,21 @@ get_ifdata_registry <- function(year, month, verbose = TRUE) {
     download_period
   )
 
+  # Handle case where all download attempts fail and result is NULL
+  if (is.null(result)) {
+    if (verbose) {
+      cat("No data was successfully downloaded.\n")
+    }
+    return(NULL)
+  }
+
   result <- result |>
     janitor::clean_names()
 
-  if (verbose && !is.null(result)) {
+  if (verbose) {
     cat(sprintf(
       "\n Completed! Total records: %s\n",
-      format(nrow(result), big.mark = ","),
-      length(unique(result$CodInst))
+      format(nrow(result), big.mark = ",")
     ))
   }
 

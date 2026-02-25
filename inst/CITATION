@@ -1,6 +1,6 @@
 bibentry(
   bibtype = "Manual",
-  title = "bacenR: Access Data from Banco Central do Brasil",
+  title = "bacenR: Access Data from Brazilian Central Bank - IFdata, Active Institutions, Balance Sheets and Normative Acts",
   author = "Ricardo Theodoro",
   year = "2026",
   version = "v0.3.0",

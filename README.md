@@ -12,7 +12,7 @@ The goal of `bacenR` is to provide R functions to download and work with data fr
   -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
   -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
   -  [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
-  - [IfData resources](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos)
+  - [Ifdata resources](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos) / [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html)
 
 
 To get data about IPCA, Selic, GDP, Government Debt, and others, check the packages:
@@ -90,17 +90,20 @@ tidy_institutions(
   out_dir = "data"
 )
 
-# Get data from IF.data Values
-data_value <- get_ifdata_values(
-  year = c(2023, 2024),
-  month = c(6, 12),
-  type_institution = c(1, 2, 3)
-)
+# Get data from IFdata Values
+data <- get_ifdata_reports(
+  year = 2011,
+  month = 12,
+  type_institution = 3,
+  report = 1,
+  verbose = TRUE
+) 
 
-# Get data from IF.data Registry (Cadastro)
+# Get data from IFdata Registry (Cadastro)
 data <- get_ifdata_registry(
   year = c(2023, 2024), 
-  month = c(3, 6, 9, 12))
+  month = c(3, 6, 9, 12)
+)
 ```
 
 ## To-do
@@ -110,7 +113,6 @@ More details about the to-do list can be found in the [GitHub project board](htt
 -   Functions to collect more datasets from Bacen
     -   [Institutions authorized, regulated, or supervised](https://www.bcb.gov.br/meubc/encontreinstituicao)
     -   [Board members](https://github.com/rtheodoro/orgaos-estatutarios-coop-cred-bacen)
-    -   [Datasets from IF.data](https://www3.bcb.gov.br/ifdata/)
     -   [Datasets from Bacen.API](https://dadosabertos.bcb.gov.br/)
  
 Feel free to contribute to this list by [opening issues or pull requests on GitHub](https://github.com/rtheodoro/bacenR/issues)!
@@ -144,7 +146,7 @@ citation("bacenR")
 
 ```         
 @manual{,
-  title = "bacenR: Access Data from Banco Central do Brasil",
+  title = "bacenR: Access Data from Brazilian Central Bank - IFdata, Active Institutions, Balance Sheets and Normative Acts",
   author = "Ricardo Theodoro",
   year = "2026",
   version = "v0.3.0",
