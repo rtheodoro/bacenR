@@ -31,12 +31,6 @@ data <- get_ifdata_registry(
 )
 
 \dontrun{
-# Multiple months in the same year
-data <- get_ifdata_registry(
- year = 2024,
- month = c(6, 12)
-)
-
 # Multiple years and months (all combinations)
 data <- get_ifdata_registry(
  year = c(2023, 2024),

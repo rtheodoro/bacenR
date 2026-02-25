@@ -9,12 +9,12 @@ get_ifdata_reports(year, month, type_institution, report, verbose = TRUE)
 \arguments{
 \item{year}{Numeric or vector. year (ex: 2024 or c(2023, 2024))}
 
-\item{month}{Numeric or vector. month (1 to 12, or c(6, 12))}
+\item{month}{Numeric or vector. month (ex: 1 to 12, or c(6, 12))}
 
-\item{type_institution}{Numeric or vector. Type of Institution:
+\item{type_institution}{Numeric. Type of Institution:
 1 = Conglomerados Prudenciais e Instituicoes Independentes
 2 = Conglomerados Financeiros e Instituicoes Independentes
-3 = Instituicoes Individuais (default)
+3 = Instituicoes Individuais
 4 = Instituicoes com Operacoes de Cambio}
 
 \item{report}{Numeric. Report type:
@@ -35,7 +35,7 @@ get_ifdata_reports(year, month, type_institution, report, verbose = TRUE)
 15 = Movimentacao de Cambio no Trimestre
 16 = Carteira de Credito ativa - por carteiras de instrumentos financeiros}
 
-\item{verbose}{Logical. Se TRUE, print progress messages (default: TRUE)}
+\item{verbose}{Logical. If TRUE, print progress messages (default: TRUE)}
 }
 \value{
 Data frame with IFdata values or NULL in the case of errors.
@@ -56,25 +56,17 @@ data <- get_ifdata_reports(
  year = 2024,
  month = 12,
  report = 1,
- type_institution = 3
+ type_institution = 2
 )
 }
 
 \dontrun{
-# Multiple institution types for a specific period
-data <- get_ifdata_reports(
- year = 2024,
- month = 12,
- report = 2,
- type_institution = 4
-)
-
-# Multiple institution types for multiple periods
+# Multiple periods
 data <- get_ifdata_reports(
   year = c(2023, 2024),
   month = c(6, 12),
-  report = 3,
-  type_institution = 1
+  report = 1,
+  type_institution = 2
 )
 }
 }
