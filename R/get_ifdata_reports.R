@@ -9,11 +9,11 @@
 #' Also, check the page to see the available reports for each institution type and date: [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html).
 #'
 #' @param year Numeric or vector. year (ex: 2024 or c(2023, 2024))
-#' @param month Numeric or vector. month (1 to 12, or c(6, 12))
-#' @param type_institution Numeric or vector. Type of Institution:
+#' @param month Numeric or vector. month (ex: 1 to 12, or c(6, 12))
+#' @param type_institution Numeric. Type of Institution:
 #'   1 = Conglomerados Prudenciais e Instituicoes Independentes
 #'   2 = Conglomerados Financeiros e Instituicoes Independentes
-#'   3 = Instituicoes Individuais (default)
+#'   3 = Instituicoes Individuais
 #'   4 = Instituicoes com Operacoes de Cambio
 #' @param report Numeric. Report type:
 #'   1 = Resumo
@@ -32,7 +32,7 @@
 #'   14 = Carteira de Credito ativa Pessoa Juridica - por porte do tomador
 #'   15 = Movimentacao de Cambio no Trimestre
 #'   16 = Carteira de Credito ativa - por carteiras de instrumentos financeiros
-#' @param verbose Logical. Se TRUE, print progress messages (default: TRUE)
+#' @param verbose Logical. If TRUE, print progress messages (default: TRUE)
 #'
 #' @return Data frame with IFdata values or NULL in the case of errors.
 #' @export
@@ -44,25 +44,17 @@
 #'  year = 2024,
 #'  month = 12,
 #'  report = 1,
-#'  type_institution = 3
+#'  type_institution = 2
 #' )
 #' }
 #'
 #' \dontrun{
-#' # Multiple institution types for a specific period
-#' data <- get_ifdata_reports(
-#'  year = 2024,
-#'  month = 12,
-#'  report = 2,
-#'  type_institution = 4
-#' )
-#'
-#' # Multiple institution types for multiple periods
+#' # Multiple periods
 #' data <- get_ifdata_reports(
 #'   year = c(2023, 2024),
 #'   month = c(6, 12),
-#'   report = 3,
-#'   type_institution = 1
+#'   report = 1,
+#'   type_institution = 2
 #' )
 #' }
 get_ifdata_reports <- function(

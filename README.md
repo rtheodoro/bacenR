@@ -90,11 +90,11 @@ tidy_institutions(
   out_dir = "data"
 )
 
-# Get data from IFdata Values
+# Get data from IFdata Reports
 data <- get_ifdata_reports(
   year = 2011,
   month = 12,
-  type_institution = 3,
+  type_institution = 2,
   report = 1,
   verbose = TRUE
 ) 
