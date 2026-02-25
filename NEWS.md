@@ -1,8 +1,15 @@
+# bacenR 0.3.1
+
+* Functions were renamed:
+    - From`get_ifdata_values()` to `get_ifdata_reports()`
+
+* Fixed bugs in select report types in `get_ifdata_reports()`
+
 # bacenR 0.3.0
 
 * New functions added:
     - `get_ifdata_registry()`: Download institution registry data from Bacen IFdata Cadastro
-    - `get_ifdata_reports()`: Download data financial information from IFdata of Brazilian Central Bank (Bacen)
+    - `get_ifdata_values()`: Download data financial information from IFdata of Brazilian Central Bank (Bacen)
 
 
 # bacenR 0.2.0

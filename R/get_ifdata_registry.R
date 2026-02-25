@@ -14,13 +14,13 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#'
 #' # Single period
 #' data <- get_ifdata_registry(
 #'  year = 2024,
 #'  month = 12
 #' )
-#' }
+#'
 #'\dontrun{
 #' # Multiple months in the same year
 #' data <- get_ifdata_registry(

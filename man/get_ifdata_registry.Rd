@@ -23,13 +23,13 @@ Download \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicac
 The function handles multiple combinations of parameters and returns a consolidated data frame with the results.
 }
 \examples{
-\donttest{
+
 # Single period
 data <- get_ifdata_registry(
  year = 2024,
  month = 12
 )
-}
+
 \dontrun{
 # Multiple months in the same year
 data <- get_ifdata_registry(
