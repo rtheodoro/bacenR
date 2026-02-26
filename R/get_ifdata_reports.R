@@ -94,7 +94,7 @@ get_ifdata_reports <- function(
   )
 
   if (verbose) {
-    cat(sprintf("Total of requests: %d\n", nrow(grid_periodos)))
+    cat(sprintf("\nTotal of requests: %d\n\n", nrow(grid_periodos)))
   }
 
   Saldo = as.character()
@@ -116,7 +116,7 @@ get_ifdata_reports <- function(
 
     if (verbose) {
       cat(sprintf(
-        "\n Downloading: %d/%02d | Type: %d | Report: %d... \n",
+        "Downloading: %d/%02d | Type Institution: %d | Report: %d... \n",
         year_i,
         month_i,
         tipo_inst_i,
@@ -155,7 +155,7 @@ get_ifdata_reports <- function(
           )
 
         if (verbose) {
-          cat(sprintf("Done %s register\n", format(nrow(df), big.mark = ",")))
+          cat(sprintf("Done %s register\n\n", format(nrow(df), big.mark = ",")))
         }
 
         return(df)
@@ -185,7 +185,7 @@ get_ifdata_reports <- function(
 
   if (verbose && !is.null(resultado)) {
     cat(sprintf(
-      "\n Done! Total of registers: %s \n\n",
+      "\n----Done! Total of registers: %s \n",
       format(nrow(resultado), big.mark = ",")
     ))
   }
