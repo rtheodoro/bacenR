@@ -116,7 +116,7 @@ get_ifdata_reports <- function(
 
     if (verbose) {
       cat(sprintf(
-        "Downloading: %d/%02d | Type: %d | Report: %d... \n",
+        "\n Downloading: %d/%02d | Type: %d | Report: %d... \n",
         year_i,
         month_i,
         tipo_inst_i,
@@ -127,7 +127,7 @@ get_ifdata_reports <- function(
     tryCatch(
       {
         # GET
-        response <- httr::GET(url, httr::timeout(60))
+        response <- httr::GET(url, httr::timeout(200))
 
         # Status
         if (httr::status_code(response) != 200) {
@@ -185,7 +185,7 @@ get_ifdata_reports <- function(
 
   if (verbose && !is.null(resultado)) {
     cat(sprintf(
-      "\n Done! Total of registers: %s\n",
+      "\n Done! Total of registers: %s \n\n",
       format(nrow(resultado), big.mark = ",")
     ))
   }
