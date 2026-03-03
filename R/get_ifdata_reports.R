@@ -46,10 +46,8 @@
 #'  report = 1,
 #'  type_institution = 2
 #' )
-#' }
 #'
-#' \dontrun{
-#' # Multiple periods
+#' # Multiple periods, take some time to run
 #' data <- get_ifdata_reports(
 #'   year = c(2023, 2024),
 #'   month = c(6, 12),
