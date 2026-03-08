@@ -1,7 +1,7 @@
 #' Download [normative texts from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) from a reference data.frame
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #'
 #' For each row of the input data.frame, constructs the appropriate URL for the Bacen
 #' normatives API, performs the request, extracts the returned content and applies

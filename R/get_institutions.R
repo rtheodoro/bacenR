@@ -1,7 +1,7 @@
 #' Download and Process Brazilian Financial Institutions Data from Bacen
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #' This function downloads [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 #' website for specified institution types and date ranges. The data is downloaded as ZIP files,
 #' extracted, and can be optionally cleaned up.

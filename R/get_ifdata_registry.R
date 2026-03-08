@@ -1,7 +1,7 @@
 #' Download institution registry data from [IFdata of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Cadastro
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #'
 #' Download [institution registry data from the Brazilian Central Bank (Bacen) IFdata](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) API for specified years and months.
 #' The function handles multiple combinations of parameters and returns a consolidated data frame with the results.

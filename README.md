@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 
-[![CRAN status](https://www.r-pkg.org/badges/version/bacenR)](https://CRAN.R-project.org/package=bacenR) [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/bacenR?color=yellow)](https://cran.r-project.org/package=bacenR) [![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/bacenR)](https://CRAN.R-project.org/package=bacenR) [![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/bacenR?color=yellow)](https://cran.r-project.org/package=bacenR) [![R-CMD-check](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rtheodoro/bacenR/actions/workflows/R-CMD-check.yaml) [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 
 <!-- badges: end -->
 
@@ -31,7 +31,7 @@ To get data about IPCA, Selic, GDP, Government Debt, and others, check the packa
 
 ## Install
 
-You can install the **stable** version of `bacenR` like so:
+You can install the *stable* version of `bacenR` like so:
 
 ```r
 install.packages("bacenR")

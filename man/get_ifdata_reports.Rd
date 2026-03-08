@@ -41,7 +41,7 @@ get_ifdata_reports(year, month, type_institution, report, verbose = TRUE)
 Data frame with IFdata values or NULL in the case of errors.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Download IFdata reports from the Brazilian Central Bank (Bacen) API for specified years,
 months, institution types, and report types. The function handles multiple combinations

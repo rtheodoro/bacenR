@@ -17,7 +17,7 @@ get_normative_data(terms, ini_date, end_date)
 data.frame containing the records returned by the API and the post-processed columns.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Queries the Bacen normative search API, collects all results within the provided
 date range and returns a data.frame with the records.

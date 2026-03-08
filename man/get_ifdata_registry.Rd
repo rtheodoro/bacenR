@@ -17,7 +17,7 @@ get_ifdata_registry(year, month, verbose = TRUE)
 Data frame with institution registry data or NULL in case of error
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 Download \href{https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao}{institution registry data from the Brazilian Central Bank (Bacen) IFdata} API for specified years and months.
 The function handles multiple combinations of parameters and returns a consolidated data frame with the results.

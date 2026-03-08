@@ -1,7 +1,7 @@
 #' Process and unify institution CSV exports from the Brazilian Central Bank (Bacen) downloaded via `get_institutions()`.
 
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #' This function reads and processes [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 #' files that were previously
 #' downloaded using the `get_institutions()` function. It takes a directory path

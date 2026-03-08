@@ -38,7 +38,7 @@ Invisible NULL. The function is called for its side effects (downloading
 and extracting files to the specified directory).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 This function downloads \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{financial institutions data from the Brazilian Central Bank (Bacen)}
 website for specified institution types and date ranges. The data is downloaded as ZIP files,
 extracted, and can be optionally cleaned up.

@@ -1,7 +1,7 @@
 #' Download [normative acts from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas) by terms and date range
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #'
 #' Queries the Bacen normative search API, collects all results within the provided
 #' date range and returns a data.frame with the records.

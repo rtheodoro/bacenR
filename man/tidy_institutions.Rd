@@ -22,7 +22,7 @@ institution file. The names of the list elements typically correspond to
 institution identifiers or file names.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 This function reads and processes \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{financial institutions data from the Brazilian Central Bank (Bacen)}
 files that were previously
 downloaded using the \code{get_institutions()} function. It takes a directory path

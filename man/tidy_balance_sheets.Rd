@@ -31,7 +31,7 @@ and one column per account (the "conta" values) with balances
 populated from the "saldo" column.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 \code{tidy_balance_sheets} reads raw CSV export files produced by the BCB and downloaded via \code{get_balance_sheets()}, normalizes filenames, locates the
 header row, imports rows matching a specific document number, cleans column names, pivots account balances so

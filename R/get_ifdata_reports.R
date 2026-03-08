@@ -1,6 +1,6 @@
 #' Download institution reports data from [IFdata of Brazilian Central Bank (Bacen)](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) Relatorios
 #'@description
-#' `r lifecycle::badge("experimental")`
+#'  `r lifecycle::badge("stable")`
 #'
 #' Download IFdata reports from the Brazilian Central Bank (Bacen) API for specified years,
 #'  months, institution types, and report types. The function handles multiple combinations

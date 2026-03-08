@@ -19,7 +19,7 @@ data.frame with the records returned by the API for each reference in \code{norm
 including the extracted and post-processed fields (e.g., \code{Assunto}, \code{Texto}).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
 For each row of the input data.frame, constructs the appropriate URL for the Bacen
 normatives API, performs the request, extracts the returned content and applies

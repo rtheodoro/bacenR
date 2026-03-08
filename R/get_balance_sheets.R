@@ -1,7 +1,7 @@
 #' Download balance sheets from [Brazilian Central Bank](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
+#' `r lifecycle::badge("stable")`
 #'
 #' Downloads monthly "balancetes" (.CSV or .ZIP) released by the Brazilian Central Bank
 #' for one or more institution types and stores them in a local directory. ZIP
