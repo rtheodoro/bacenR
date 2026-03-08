@@ -31,9 +31,15 @@ To get data about IPCA, Selic, GDP, Government Debt, and others, check the packa
 
 ## Install
 
-You can install the development version of `bacenR` like so:
+You can install the **stable** version of `bacenR` like so:
 
-``` r
+```r
+install.packages("bacenR")
+```
+
+Or, you can install the *development* version of `bacenR` like so:
+
+```r
 # install.packages("pak") # if you don't have pak installed yet
 pak::pak("rtheodoro/bacenR")
 ```
