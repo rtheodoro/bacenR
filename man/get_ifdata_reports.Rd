@@ -12,28 +12,32 @@ get_ifdata_reports(year, month, type_institution, report, verbose = TRUE)
 \item{month}{Numeric or vector. month (ex: 1 to 12, or c(6, 12))}
 
 \item{type_institution}{Numeric. Type of Institution:
-1 = Conglomerados Prudenciais e Instituicoes Independentes
-2 = Conglomerados Financeiros e Instituicoes Independentes
-3 = Instituicoes Individuais
-4 = Instituicoes com Operacoes de Cambio}
+\itemize{
+\item 1 = Conglomerados Prudenciais e Instituicoes Independentes
+\item  2 = Conglomerados Financeiros e Instituicoes Independentes
+\item 3 = Instituicoes Individuais
+\item 4 = Instituicoes com Operacoes de Cambio
+}}
 
 \item{report}{Numeric. Report type:
-1 = Resumo
-2 = Ativo
-3 = Passivo
-4 = Demonstracao de Resultado
-5 = Informacoes de Capital
-6 = Segmentacao
-7 = Carteira de Credito Ativa - Por indexador
-8 = Carteira de Credito ativa - por nivel de risco da operacao
-9 = Carteira de Credito ativa - por regiao geografica
-10 = Carteira de Credito ativa - quantidade de clientes e de operacoes
-11 = Carteira de Credito ativa Pessoa Fisica - modalidade e prazo de vencimento
-12 = Carteira de Credito ativa Pessoa Juridica - por atividade economica (CNAE)
-13 = Carteira de Credito ativa Pessoa Juridica - modalidade e prazo de vencimento
-14 = Carteira de Credito ativa Pessoa Juridica - por porte do tomador
-15 = Movimentacao de Cambio no Trimestre
-16 = Carteira de Credito ativa - por carteiras de instrumentos financeiros}
+\itemize{
+\item 1 = Resumo
+\item 2 = Ativo
+\item 3 = Passivo
+\item 4 = Demonstracao de Resultado
+\item 5 = Informacoes de Capital
+\item 6 = Segmentacao
+\item 7 = Carteira de Credito Ativa - Por indexador
+\item 8 = Carteira de Credito ativa - por nivel de risco da operacao
+\item 9 = Carteira de Credito ativa - por regiao geografica
+\item 10 = Carteira de Credito ativa - quantidade de clientes e de operacoes
+\item 11 = Carteira de Credito ativa Pessoa Fisica - modalidade e prazo de vencimento
+\item 12 = Carteira de Credito ativa Pessoa Juridica - por atividade economica (CNAE)
+\item 13 = Carteira de Credito ativa Pessoa Juridica - modalidade e prazo de vencimento
+\item 14 = Carteira de Credito ativa Pessoa Juridica - por porte do tomador
+\item 15 = Movimentacao de Cambio no Trimestre
+\item  16 = Carteira de Credito ativa - por carteiras de instrumentos financeiros
+}}
 
 \item{verbose}{Logical. If TRUE, print progress messages (default: TRUE)}
 }

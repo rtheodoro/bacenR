@@ -2,6 +2,7 @@
 
 #' @description
 #'  `r lifecycle::badge("stable")`
+#'
 #' This function reads and processes [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 #' files that were previously
 #' downloaded using the `get_institutions()` function. It takes a directory path
@@ -18,8 +19,8 @@
 #' @return A list of data.frames, where each element corresponds to a processed
 #'   institution file. The names of the list elements typically correspond to
 #'   institution identifiers or file names.
-#' @examples
 #'
+#' @examples
 #'# First, download institution data
 #'  get_institutions(
 #'   institution = "COOPERATIVAS",
@@ -33,8 +34,6 @@
 #'   out_dir = tempdir(),
 #'   verbose = TRUE
 #' )
-#'
-#'
 #' @export
 tidy_institutions <- function(
   path_dir,

@@ -76,7 +76,6 @@ Invalid institution tokens cause an immediate error listing the invalid
 entries.
 }
 \examples{
-
 # Download balance sheets of credit unions for December of 2023
 get_balance_sheets(
   institution = "COOPERATIVAS",
@@ -98,12 +97,9 @@ get_balance_sheets(
   overwrite = FALSE
 )
 }
-
 }
 \references{
 Source Banco Central do Brasil (Bacen): \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
 Note:
 The values are not changed or processed in any way, they are downloaded as-is from the source.
-Check the function \code{treat_balance_sheets()} for tools to read and process
-Site: https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais
 }

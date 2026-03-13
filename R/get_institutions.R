@@ -2,13 +2,21 @@
 #'
 #' @description
 #'  `r lifecycle::badge("stable")`
+#'
 #' This function downloads [financial institutions data from the Brazilian Central Bank (Bacen)](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
 #' website for specified institution types and date ranges. The data is downloaded as ZIP files,
 #' extracted, and can be optionally cleaned up.
 #'
 #' @param institution Character vector. Type(s) of financial institutions to download.
-#'   Valid options are: "CONGLOMERADOS", "BANCOS", "COOPERATIVAS", "CONSORCIO", "SOCIEDADES".
-#'   Default is "COOPERATIVAS". Case-insensitive. Check the details on [Bacen's website](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento).
+#'   Valid options are:
+#' \itemize{
+#' \item "CONGLOMERADOS"
+#' \item "BANCOS"
+#' \item "COOPERATIVAS"
+#' \item "CONSORCIO"
+#' \item "SOCIEDADES"
+#' }
+#' Default is "COOPERATIVAS". Case-insensitive. Check the details on [Bacen's website](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento).
 #' @param start_date Character. Start date in "YYYYMM" format (e.g., "200709") or
 #'   a parsable date string (e.g., "2007-09-01"). Default is "200709".
 #' @param end_date Character. End date in "YYYYMM" format (e.g., "202409") or
@@ -44,7 +52,6 @@
 #' }
 #'
 #' @examples
-#'
 #' # Download cooperative credit unions data for 2023
 #' get_institutions(
 #'   institution = "COOPERATIVAS",

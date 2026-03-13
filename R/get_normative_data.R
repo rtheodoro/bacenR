@@ -20,12 +20,10 @@
 #'    - removes the decimal part of normative numbers.
 #' @return data.frame containing the records returned by the API and the post-processed columns.
 #' @examples
-#'
 #' ini_date <- "2025-01-01"
 #' end_date <- "2025-01-05"
 #' terms <- c("Cooperativas", "Cooperativa")
 #' normas <- get_normative_data(terms, ini_date, end_date)
-#'
 #' @export
 #'
 get_normative_data <- function(terms, ini_date, end_date) {

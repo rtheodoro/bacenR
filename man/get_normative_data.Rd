@@ -37,10 +37,8 @@ Data are downloaded from \url{https://www.bcb.gov.br/estabilidadefinanceira/busc
 }
 }
 \examples{
-
 ini_date <- "2025-01-01"
 end_date <- "2025-01-05"
 terms <- c("Cooperativas", "Cooperativa")
 normas <- get_normative_data(terms, ini_date, end_date)
-
 }

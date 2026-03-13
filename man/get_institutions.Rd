@@ -15,7 +15,14 @@ get_institutions(
 }
 \arguments{
 \item{institution}{Character vector. Type(s) of financial institutions to download.
-Valid options are: "CONGLOMERADOS", "BANCOS", "COOPERATIVAS", "CONSORCIO", "SOCIEDADES".
+Valid options are:
+\itemize{
+\item "CONGLOMERADOS"
+\item "BANCOS"
+\item "COOPERATIVAS"
+\item "CONSORCIO"
+\item "SOCIEDADES"
+}
 Default is "COOPERATIVAS". Case-insensitive. Check the details on \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{Bacen's website}.}
 
 \item{start_date}{Character. Start date in "YYYYMM" format (e.g., "200709") or
@@ -39,6 +46,7 @@ and extracting files to the specified directory).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
 This function downloads \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{financial institutions data from the Brazilian Central Bank (Bacen)}
 website for specified institution types and date ranges. The data is downloaded as ZIP files,
 extracted, and can be optionally cleaned up.
@@ -64,7 +72,6 @@ Institution type mappings:
 }
 }
 \examples{
-
 # Download cooperative credit unions data for 2023
 get_institutions(
   institution = "COOPERATIVAS",

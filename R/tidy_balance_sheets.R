@@ -65,7 +65,6 @@
 #'   [https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
 #'
 #' @examples
-#'
 #' # First, download balance sheets
 #' get_balance_sheets(
 #'   institution = "BANCOS",
@@ -93,7 +92,6 @@
 #'   save = TRUE
 #' )
 #'}
-#'
 #' @export
 
 tidy_balance_sheets <- function(

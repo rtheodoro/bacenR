@@ -62,5 +62,4 @@ normative_data <- get_normative_data(
 # Then, download the full texts for the retrieved normatives
 normative_txt <- get_normative_txt(normative_data)
 }
-
 }

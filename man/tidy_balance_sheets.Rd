@@ -83,7 +83,6 @@ in the balance sheets are not adjusted for inflation. See:
 \url{https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais}
 }
 \examples{
-
 # First, download balance sheets
 get_balance_sheets(
   institution = "BANCOS",
@@ -111,5 +110,4 @@ tidy_balance_sheets(
   save = TRUE
 )
 }
-
 }
