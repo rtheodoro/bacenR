@@ -1,3 +1,7 @@
+# bacenR 0.4.3
+
+* Fixed error handle when website is not available at `get_normative_data()`
+
 # bacenR 0.4.2
 
 * Function added:
