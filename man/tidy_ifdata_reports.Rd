@@ -28,6 +28,8 @@ Wide format (one row per institution with columns for each report item)
 }
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
 Transforms raw ifdata reports downloaded with \code{get_ifdata_reports()} into a clean, wide-format dataset suitable for
 analysis. This function handles data input from multiple sources (direct
 data.frame, CSV, or Parquet files), removes unnecessary columns, renames
@@ -60,11 +62,12 @@ tidy_data <- tidy_ifdata_reports(data = "reports.csv")
 # Example 2: Tidy data from a Parquet file
 tidy_data <- tidy_ifdata_reports(data = "reports.parquet")
 }
-
+\donttest{
 # Example 3: Tidy an existing data.frame
-raw_data <- get_ifdata_reports(2024, 12, 2, 4)
+raw_data <- get_ifdata_reports(year = 2024, month = 12, 
+                                type_institution = 2, report = 4)
 tidy_data <- tidy_ifdata_reports(data = raw_data)
-
+}
 
 }
 \seealso{

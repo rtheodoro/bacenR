@@ -8,6 +8,9 @@ globalVariables(
 
 #' Tidy ifdata Reports Data
 #'
+#' @description
+#'  `r lifecycle::badge("stable")`
+#' 
 #' Transforms raw ifdata reports downloaded with `get_ifdata_reports()` into a clean, wide-format dataset suitable for
 #' analysis. This function handles data input from multiple sources (direct
 #' data.frame, CSV, or Parquet files), removes unnecessary columns, renames
@@ -59,12 +62,13 @@ globalVariables(
 #'
 #' # Example 2: Tidy data from a Parquet file
 #' tidy_data <- tidy_ifdata_reports(data = "reports.parquet")
-#' }
-#' 
+#'}
+#' \donttest{
 #' # Example 3: Tidy an existing data.frame
-#' raw_data <- get_ifdata_reports(2024, 12, 2, 4)
+#' raw_data <- get_ifdata_reports(year = 2024, month = 12, 
+#'                                 type_institution = 2, report = 4)
 #' tidy_data <- tidy_ifdata_reports(data = raw_data)
-#' 
+#' }
 #'
 #' @seealso
 #' \code{\link{get_ifdata_reports}} for downloading raw data
@@ -75,6 +79,8 @@ globalVariables(
 #' @importFrom utils read.csv
 #' @importFrom arrow read_parquet
 #' @keywords internal
+#' @export
+#'
 tidy_ifdata_reports <- function(data) {
   if (inherits(data, "data.frame")) {
     df <- data
