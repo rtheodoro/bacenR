@@ -1,3 +1,8 @@
+# bacenR 0.4.2
+
+* Function added:
+    - `tidy_ifdata_reports()`
+
 # bacenR 0.3.2
 
 * Vignettes texts improved

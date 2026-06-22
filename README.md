@@ -105,6 +105,11 @@ cc_ativa_pj_modalidade_20142024 <- bacenR::get_ifdata_reports(
   type_institution = 2
 )
 
+# Tidy data from IFdata Reports
+tidy_cc_ativa_pj_modalidade_20142024 <- bacenR::tidy_ifdata_reports(
+  cc_ativa_pj_modalidade_20142024
+)
+
 # Get data from IFdata Registry (Cadastro)
 data <- get_ifdata_registry(
   year = c(2023, 2024), 

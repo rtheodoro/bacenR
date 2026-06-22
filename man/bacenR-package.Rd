@@ -6,6 +6,8 @@
 \alias{bacenR-package}
 \title{bacenR: Access Data from Brazilian Central Bank: IFdata, Active Institutions, Balance Sheets and Normative Acts}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provides functions to query, retrieve, and tidy economic and financial data from Brazilian Central Bank web services for use in R analyses and workflows. Active institutions information, balance sheets and normative acts.
 }
 \seealso{
@@ -18,6 +20,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Ricardo Theodoro \email{rtheodoro@usp.br} (\href{https://orcid.org/0000-0001-6741-5153}{ORCID})
+
+Authors:
+\itemize{
+  \item Ricardo Theodoro \email{rtheodoro@usp.br} (\href{https://orcid.org/0000-0001-6741-5153}{ORCID})
+}
 
 }
 \keyword{internal}

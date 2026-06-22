@@ -111,6 +111,15 @@ cc_ativa_pj_modalidade_20142024 <- bacenR::get_ifdata_reports(
 )
 ```
 
+- `tidy_ifdata_reports()`: tidy the data.frames downloaded with `get_ifdata_reports()`.
+
+```R
+tidy_cc_ativa_pj_modalidade_20142024 <- bacenR::tidy_ifdata_reports(
+  cc_ativa_pj_modalidade_20142024
+)
+``` 
+
+
 - `get_ifdata_registry()`: download [IFdata Registry data](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao) for specified years and months. 
 
 ```R
