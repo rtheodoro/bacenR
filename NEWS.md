@@ -1,15 +1,13 @@
 # bacenR 0.4.3
 
+* Vignettes texts improved
+
 * Fixed error handle when website is not available at `get_normative_data()`
 
-# bacenR 0.4.2
+# bacenR 0.4.0
 
 * Function added:
     - `tidy_ifdata_reports()`
-
-# bacenR 0.3.2
-
-* Vignettes texts improved
 
 # bacenR 0.3.1
 
