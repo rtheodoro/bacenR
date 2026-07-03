@@ -1,6 +1,6 @@
 Package: bacenR
 Title: Access Data from Brazilian Central Bank: IFdata, Active Institutions, Balance Sheets and Normative Acts 
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6741-5153"))
@@ -13,7 +13,6 @@ BugReports: https://github.com/rtheodoro/bacenR/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
-    arrow,
     data.table,
     dplyr,
     fs,

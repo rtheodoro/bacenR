@@ -1,3 +1,7 @@
+# bacenR 0.4.4
+
+* `tidy_ifdata_reports()`: removed function to import data directly from .csv and .parquet. This will improve the speed to install the package.
+
 # bacenR 0.4.3
 
 * Vignettes texts improved

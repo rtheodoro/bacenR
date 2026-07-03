@@ -7,9 +7,8 @@
 tidy_ifdata_reports(data)
 }
 \arguments{
-\item{data}{Optional. A data.frame/tibble or file path (CSV or Parquet).
+\item{data}{Optional. A data.frame/tibble.
 The data must be downloaded via \code{\link{get_ifdata_reports}}.
-If a character string, must be a valid path to a .csv or .parquet file.
 If a data.frame, it should contain the raw ifdata reports structure with
 columns: \code{cod_inst}, \code{grupo}, \code{conta}, \code{numero_relatorio},
 \code{nome_relatorio}, \code{tipo_instituicao}, \code{descricao_coluna},
@@ -32,7 +31,7 @@ Wide format (one row per institution with columns for each report item)
 
 Transforms raw ifdata reports downloaded with \code{get_ifdata_reports()} into a clean, wide-format dataset suitable for
 analysis. This function handles data input from multiple sources (direct
-data.frame, CSV, or Parquet files), removes unnecessary columns, renames
+data.frame), removes unnecessary columns, renames
 identifiers, and pivots the data from long to wide format.
 }
 \details{
@@ -41,7 +40,6 @@ The function performs the following operations in sequence:
 \item \strong{Data Input Handling}: Accepts data in two forms:
 \itemize{
 \item Direct tibble/data.frame (preferred for in-memory operations)
-\item File path to CSV or Parquet (for disk-based data)
 }
 \item \strong{Column Removal}: Drops metadata columns that are redundant after
 pivoting (grupo, conta, numero_relatorio, etc.)
@@ -55,15 +53,8 @@ consistent, R-friendly column naming
 }
 }
 \examples{
-\dontrun{
-# Example 1: Tidy data from a CSV file
-tidy_data <- tidy_ifdata_reports(data = "reports.csv")
-
-# Example 2: Tidy data from a Parquet file
-tidy_data <- tidy_ifdata_reports(data = "reports.parquet")
-}
 \donttest{
-# Example 3: Tidy an existing data.frame
+# Tidy an existing data.frame
 raw_data <- get_ifdata_reports(year = 2024, month = 12, 
                                 type_institution = 2, report = 4)
 tidy_data <- tidy_ifdata_reports(data = raw_data)

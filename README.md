@@ -160,7 +160,7 @@ citation("bacenR")
   title = "bacenR: Access Data from Brazilian Central Bank - IFdata, Active Institutions, Balance Sheets and Normative Acts",
   author = "Ricardo Theodoro",
   year = "2026",
-  version = "v0.4.3",
+  version = "v0.4.4",
   doi = "10.32614/CRAN.package.bacenR",
   url = "https://github.com/rtheodoro/bacenR"
 }
