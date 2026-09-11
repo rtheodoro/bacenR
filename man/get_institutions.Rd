@@ -6,8 +6,8 @@
 \usage{
 get_institutions(
   institution,
-  start_date,
-  end_date,
+  years,
+  months,
   out_dir,
   cleanup_zip = TRUE,
   verbose = TRUE
@@ -25,11 +25,10 @@ Valid options are:
 }
 Default is "COOPERATIVAS". Case-insensitive. Check the details on \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{Bacen's website}.}
 
-\item{start_date}{Character. Start date in "YYYYMM" format (e.g., "200709") or
-a parsable date string (e.g., "2007-09-01"). Default is "200709".}
+\item{years}{Numeric vector. Year(s) to download, e.g. \code{c(2020:2023)} or \code{c(2020, 2022)}.}
 
-\item{end_date}{Character. End date in "YYYYMM" format (e.g., "202409") or
-a parsable date string (e.g., "2024-09-01"). Default is "202409".}
+\item{months}{Numeric vector. Month(s) to download, values between 1 and 12,
+e.g. \code{c(1:12)} or \code{c(6, 12)}.}
 
 \item{out_dir}{Character. Directory path where downloaded files will be saved.
 Default is "data". The directory will be created if it doesn't exist.}
@@ -55,7 +54,7 @@ extracted, and can be optionally cleaned up.
 The function performs the following steps:
 \itemize{
 \item Validates institution types against known valid options
-\item Generates a sequence of months between start_date and end_date
+\item Generates every combination of \code{years} x \code{months} as year-month strings
 \item Downloads ZIP files for each institution and month from BCB website
 \item Extracts the downloaded ZIP files to the output directory
 \item Optionally removes ZIP files after extraction
@@ -67,7 +66,7 @@ Institution type mappings:
 \item CONGLOMERADOS: Conglomerados
 \item BANCOS: Bancos comerciais, múltiplos e caixa
 \item COOPERATIVAS: Cooperativas de crédito
-\item CONSORCIO: Consórcios administrativos
+\item ADMCONSORCIO: Consórcios administrativos
 \item SOCIEDADES: Bancos de investimentos, desenvolvimento e sociedades corretoras
 }
 }
@@ -75,24 +74,24 @@ Institution type mappings:
 # Download cooperative credit unions data for 2023
 get_institutions(
   institution = "COOPERATIVAS",
-  start_date = "202311",
-  end_date = "202312",
+  years = 2023,
+  months = 11:12,
   out_dir = tempdir()
 )
 \donttest{
 # Download multiple institution types
 get_institutions(
   institution = c("BANCOS", "COOPERATIVAS"),
-  start_date = "202201",
-  end_date = "202212",
+  years = 2022,
+  months = 1:12,
   out_dir = tempdir()
 )
 
 # Skip downloading, just use existing files
 get_institutions(
   institution = "BANCOS",
-  start_date = "202201",
-  end_date = "202212",
+  years = 2022,
+  months = 1:12,
   out_dir = tempdir(),
   verbose = FALSE
 )

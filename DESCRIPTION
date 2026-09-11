@@ -1,6 +1,6 @@
 Package: bacenR
 Title: Access Data from Brazilian Central Bank: IFdata, Active Institutions, Balance Sheets and Normative Acts 
-Version: 0.4.4
+Version: 0.5.0
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6741-5153"))
@@ -41,4 +41,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 SystemRequirements: qpdf
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.0
