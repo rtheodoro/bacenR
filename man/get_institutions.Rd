@@ -20,7 +20,7 @@ Valid options are:
 \item "CONGLOMERADOS"
 \item "BANCOS"
 \item "COOPERATIVAS"
-\item "CONSORCIO"
+\item "ADMCONSORCIO"
 \item "SOCIEDADES"
 }
 Default is "COOPERATIVAS". Case-insensitive. Check the details on \href{https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento}{Bacen's website}.}
@@ -60,6 +60,11 @@ The function performs the following steps:
 \item Optionally removes ZIP files after extraction
 \item Displays progress information if verbose = TRUE
 }
+
+For \code{CONGLOMERADOS}, the file suffix on BCB's server changed from the plural
+"CONGLOMERADOS" to the singular "CONGLOMERADO" starting in months after 2022
+(e.g. \verb{.../202208CONGLOMERADOS.zip} vs. \verb{.../202607CONGLOMERADO.zip}). This is
+handled internally and is transparent to the caller.
 
 Institution type mappings:
 \itemize{

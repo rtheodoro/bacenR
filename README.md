@@ -83,13 +83,14 @@ tidy_balance_sheets(
 
 # Download list of financial institutions regulated by Bacen
 get_institutions(
-  institution = c("COOPERATIVAS", "BANCOS"),
-  start_date = "202312",
-  end_date = "202405",
-  out_dir = "data_raw",
+  institution = c("CONGLOMERADOS", "COOPERATIVAS"),
+  years = 2011:2025,
+  months = 12,
+  out_dir = "data",
   cleanup_zip = TRUE,
   verbose = TRUE
 )
+
 
 # Tidy the institutions data
 tidy_institutions(

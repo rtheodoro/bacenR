@@ -1,6 +1,6 @@
 # bacenR 0.5.0
 
-* `get_institutions()`: fixed ADMCONSORCIO bug and changed params, now is possible to select years and months individually.
+* `get_institutions()`: fixed ADMCONSORCIO and CONGLOMERADO bugs, and changed params. Now is possible to select years and months individually.
 
 # bacenR 0.4.4
 

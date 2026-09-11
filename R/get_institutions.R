@@ -13,7 +13,7 @@
 #' \item "CONGLOMERADOS"
 #' \item "BANCOS"
 #' \item "COOPERATIVAS"
-#' \item "CONSORCIO"
+#' \item "ADMCONSORCIO"
 #' \item "SOCIEDADES"
 #' }
 #' Default is "COOPERATIVAS". Case-insensitive. Check the details on [Bacen's website](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento).
@@ -40,6 +40,11 @@
 #'   \item Optionally removes ZIP files after extraction
 #'   \item Displays progress information if verbose = TRUE
 #' }
+#'
+#' For `CONGLOMERADOS`, the file suffix on BCB's server changed from the plural
+#' "CONGLOMERADOS" to the singular "CONGLOMERADO" starting in months after 2022
+#' (e.g. `.../202208CONGLOMERADOS.zip` vs. `.../202607CONGLOMERADO.zip`). This is
+#' handled internally and is transparent to the caller.
 #'
 #' Institution type mappings:
 #' \itemize{
@@ -125,6 +130,17 @@ get_institutions <- function(
     dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   }
 
+  # helper: resolve the file-name label for an institution/year-month,
+  # accounting for the CONGLOMERADOS -> CONGLOMERADO rename after 2022
+  resolve_inst_label <- function(inst, year_month) {
+    ano <- as.integer(substr(year_month, 1, 4))
+    if (inst == "CONGLOMERADOS" && !is.na(ano) && ano > 2022) {
+      "CONGLOMERADO"
+    } else {
+      inst
+    }
+  }
+
   # helper: download & unzip one month for one institution directly into out_dir
   get_files_for_inst <- function(inst, year_month) {
     prefix <- type_institution[[inst]]
@@ -132,16 +148,18 @@ get_institutions <- function(
       return(FALSE)
     }
 
+    inst_label <- resolve_inst_label(inst, year_month)
+
     url <- paste0(
       "https://www.bcb.gov.br/content/estabilidadefinanceira/relacao_instituicoes_funcionamento/",
       prefix,
       "/",
       year_month,
-      inst,
+      inst_label,
       ".zip"
     )
 
-    zip_path <- file.path(out_dir, paste0(inst, "_", year_month, ".zip"))
+    zip_path <- file.path(out_dir, paste0(inst_label, "_", year_month, ".zip"))
 
     resp <- tryCatch(
       {

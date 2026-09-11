@@ -22,10 +22,11 @@
 #'
 #' @examples
 #'# First, download institution data
-#'  get_institutions(
+#'# Download cooperative credit unions data for 2023
+#' get_institutions(
 #'   institution = "COOPERATIVAS",
-#'   start_date = "202311",
-#'   end_date = "202312",
+#'   years = 2023,
+#'   months = 11:12,
 #'   out_dir = tempdir()
 #' )
 #' # Process institution files from a directory

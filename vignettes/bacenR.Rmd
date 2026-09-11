@@ -73,10 +73,12 @@ normative_txt <- get_normative_txt(normative_data)
 ```R
 # Download multiple institution types
 get_institutions(
-  institution = c("BANCOS", "COOPERATIVAS"),
-  start_date = "202201",
-  end_date = "202212",
-  out_dir = tempdir()
+  institution = c("CONGLOMERADOS"),
+  years = 2011:2025,
+  months = 1:12,
+  out_dir = tempdir(),
+  cleanup_zip = TRUE,
+  verbose = TRUE
 )
 ```
 
@@ -84,10 +86,10 @@ get_institutions(
 
 ```R
 # First, download institution data
- get_institutions(
-  institution = "COOPERATIVAS",
-  start_date = "202311",
-  end_date = "202312",
+get_institutions(
+   institution = "COOPERATIVAS",
+   years = 2023,
+   months = 11:12,
   out_dir = tempdir()
 )
 
