@@ -76,6 +76,7 @@ Invalid institution tokens cause an immediate error listing the invalid
 entries.
 }
 \examples{
+\donttest{
 # Download balance sheets of credit unions for December of 2023
 get_balance_sheets(
   institution = "COOPERATIVAS",
@@ -86,8 +87,8 @@ get_balance_sheets(
   overwrite = FALSE
 )
 
-\donttest{
-# Download balance sheets of credit unions for December of 2023
+# Download balance sheets of banks and credit unions for June and December
+# of 2022 and 2023
 get_balance_sheets(
   institution = c("BANCOS", "COOPERATIVAS"),
   months = c(6, 12),

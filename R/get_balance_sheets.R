@@ -54,6 +54,7 @@
 #'     a short note when a local file existed and was not overwritten.
 #'
 #' @examples
+#' \donttest{
 #' # Download balance sheets of credit unions for December of 2023
 #' get_balance_sheets(
 #'   institution = "COOPERATIVAS",
@@ -64,8 +65,8 @@
 #'   overwrite = FALSE
 #' )
 #'
-#' \donttest{
-#' # Download balance sheets of credit unions for December of 2023
+#' # Download balance sheets of banks and credit unions for June and December
+#' # of 2022 and 2023
 #' get_balance_sheets(
 #'   institution = c("BANCOS", "COOPERATIVAS"),
 #'   months = c(6, 12),
