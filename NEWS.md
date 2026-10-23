@@ -1,3 +1,18 @@
+# bacenR 0.5.1
+
+* `get_institutions()`: the CONGLOMERADO file name (used by Bacen after 2022) is now chosen per downloaded year instead of from the whole `years` vector.
+
+* `tidy_institutions()`: fixed silent data loss and harmonized columns across years.
+    - Reads the correct sheet when a file has more than one (e.g. `201212COOPERATIVAS.xls` had an "SCM" sheet first, so only ~40 of ~1,250 cooperatives were imported; 2011 BANCOS/ADMCONSORCIO have two position sheets).
+    - Recognizes the CNPJ column in CONGLOMERADOS files ("CNPJ PARTIC." / "CNPJ PARTICIPANTE"), which previously caused an error.
+    - Keeps rows with a missing CNPJ (e.g. conglomerate participants without CNPJ) instead of dropping them.
+    - Removes the "FONTE:"/"Fonte:" footer regardless of case and no longer warns about it.
+    - CONGLOMERADO and CONGLOMERADOS files are combined into a single CONGLOMERADOS table.
+    - Only raw Bacen files (`YYYYMM<INST>.ext`) are read, so the function no longer re-imports its own CSV output when `path_dir` and `out_dir` are the same.
+    - Column names that changed over the years are mapped to the most recent header (see `?tidy_institutions`). E-mail and website columns are assigned by content, since Bacen's headers for them are inconsistent.
+    - CONGLOMERADOS `data_inicio` is now a `Date` in every year, including files where Excel had swapped day and month (201912, 202112).
+    - Empty unnamed columns are dropped.
+
 # bacenR 0.5.0
 
 * `get_institutions()`: fixed ADMCONSORCIO and CONGLOMERADO bugs, and changed params. Now is possible to select years and months individually.

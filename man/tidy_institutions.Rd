@@ -30,6 +30,27 @@ downloaded using the \code{get_institutions()} function. It takes a directory pa
 containing the institution files, processes them, and optionally saves the
 output to a specified directory.
 }
+\details{
+Bacen changes column headers over the years. After \code{janitor::clean_names()},
+columns are renamed to the most recent header so each institution type has
+a single column per field:
+\itemize{
+\item All types: \code{nome}, \code{nomeinstituicao} -> \code{nome_instituicao};
+\code{fone} -> \code{telefone}; \code{cidade} -> \code{municipio}; \code{segmentos} -> \code{segmento}.
+\item E-mail and website columns (\code{email}, \code{e_mail}, \code{endereco_eletronico},
+\code{sitio_na_internet}, \code{end_pagina_internet}) are assigned to \code{e_mail} or
+\code{sitio_na_internet} by their content (share of values containing "@"),
+because Bacen's headers for them are inconsistent and sometimes swapped.
+\item COOPERATIVAS: \code{classe_cooper} -> \code{classe}.
+\item CONGLOMERADOS: \code{nome_conglomerado} -> \code{nome_do_conglomerado};
+\code{classe} -> \code{classe_do_conglomerado}; \code{nome_instituicao_participante},
+\code{nome_participante} -> \code{nome_do_participante}; \code{dt_inicio} ->
+\code{data_inicio} (converted to \code{Date}); \code{estado} -> \code{uf}.
+}
+Columns that are not equivalent across years (e.g. COOPERATIVAS
+\code{tipo_cooperativa} until 2015 and \code{criterio_de_associacao} from 2016) are
+kept separate.
+}
 \examples{
 # First, download institution data
 # Download cooperative credit unions data for 2023
