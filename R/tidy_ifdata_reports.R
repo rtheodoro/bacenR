@@ -1,8 +1,14 @@
 globalVariables(
   c(
-    "grupo", "conta", "numero_relatorio", "nome_relatorio",
-    "tipo_instituicao", "descricao_coluna", "cod_inst",
-    "nome_coluna", "saldo"
+    "grupo",
+    "conta",
+    "numero_relatorio",
+    "nome_relatorio",
+    "tipo_instituicao",
+    "descricao_coluna",
+    "cod_inst",
+    "nome_coluna",
+    "saldo"
   )
 )
 
@@ -10,7 +16,7 @@ globalVariables(
 #'
 #' @description
 #'  `r lifecycle::badge("stable")`
-#' 
+#'
 #' Transforms raw ifdata reports downloaded with `get_ifdata_reports()` into a clean, wide-format dataset suitable for
 #' analysis. This function handles data input from multiple sources (direct
 #' data.frame), removes unnecessary columns, renames
@@ -23,7 +29,9 @@ globalVariables(
 #'   \code{nome_relatorio}, \code{tipo_instituicao}, \code{descricao_coluna},
 #'   \code{nome_coluna}, and \code{saldo}.
 #'
-#' @return A tibble with the following transformations applied:
+#' @return If `data` is `NULL` or has no rows (e.g. the IFdata API was
+#'   unavailable), an empty tibble with an informative message. Otherwise, a
+#'   tibble with the following transformations applied:
 #'   \itemize{
 #'     \item Columns removed: grupo, conta, numero_relatorio, nome_relatorio,
 #'           tipo_instituicao, descricao_coluna
@@ -56,7 +64,7 @@ globalVariables(
 #' @examples
 #' \donttest{
 #' # Tidy an existing data.frame
-#' raw_data <- get_ifdata_reports(year = 2024, month = 12, 
+#' raw_data <- get_ifdata_reports(year = 2024, month = 12,
 #'                                 type_institution = 2, report = 4)
 #' tidy_data <- tidy_ifdata_reports(data = raw_data)
 #' }
@@ -71,6 +79,17 @@ globalVariables(
 #' @export
 #'
 tidy_ifdata_reports <- function(data) {
+  # get_ifdata_reports() returns an empty tibble when every request fails
+  # (e.g. the IFdata API is down), so fail gracefully instead of erroring.
+  if (is.null(data) || (inherits(data, "data.frame") && nrow(data) == 0)) {
+    message(
+      "No data to tidy: `data` is empty. If it came from get_ifdata_reports(), ",
+      "the Bacen IFdata API may be unavailable or the requested period may not ",
+      "exist. Try again later."
+    )
+    return(tibble::tibble())
+  }
+
   if (inherits(data, "data.frame")) {
     df <- data
   } else if (is.character(data) && length(data) == 1) {
@@ -84,11 +103,26 @@ tidy_ifdata_reports <- function(data) {
     stop("`data` must be a data.frame/tibble.")
   }
 
+  required <- c("cod_inst", "nome_coluna", "saldo")
+  missing_cols <- setdiff(required, names(df))
+  if (length(missing_cols) > 0) {
+    stop(
+      "`data` is missing required column(s): ",
+      paste(missing_cols, collapse = ", "),
+      ". Use data downloaded with get_ifdata_reports().",
+      call. = FALSE
+    )
+  }
+
   df |>
     dplyr::select(
       -dplyr::any_of(c(
-        "grupo", "conta", "numero_relatorio", "nome_relatorio",
-        "tipo_instituicao", "descricao_coluna"
+        "grupo",
+        "conta",
+        "numero_relatorio",
+        "nome_relatorio",
+        "tipo_instituicao",
+        "descricao_coluna"
       ))
     ) |>
     dplyr::rename(cnpj = cod_inst) |>
@@ -98,4 +132,3 @@ tidy_ifdata_reports <- function(data) {
     ) |>
     janitor::clean_names()
 }
-

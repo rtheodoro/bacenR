@@ -15,7 +15,9 @@ columns: \code{cod_inst}, \code{grupo}, \code{conta}, \code{numero_relatorio},
 \code{nome_coluna}, and \code{saldo}.}
 }
 \value{
-A tibble with the following transformations applied:
+If \code{data} is \code{NULL} or has no rows (e.g. the IFdata API was
+unavailable), an empty tibble with an informative message. Otherwise, a
+tibble with the following transformations applied:
 \itemize{
 \item Columns removed: grupo, conta, numero_relatorio, nome_relatorio,
 tipo_instituicao, descricao_coluna
@@ -55,7 +57,7 @@ consistent, R-friendly column naming
 \examples{
 \donttest{
 # Tidy an existing data.frame
-raw_data <- get_ifdata_reports(year = 2024, month = 12, 
+raw_data <- get_ifdata_reports(year = 2024, month = 12,
                                 type_institution = 2, report = 4)
 tidy_data <- tidy_ifdata_reports(data = raw_data)
 }

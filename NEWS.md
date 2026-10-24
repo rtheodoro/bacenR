@@ -1,8 +1,14 @@
+# bacenR 0.5.2
+
+* `get_institutions()`:
+    - Stops with a clear error when `out_dir` is not writable; previously write errors were silently ignored and nothing was saved.
+    - Reports how many files were downloaded and which year-months were not available.
+
+* `tidy_ifdata_reports()`: fails gracefully when the input is empty (e.g. when the IFdata API is unavailable and `get_ifdata_reports()` returns no rows), returning an empty tibble with an informative message. Input missing required columns now gives a clear error.
+
 # bacenR 0.5.1
 
 * `get_institutions()`: the CONGLOMERADO file name (used by Bacen after 2022) is now chosen per downloaded year instead of from the whole `years` vector.
-    - Stops with a clear error when `out_dir` is not writable; previously write errors were silently ignored and nothing was saved.
-    - Reports how many files were downloaded and which year-months were not available.
 
 * `tidy_institutions()`: fixed silent data loss and harmonized columns across years.
     - Reads the correct sheet when a file has more than one (e.g. `201212COOPERATIVAS.xls` had an "SCM" sheet first, so only ~40 of ~1,250 cooperatives were imported; 2011 BANCOS/ADMCONSORCIO have two position sheets).
