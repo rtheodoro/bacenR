@@ -129,6 +129,15 @@ get_institutions <- function(
   if (!dir.exists(out_dir)) {
     dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   }
+  # Fail early: write errors inside the download loop would otherwise be silent
+  if (!dir.exists(out_dir) || file.access(out_dir, mode = 2) != 0) {
+    stop(
+      "Cannot write to out_dir: ",
+      normalizePath(out_dir, mustWork = FALSE),
+      ". Check the path and its permissions.",
+      call. = FALSE
+    )
+  }
 
   # helper: resolve the file-name label for an institution/year-month,
   # accounting for the CONGLOMERADOS -> CONGLOMERADO rename after 2022
@@ -231,18 +240,37 @@ get_institutions <- function(
     if (verbose) {
       pb <- utils::txtProgressBar(min = 0, max = total, style = 3)
     }
-    purrr::iwalk(datas, function(ym, i) {
+    ok <- purrr::imap_lgl(datas, function(ym, i) {
       if (verbose) {
         message(glue::glue("[{i}/{total}] {inst} {ym}"))
       }
-      try(get_files_for_inst(inst, ym), silent = TRUE)
+      res <- tryCatch(
+        isTRUE(get_files_for_inst(inst, ym)),
+        error = function(e) {
+          if (verbose) {
+            warning(
+              sprintf("Failed for %s %s: %s", inst, ym, conditionMessage(e)),
+              call. = FALSE
+            )
+          }
+          FALSE
+        }
+      )
       if (!is.null(pb)) {
         utils::setTxtProgressBar(pb, i)
       }
+      res
     })
     if (!is.null(pb)) {
       close(pb)
     }
-    if (verbose) message(glue::glue("Downloads attempted for {inst}"))
+    if (verbose) {
+      message(glue::glue("{sum(ok)}/{total} files downloaded for {inst}"))
+      if (any(!ok)) {
+        message("Not available or failed: ", paste(datas[!ok], collapse = ", "))
+      }
+    }
   })
+
+  invisible(NULL)
 }
