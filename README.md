@@ -13,7 +13,7 @@ The goal of `bacenR` is to provide R functions to download and work with data fr
   -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
   -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
   -  [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
-  -  [List of bank branches (agências)](https://www.bcb.gov.br/fis/info/agencias.asp)
+  -  [Lists of branches, service posts and electronic posts](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
   -  [ESTBAN: banking statistics by municipality](https://www.bcb.gov.br/estatisticas/estatisticabancariamunicipios)
   - [Ifdata resources](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos) / [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html)
 
@@ -79,9 +79,9 @@ get_balance_sheets(
 get_estban(years = 2020:2024, months = 12, out_dir = "data_raw/estban")
 estban <- tidy_estban("data_raw/estban")
 
-# Download and read the lists of bank branches (since 09/2007)
-get_bank_branches(years = 2020:2024, months = 12, out_dir = "data_raw/agencias")
-branches <- tidy_bank_branches("data_raw/agencias")
+# Download and read the lists of branches and service posts (since 09/2007)
+get_branches(type = c("AGENCIAS", "POSTOS", "PAE"), years = 2020:2023, months = 12, out_dir = "data_raw/dependencias")
+branches <- tidy_branches("data_raw/dependencias")
 
 # Unified treatment of downloaded financial statements
 tidy_balance_sheets(
