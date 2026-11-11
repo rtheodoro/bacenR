@@ -1,12 +1,13 @@
 Package: bacenR
 Title: Access Data from Brazilian Central Bank: IFdata, Active Institutions, Balance Sheets and Normative Acts 
-Version: 0.5.2
+Version: 0.6.0
 Authors@R: 
     person("Ricardo", "Theodoro", , "rtheodoro@usp.br", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6741-5153"))
 Description: Provides functions to query, retrieve, and tidy economic and
     financial data from Brazilian Central Bank web services for use in R
-    analyses and workflows. Active institutions information, balance sheets and normative acts.
+    analyses and workflows. Active institutions information, bank branches,
+    balance sheets, banking statistics by municipality (ESTBAN) and normative acts.
 License: GPL (>= 3)
 URL: https://github.com/rtheodoro/bacenR
 BugReports: https://github.com/rtheodoro/bacenR/issues
@@ -34,7 +35,8 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
@@ -42,3 +44,4 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 SystemRequirements: qpdf
 Config/roxygen2/version: 8.1.0
+RoxygenNote: 7.3.1
