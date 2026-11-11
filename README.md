@@ -13,6 +13,8 @@ The goal of `bacenR` is to provide R functions to download and work with data fr
   -   [Normative legislation](https://www.bcb.gov.br/estabilidadefinanceira/buscanormas)
   -   [Financial statements of financial institutions](https://www.bcb.gov.br/estabilidadefinanceira/balancetesbalancospatrimoniais)
   -  [List of financial institutions regulated by Bacen in activity](https://www.bcb.gov.br/estabilidadefinanceira/relacao_instituicoes_funcionamento)
+  -  [List of bank branches (agências)](https://www.bcb.gov.br/fis/info/agencias.asp)
+  -  [ESTBAN: banking statistics by municipality](https://www.bcb.gov.br/estatisticas/estatisticabancariamunicipios)
   - [Ifdata resources](https://olinda.bcb.gov.br/olinda/servico/IFDATA/versao/v1/aplicacao#!/recursos) / [IFdata](https://www3.bcb.gov.br/ifdata/index2024.html)
 
 
@@ -72,6 +74,14 @@ get_balance_sheets(
    out_dir = "data_raw",
    overwrite = FALSE
 )
+
+# Download and read the ESTBAN files (branches and balances by municipality)
+get_estban(years = 2020:2024, months = 12, out_dir = "data_raw/estban")
+estban <- tidy_estban("data_raw/estban")
+
+# Download and read the lists of bank branches (since 09/2007)
+get_bank_branches(years = 2020:2024, months = 12, out_dir = "data_raw/agencias")
+branches <- tidy_bank_branches("data_raw/agencias")
 
 # Unified treatment of downloaded financial statements
 tidy_balance_sheets(

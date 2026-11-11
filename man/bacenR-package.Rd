@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides functions to query, retrieve, and tidy economic and financial data from Brazilian Central Bank web services for use in R analyses and workflows. Active institutions information, balance sheets and normative acts.
+Provides functions to query, retrieve, and tidy economic and financial data from Brazilian Central Bank web services for use in R analyses and workflows. Active institutions information, bank branches, balance sheets, banking statistics by municipality (ESTBAN) and normative acts.
 }
 \seealso{
 Useful links:
