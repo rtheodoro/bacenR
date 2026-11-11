@@ -2,7 +2,7 @@
 
 * New `get_estban()` and `tidy_estban()`: download and read the monthly ESTBAN files (banking statistics by municipality and institution: number of branches and COSIF account balances of commercial and multiple banks and Caixa).
 
-* New `get_bank_branches()` and `tidy_bank_branches()`: download and read the monthly lists of branches (agências) of institutions supervised by Bacen, available since September 2007, with the full 14-digit CNPJ, address, municipality and opening date. All documents of a month and all sheets of each file are read; branches abroad are dropped.
+* New `get_branches()` and `tidy_branches()`: download and read the monthly lists of branches (agências), service posts (postos de atendimento, including cooperative posts since July 2016), electronic service posts (PAE) and branches of consortium administrators, with the full 14-digit CNPJ, address, municipality and opening date. From 2010 onwards the list of branches does not include Banco do Brasil and Caixa; ESTBAN covers them.
 
 # bacenR 0.5.2
 
