@@ -37,9 +37,9 @@
 #' posts (PAC), gold purchase posts (PCO) and temporary exchange posts (PCT)
 #' and no longer includes electronic posts (PAE), which have their own list.
 #'
-#' From 2010 onwards, the list of branches does not include Banco do Brasil
-#' and Caixa Econômica Federal; their branch counts by municipality are
-#' available in ESTBAN ([get_estban()]).
+#' The branch totals match the branch counts reported in ESTBAN
+#' ([get_estban()]) for banks. Service posts and electronic posts have no CNPJ
+#' of their own; from 2020 they carry an installation id (`id_instalacao`).
 #' @examples
 #' \donttest{
 #' get_branches(type = "AGENCIAS", years = 2023, months = 12, out_dir = tempdir())
@@ -198,7 +198,10 @@ tidy_branches <- function(path_dir, type = NULL, out_dir = NULL, verbose = TRUE)
 
   first <- c("type", "year_month", "cnpj", "cnpj_basico", "cnpj_ordem", "cnpj_dv")
   deps <- deps[c(first, setdiff(names(deps), first))]
-  key <- ifelse(is.na(deps$cnpj), paste0("id", deps$id_instalacao %||% seq_len(nrow(deps))), deps$cnpj)
+  # Posts without id_instalacao (before 2020) are kept row by row: identical rows can be
+  # distinct terminals at the same address
+  id <- if ("id_instalacao" %in% names(deps)) deps$id_instalacao else rep(NA_character_, nrow(deps))
+  key <- ifelse(!is.na(deps$cnpj), deps$cnpj, ifelse(!is.na(id), paste0("id", id), paste0("row", seq_len(nrow(deps)))))
   deps <- deps[!duplicated(data.frame(deps$type, deps$year_month, key)), , drop = FALSE]
   deps <- tibble::as_tibble(deps)
 
