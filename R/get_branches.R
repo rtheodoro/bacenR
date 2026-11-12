@@ -169,6 +169,10 @@ tidy_branches <- function(path_dir, type = NULL, out_dir = NULL, verbose = TRUE)
     files <- list.files(folder, pattern = "\\.xlsx?$", full.names = TRUE, recursive = TRUE, ignore.case = TRUE)
     out <- purrr::map(files, function(file) {
       sheets <- tryCatch(readxl::excel_sheets(file), error = function(e) character(0))
+      # December 2011 has two positions ("Posição em 01.12.2011" and "Posição em
+      # 31.12.2011"): keep only the latest
+      dates <- as.Date(stringr::str_extract(sheets, "[0-9]{2}\\.[0-9]{2}\\.[0-9]{4}"), format = "%d.%m.%Y")
+      if (sum(!is.na(dates)) > 1) sheets <- sheets[!is.na(dates) & dates == max(dates, na.rm = TRUE)]
       purrr::map(sheets, function(sheet) read_branch_sheet(file, sheet)) |>
         purrr::list_rbind()
     }) |>
@@ -263,7 +267,9 @@ branch_col_map <- c(
   "tipo de dependencia" = "tipo_dependencia",
   "cnpj da entidade a" = "cnpj_entidade_assistida",
   "cnpj da entidade assistida" = "cnpj_entidade_assistida",
-  "nome da entidade assistida" = "nome_entidade_assistida"
+  "nome da entidade assistida" = "nome_entidade_assistida",
+  # November 2024: the previous classification comes as "antigo tipo de dependencia"
+  "antigo tipo de dependencia" = "tipo_dependencia"
 )
 
 normalize_header <- function(x) {
