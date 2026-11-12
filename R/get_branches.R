@@ -117,7 +117,9 @@ get_branches <- function(
 #' @param out_dir Character or NULL. If given, the table is also written to
 #'   `out_dir/<TYPE>.csv`, one file per type. Default is NULL.
 #' @param verbose Logical. If TRUE, displays progress messages. Default is TRUE.
-#' @return A tibble with `type`, `year_month`, `cnpj` (14 digits),
+#' @return A tibble with `type`, `year_month`, `cnpj` (14 digits; NA for
+#'   service posts and electronic posts, which have no CNPJ of their own and
+#'   are identified by `id_instalacao`),
 #'   `cnpj_basico`, `cnpj_ordem`, `cnpj_dv` and the remaining columns of the
 #'   files in snake case. Columns whose names changed over the years are
 #'   harmonized: `nome_instituicao`, `segmento`, `compe_banco`,
@@ -126,9 +128,13 @@ get_branches <- function(
 #'   and `id_instalacao`.
 #' @details
 #' Every spreadsheet and every sheet in each folder is read, and the header row
-#' is the first one containing `CNPJ`. Dependencies abroad, which have no
-#' sequential number in the CNPJ, are dropped with a message. Rows repeated
-#' within a type and year-month (same 14-digit CNPJ) are kept once.
+#' is the first one containing `CNPJ`. In the lists of service posts and
+#' electronic posts, the `CNPJ` column holds only the root of the institution,
+#' the post is identified by `id_instalacao`, and `tipo_dependencia` gives the
+#' kind of post (PAB, PAA, PAC, ...); these lists have no opening date.
+#' Dependencies abroad (branches without the CNPJ sequential number, posts
+#' without a state) are dropped with a message. Rows repeated within a type
+#' and year-month (same CNPJ or `id_instalacao`) are kept once.
 #' @examples
 #' \donttest{
 #' dir <- file.path(tempdir(), "branches")
@@ -172,20 +178,28 @@ tidy_branches <- function(path_dir, type = NULL, out_dir = NULL, verbose = TRUE)
   }
 
   deps$cnpj_basico <- stringr::str_pad(deps$cnpj_basico, 8, pad = "0")
-  abroad <- is.na(deps$cnpj_ordem) | !grepl("^[0-9]+$", deps$cnpj_ordem)
+  # Branches abroad have no CNPJ sequential number; posts abroad have no state
+  is_branch <- deps$type %in% c("AGENCIAS", "FILIAISCONS")
+  no_seq <- is.na(deps$cnpj_ordem) | !grepl("^[0-9]+$", deps$cnpj_ordem)
+  no_uf <- if ("uf" %in% names(deps)) is.na(deps$uf) | deps$uf == "" else rep(FALSE, nrow(deps))
+  abroad <- (is_branch & no_seq) | (!is_branch & no_uf)
   if (any(abroad) && verbose) {
-    message(sum(abroad), " rows without the CNPJ sequential number (abroad) dropped.")
+    message(sum(abroad), " rows abroad (or without CNPJ sequential number) dropped.")
   }
   deps <- deps[!abroad, , drop = FALSE]
-  deps$cnpj_ordem <- stringr::str_pad(deps$cnpj_ordem, 4, pad = "0")
-  deps$cnpj_dv <- stringr::str_pad(deps$cnpj_dv, 2, pad = "0")
-  deps$cnpj <- paste0(deps$cnpj_basico, deps$cnpj_ordem, deps$cnpj_dv)
-  if ("cep" %in% names(deps)) deps$cep <- gsub("[^0-9]", "", deps$cep)
+  has_seq <- !is.na(deps$cnpj_ordem) & grepl("^[0-9]+$", deps$cnpj_ordem)
+  deps$cnpj_ordem <- ifelse(has_seq, stringr::str_pad(deps$cnpj_ordem, 4, pad = "0"), NA_character_)
+  deps$cnpj_dv <- ifelse(has_seq, stringr::str_pad(deps$cnpj_dv, 2, pad = "0"), NA_character_)
+  deps$cnpj <- ifelse(has_seq, paste0(deps$cnpj_basico, deps$cnpj_ordem, deps$cnpj_dv), NA_character_)
+  for (col in intersect(c("cep", "cnpj_entidade_assistida"), names(deps))) {
+    deps[[col]] <- gsub("[^0-9]", "", deps[[col]])
+  }
   if ("data_inicio" %in% names(deps)) deps$data_inicio <- as_bacen_date(deps$data_inicio)
 
   first <- c("type", "year_month", "cnpj", "cnpj_basico", "cnpj_ordem", "cnpj_dv")
   deps <- deps[c(first, setdiff(names(deps), first))]
-  deps <- deps[!duplicated(deps[c("type", "year_month", "cnpj")]), , drop = FALSE]
+  key <- ifelse(is.na(deps$cnpj), paste0("id", deps$id_instalacao %||% seq_len(nrow(deps))), deps$cnpj)
+  deps <- deps[!duplicated(data.frame(deps$type, deps$year_month, key)), , drop = FALSE]
   deps <- tibble::as_tibble(deps)
 
   if (!is.null(out_dir)) {
@@ -230,7 +244,12 @@ branch_col_map <- c(
   "uf" = "uf",
   "municipio ibge" = "codmun_ibge",
   "data inicio" = "data_inicio",
-  "id instalacao" = "id_instalacao"
+  "id instalacao" = "id_instalacao",
+  "nome instalacao" = "nome_instalacao",
+  "tipo de dependencia" = "tipo_dependencia",
+  "cnpj da entidade a" = "cnpj_entidade_assistida",
+  "cnpj da entidade assistida" = "cnpj_entidade_assistida",
+  "nome da entidade assistida" = "nome_entidade_assistida"
 )
 
 normalize_header <- function(x) {
