@@ -253,11 +253,29 @@ read_branch_sheet <- function(file, sheet) {
     return(NULL)
   }
   header <- normalize_header(unlist(raw[header_row, ]))
+  header[is.na(header)] <- ""
   new_names <- ifelse(is.na(branch_col_map[header]), gsub(" ", "_", header), branch_col_map[header])
+  # Names of the sequential number and check digits vary across types and years
+  unmapped <- is.na(branch_col_map[header])
+  new_names[unmapped & grepl("sequencial|^seq", header)] <- "cnpj_ordem"
+  new_names[unmapped & grepl("^dv|digito", header)] <- "cnpj_dv"
   keep <- new_names != "" & !is.na(new_names) & !duplicated(new_names)
   df <- raw[-seq_len(header_row), keep, drop = FALSE]
   names(df) <- unname(new_names[keep])
-  df <- df[!is.na(df$cnpj_basico) & grepl("^[0-9]+$", trimws(df$cnpj_basico)), , drop = FALSE]
   df[] <- lapply(df, function(x) trimws(as.character(x)))
+  df$cnpj_basico <- gsub("[^0-9]", "", df$cnpj_basico)
+  df <- df[!is.na(df$cnpj_basico) & df$cnpj_basico != "", , drop = FALSE]
+  # Full CNPJ in a single column: split root, sequential number and check digits
+  if (!"cnpj_ordem" %in% names(df)) {
+    if (nrow(df) > 0 && all(nchar(df$cnpj_basico) >= 12)) {
+      cnpj14 <- stringr::str_pad(df$cnpj_basico, 14, pad = "0")
+      df$cnpj_basico <- substr(cnpj14, 1, 8)
+      df$cnpj_ordem <- substr(cnpj14, 9, 12)
+      df$cnpj_dv <- substr(cnpj14, 13, 14)
+    } else {
+      df$cnpj_ordem <- NA_character_
+      df$cnpj_dv <- NA_character_
+    }
+  }
   df
 }
