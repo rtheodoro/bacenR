@@ -37,6 +37,11 @@
 #' posts (PAC), gold purchase posts (PCO) and temporary exchange posts (PCT)
 #' and no longer includes electronic posts (PAE), which have their own list.
 #'
+#' Until June 2016, electronic posts are in the list of service posts
+#' (`tipo_dependencia`); a continuous series of PAE combines both lists. The
+#' December 2007 list of branches is named `200712AG.zip` and is handled
+#' automatically.
+#'
 #' The branch totals match the branch counts reported in ESTBAN
 #' ([get_estban()]) for banks. Service posts and electronic posts have no CNPJ
 #' of their own; from 2020 they carry an installation id (`id_instalacao`).
@@ -79,7 +84,12 @@ get_branches <- function(
   grid$path <- purrr::pmap_chr(grid[c("type", "year_month", "url")], function(type, year_month, url) {
     if (verbose) message(type, " ", year_month)
     zip_path <- file.path(out_dir, paste0(year_month, type, ".zip"))
-    if (!download_bacen(url, zip_path) || !is_zip(zip_path)) {
+    ok <- download_bacen(url, zip_path) && is_zip(zip_path)
+    # The December 2007 list of branches is named 200712AG.zip
+    if (!ok && type == "AGENCIAS") {
+      ok <- download_bacen(sub("AGENCIAS\\.zip$", "AG.zip", url), zip_path) && is_zip(zip_path)
+    }
+    if (!ok) {
       unlink(zip_path)
       return(NA_character_)
     }
@@ -249,6 +259,7 @@ branch_col_map <- c(
   "data inicio" = "data_inicio",
   "id instalacao" = "id_instalacao",
   "nome instalacao" = "nome_instalacao",
+  "nome da instalacao" = "nome_instalacao",
   "tipo de dependencia" = "tipo_dependencia",
   "cnpj da entidade a" = "cnpj_entidade_assistida",
   "cnpj da entidade assistida" = "cnpj_entidade_assistida",
@@ -270,12 +281,14 @@ read_branch_sheet <- function(file, sheet) {
   if (is.null(raw) || nrow(raw) == 0) {
     return(NULL)
   }
-  header_row <- which(apply(raw, 1, function(row) any(normalize_header(row) == "cnpj", na.rm = TRUE)))[1]
+  # "CPNJ" in the September 2007 list of service posts
+  header_row <- which(apply(raw, 1, function(row) any(normalize_header(row) %in% c("cnpj", "cpnj"), na.rm = TRUE)))[1]
   if (is.na(header_row)) {
     return(NULL)
   }
   header <- normalize_header(unlist(raw[header_row, ]))
   header[is.na(header)] <- ""
+  header[header == "cpnj"] <- "cnpj"
   new_names <- ifelse(is.na(branch_col_map[header]), gsub(" ", "_", header), branch_col_map[header])
   # Names of the sequential number and check digits vary across types and years
   unmapped <- is.na(branch_col_map[header])
