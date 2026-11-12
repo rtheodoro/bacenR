@@ -19,7 +19,9 @@ tidy_branches(path_dir, type = NULL, out_dir = NULL, verbose = TRUE)
 \item{verbose}{Logical. If TRUE, displays progress messages. Default is TRUE.}
 }
 \value{
-A tibble with \code{type}, \code{year_month}, \code{cnpj} (14 digits),
+A tibble with \code{type}, \code{year_month}, \code{cnpj} (14 digits; NA for
+service posts and electronic posts, which have no CNPJ of their own and
+are identified by \code{id_instalacao}),
 \code{cnpj_basico}, \code{cnpj_ordem}, \code{cnpj_dv} and the remaining columns of the
 files in snake case. Columns whose names changed over the years are
 harmonized: \code{nome_instituicao}, \code{segmento}, \code{compe_banco},
@@ -34,9 +36,13 @@ single table, one row per type, year-month and dependency.
 }
 \details{
 Every spreadsheet and every sheet in each folder is read, and the header row
-is the first one containing \code{CNPJ}. Dependencies abroad, which have no
-sequential number in the CNPJ, are dropped with a message. Rows repeated
-within a type and year-month (same 14-digit CNPJ) are kept once.
+is the first one containing \code{CNPJ}. In the lists of service posts and
+electronic posts, the \code{CNPJ} column holds only the root of the institution,
+the post is identified by \code{id_instalacao}, and \code{tipo_dependencia} gives the
+kind of post (PAB, PAA, PAC, ...); these lists have no opening date.
+Dependencies abroad (branches without the CNPJ sequential number, posts
+without a state) are dropped with a message. Rows repeated within a type
+and year-month (same CNPJ or \code{id_instalacao}) are kept once.
 }
 \examples{
 \donttest{

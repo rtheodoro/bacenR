@@ -61,9 +61,9 @@ other than banks, and the list of service posts includes cooperative service
 posts (PAC), gold purchase posts (PCO) and temporary exchange posts (PCT)
 and no longer includes electronic posts (PAE), which have their own list.
 
-From 2010 onwards, the list of branches does not include Banco do Brasil
-and Caixa Econômica Federal; their branch counts by municipality are
-available in ESTBAN (\code{\link[=get_estban]{get_estban()}}).
+The branch totals match the branch counts reported in ESTBAN
+(\code{\link[=get_estban]{get_estban()}}) for banks. Service posts and electronic posts have no CNPJ
+of their own; from 2020 they carry an installation id (\code{id_instalacao}).
 }
 \examples{
 \donttest{
