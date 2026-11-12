@@ -66,28 +66,29 @@
 #'
 #' @examples
 #' # First, download balance sheets
+#' dir <- file.path(tempdir(), "balance_sheets")
 #' get_balance_sheets(
 #'   institution = "BANCOS",
 #'   months = 12,
 #'   first_year = 2023,
 #'   final_year = 2023,
-#'   out_dir = tempdir(),
+#'   out_dir = dir,
 #'   overwrite = FALSE
 #' )
 #'
 #' # Now, tidy the files
 #' # Do not write outputs
 #' tidy_balance_sheets(
-#'   path_raw = tempdir(),
-#'   out_dir = tempdir(),
+#'   path_raw = dir,
+#'   out_dir = dir,
 #'   doc_filter = 4010,
 #'   save = FALSE
 #' )
 #'\donttest{
 #' # Write outputs
 #' tidy_balance_sheets(
-#'   path_raw = tempdir(),
-#'   out_dir = tempdir(),
+#'   path_raw = dir,
+#'   out_dir = file.path(tempdir(), "balance_sheets_out"),
 #'   doc_filter = 4016,
 #'   save = TRUE
 #' )
@@ -232,6 +233,9 @@ tidy_balance_sheets <- function(
       df_wide
     }
   )
+
+  # Drop types without balance-sheet data (e.g. other CSVs in path_raw)
+  balance_by_type <- purrr::compact(balance_by_type)
 
   # Write a CSV per institution type if save = TRUE
   if (save) {
